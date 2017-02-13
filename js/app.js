@@ -127,7 +127,7 @@ class App extends React.Component {
     const newContentFont = isContentLocked ? contentFont : randContentFont
 
     const toUrlFontFamily = st => st.replace(/ /g, "-")
-    const url = `/${toUrlFontFamily(newTitleFont.family)}--${toUrlFontFamily(newContentFont.family)}`
+    const url = `/#/${toUrlFontFamily(newTitleFont.family)}--${toUrlFontFamily(newContentFont.family)}`
     browserHistory.push(url)
 
     this.setState(
