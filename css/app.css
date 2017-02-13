@@ -1,0 +1,97 @@
+.icon-action {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.icon-lock-locked {
+  color: #505050;
+}
+
+.icon-lock-locked:hover {
+  color: #9e9e9e;
+}
+
+.icon-lock-unlocked {
+  color: #9e9e9e;
+}
+.icon-lock-unlocked:hover {
+  color: #505050;
+}
+
+.icon-swap {
+  color: #028090;
+  font-size: 14px;
+}
+
+.icon-swap:hover {
+  color: #505050;
+}
+
+.margin-top-sm { margin-top: 5px; }
+.margin-top-md { margin-top: 10px; }
+.margin-top-lg { margin-top: 25px; }
+
+.section-row {
+  border-bottom: 5px solid #028090;
+}
+
+.section-divider {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* Modal */
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background: #05668D;
+  color: #FFF;
+  border-radius: 5px 5px 0 0;
+}
+
+.modal-header .close {
+  color: #FFF;
+}
+
+h4, .h4 {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+pre {
+  overflow: initial;
+  white-space: initial;
+}
+
+/* Navbar */
+
+.navbar-foonts {
+  background-color: #05668D;
+  border-radius: 0;
+  border: 0;
+}
+
+.navbar-foonts  .navbar-brand {
+  color: #f5f5f5;
+  font-size: 25px;
+  font-weight: bold;
+}
+.navbar-foonts  .navbar-brand:hover,
+.navbar-foonts  .navbar-brand:focus {
+  color: #FFF;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: #f5f5f5;
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover {
+  color: #FFF;
+}
+.section-title {
+  color: #028090;
+}
