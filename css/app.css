@@ -72,6 +72,7 @@ pre {
   background-color: #05668D;
   border-radius: 0;
   border: 0;
+  margin-bottom: 0;
 }
 
 .navbar-foonts  .navbar-brand {
@@ -86,6 +87,7 @@ pre {
 
 .navbar-default .navbar-nav>li>a {
   color: #f5f5f5;
+  font-size: 16px;
 }
 
 .navbar-default .navbar-nav>li>a:focus,
@@ -95,3 +97,11 @@ pre {
 .section-title {
   color: #028090;
 }
+
+.banner {
+  background: #FFF;
+  color: #757575  ;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+

@@ -130,6 +130,14 @@ class App extends React.Component {
             </ul>
           </div>
         </nav>
+        <div className="container-fluid">
+          <div className="row banner">
+            <div className="col-xs-12 text-center">
+              Press [Space] to generate new fonts
+            </div>
+          </div>
+        </div>
+
 
         <div className="container">
 
