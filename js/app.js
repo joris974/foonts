@@ -1,3 +1,4 @@
+import { browserHistory } from 'react-router';
 import React from 'react'
 import $ from 'jquery'
 import _ from 'lodash'
@@ -18,6 +19,43 @@ function loadFonts() {
   )
 }
 
+function fontsFromUrlParams(paramsPathPiece, fontList) {
+  if (_.isEmpty(paramsPathPiece)){
+    return null
+  }
+
+  const paramChunks = paramsPathPiece.split("--")
+  if (paramChunks.length !== 2) {
+    return null
+  }
+
+  const [titleFontPathPiece, contentFontPathPiece] = paramChunks
+  const fromUrl = st => st.replace(/-/g, " ")
+
+  const [titleFontFamily, contentFontFamily] =
+    [ fromUrl(titleFontPathPiece)
+    , fromUrl(contentFontPathPiece)
+    ]
+
+  const findFontByFamily = family => _.find(fontList, font => font.family === family)
+
+  const [titleFont, contentFont] =
+    [ findFontByFamily(titleFontFamily)
+    , findFontByFamily(contentFontFamily)
+    ]
+
+  if (_.some([titleFont, contentFont], x => !x)) {
+    return null
+  }
+
+  return (
+    { titleFont
+    , contentFont
+    }
+  )
+
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -35,14 +73,25 @@ class App extends React.Component {
     loadFonts()
     .then((data) => {
       const fontList = data.items
-      const [titleFont, contentFont] = _.sampleSize(fontList, 2)
+      this.setState({fontList}, () => {
 
-      this.setState(
-        { fontList
-        , titleFont
-        , contentFont
+        let fromParams
+        if (!_.isNull(this.props.params) && !_.isNull(this.props.params.fonts)) {
+          fromParams = fontsFromUrlParams(this.props.params.fonts, fontList)
         }
-      )
+        if (fromParams) {
+          const titleFont = fromParams ? fromParams.titleFont : _.sample(fontList)
+          const contentFont = fromParams ? fromParams.contentFont : _.sample(fontList)
+
+          this.setState(
+            { titleFont
+            , contentFont
+            }
+          )
+        } else {
+          this.generate()
+        }
+      })
     })
 
     window.addEventListener('keydown', this.handleKeyPress.bind(this))
@@ -77,10 +126,9 @@ class App extends React.Component {
     const newTitleFont = isTitleLocked ? titleFont : randTitleFont
     const newContentFont = isContentLocked ? contentFont : randContentFont
 
-
     const toUrlFontFamily = st => st.replace(/ /g, "-")
-    const url = `${toUrlFontFamily(newTitleFont.family)}--${toUrlFontFamily(newContentFont.family)}`
-    history.pushState({}, "", url)
+    const url = `/${toUrlFontFamily(newTitleFont.family)}--${toUrlFontFamily(newContentFont.family)}`
+    browserHistory.push(url)
 
     this.setState(
       { titleFont: newTitleFont
