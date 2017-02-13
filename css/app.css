@@ -78,8 +78,9 @@ pre {
 .navbar-foonts  .navbar-brand {
   color: #f5f5f5;
   font-size: 25px;
-  font-weight: bold;
+  font-family: 'Sonsie One', cursive;
 }
+
 .navbar-foonts  .navbar-brand:hover,
 .navbar-foonts  .navbar-brand:focus {
   color: #FFF;
@@ -102,6 +103,8 @@ pre {
   background: #FFF;
   color: #757575  ;
   margin-bottom: 20px;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #CCC;
 }
 

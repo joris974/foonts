@@ -77,6 +77,11 @@ class App extends React.Component {
     const newTitleFont = isTitleLocked ? titleFont : randTitleFont
     const newContentFont = isContentLocked ? contentFont : randContentFont
 
+
+    const toUrlFontFamily = st => st.replace(/ /g, "-")
+    const url = `${toUrlFontFamily(newTitleFont.family)}--${toUrlFontFamily(newContentFont.family)}`
+    history.pushState({}, "", url)
+
     this.setState(
       { titleFont: newTitleFont
       , contentFont: newContentFont
