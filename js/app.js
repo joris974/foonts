@@ -225,6 +225,9 @@ class App extends React.Component {
           contentFont={contentFont}
         />
 
+        <footer className="text-center">
+          Designed and built by <a href="https://github.com/joris974">Joris Buchou</a>. ©2017
+        </footer>
       </div>
     )
   }

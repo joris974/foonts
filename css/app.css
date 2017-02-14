@@ -1,3 +1,7 @@
+* {
+  transition: all 200ms ease;
+}
+
 .icon-action {
   font-size: 25px;
   cursor: pointer;
@@ -133,4 +137,27 @@ pre {
 
 .editable-content {
   line-height: 1.1;
+}
+
+/* footer */
+
+footer {
+  font-size: 12px;
+  background: #F5F5F5;
+  color: #616161;
+  font-family: sans-serif;
+  position: absolute;
+  padding: 8px;
+  width: 100%;
+  bottom: 0;
+}
+
+footer a {
+  text-decoration: none;
+  color: #333;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #222;
 }
