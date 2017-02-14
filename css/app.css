@@ -2,6 +2,12 @@
   transition: all 200ms ease;
 }
 
+@media (min-width: 1200px) {
+  .container {
+    width: 970px;
+  }
+}
+
 .icon-action {
   font-size: 25px;
   cursor: pointer;
@@ -126,7 +132,7 @@ pre {
 }
 
 .editable-title {
-  line-height: 1.5;
+  line-height: 1;
   font-weight: 500;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -136,7 +142,7 @@ pre {
 }
 
 .editable-content {
-  line-height: 1.1;
+  line-height: 1;
 }
 
 /* footer */
