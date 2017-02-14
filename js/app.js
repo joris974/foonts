@@ -5,8 +5,9 @@ import _ from 'lodash'
 
 import Sidebar from './sidebar.js'
 import Fonts from './fonts.js'
-import ContentWithFont from './content-with-font.js'
 import DownloadModal from './download-modal.js'
+import EditableTitle from './editable-title.js'
+import EditableContent from './editable-content.js'
 
 const googleFontsApiKey = "AIzaSyA0gI8XQTRYzu8rPdCeYsb4GNZ5BQt-lCw"
 const googleApiUrl = `https://www.googleapis.com/webfonts/v1/webfonts`
@@ -98,6 +99,10 @@ class App extends React.Component {
   }
 
   handleKeyPress(event) {
+    if(_.includes(event.target.className.split(" "), "editable")) {
+      return
+    }
+
     if(event.keyCode == 32){
       this.generate()
     }
@@ -207,17 +212,8 @@ class App extends React.Component {
               />
             </div>
             <div className="col-xs-8">
-              <ContentWithFont font={titleFont}>
-                <h1>
-                  Foo
-                </h1>
-              </ContentWithFont>
-
-              <ContentWithFont font={contentFont}>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis porttitor diam, et feugiat sapien. Cras fringilla eros in tellus ultrices porttitor. Ut scelerisque volutpat velit, eu bibendum nisi fringilla at. Fusce vitae ligula eget magna molestie semper eu in diam. Sed scelerisque tristique nunc ac congue. Vivamus dolor risus, fringilla a nisl at, pellentesque mattis nisi. Duis vehicula mi nec enim hendrerit, quis convallis libero mattis. Ut pharetra, sem et tincidunt porttitor, felis urna tristique lacus, nec tincidunt nibh est et sapien. Vestibulum tempor nisi at congue sodales. Aliquam facilisis blandit elit nec tempor. Aenean commodo tortor ac justo ultrices, quis finibus diam tempus. Donec efficitur diam tellus, vitae varius diam euismod eu. Phasellus viverra tellus lacus. Nam quis ultrices libero.
-                </p>
-              </ContentWithFont>
+              <EditableTitle font={titleFont} />
+              <EditableContent font={contentFont} />
             </div>
           </div>
         </div>
