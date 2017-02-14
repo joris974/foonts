@@ -54,8 +54,40 @@ function fontsFromUrlParams(paramsPathPiece, fontList) {
     , contentFont
     }
   )
-
 }
+
+function updateFontStyle(changeType, fontStyleProps) {
+  const {fontSize, fontWeight, fontStyle} = fontStyleProps
+
+  let newFontSize = fontSize
+  let newFontWeight = fontWeight
+  let newFontStyle = fontStyle
+
+  if (changeType === "italic") {
+    newFontStyle = fontStyle === "italic" ? "normal" : "italic"
+  }
+  if (changeType === "bold") {
+    newFontWeight = fontWeight === "bold" ? "normal" : "bold"
+  }
+  const newFontStyleProps =
+    { fontSize: newFontSize
+    , fontWeight: newFontWeight
+    , fontStyle: newFontStyle
+    }
+  return newFontStyleProps
+}
+
+const defaultTitleStyleProps =
+  { fontSize: 36
+  , fontWeight: "normal"
+  , fontStyle: "normal"
+  }
+
+const defaultContentStyleProps =
+  { fontSize: 14
+  , fontWeight: "normal"
+  , fontStyle: "normal"
+  }
 
 class App extends React.Component {
   constructor(props) {
@@ -67,6 +99,8 @@ class App extends React.Component {
       , isTitleLocked: false
       , isContentLocked : false
       , showDownloadModal: false
+      , titleFontStyleProps: defaultTitleStyleProps
+      , contentFontStyleProps: defaultContentStyleProps
       }
   }
 
@@ -109,12 +143,14 @@ class App extends React.Component {
   }
 
   handleSwap() {
-    const {titleFont, contentFont, isTitleLocked, isContentLocked} = this.state
+    const {titleFont, contentFont, isTitleLocked, isContentLocked, titleFontStyleProps, contentFontStyleProps} = this.state
     this.setState(
       { titleFont: contentFont
       , contentFont: titleFont
       , isTitleLocked: isContentLocked
       , isContentLocked: isTitleLocked
+      , titleFontStyleProps: contentFontStyleProps
+      , contentFontStyleProps: titleFontStyleProps
       }
     )
   }
@@ -122,6 +158,18 @@ class App extends React.Component {
   handleClickGenerate(e) {
     e.preventDefault()
     this.generate()
+  }
+
+  handleToggleTitleStyle(changeType) {
+    const {titleFontStyleProps} = this.state
+    const newTitleFontStyleProps = updateFontStyle(changeType, titleFontStyleProps)
+    this.setState({titleFontStyleProps: newTitleFontStyleProps})
+  }
+
+  handleToggleContentStyle(changeType) {
+    const {contentFontStyleProps} = this.state
+    const newContentFontStyleProps = updateFontStyle(changeType, contentFontStyleProps)
+    this.setState({contentFontStyleProps: newContentFontStyleProps})
   }
 
   generate() {
@@ -143,7 +191,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {titleFont, contentFont, isTitleLocked, isContentLocked} = this.state
+    const {titleFont, titleFontStyleProps, contentFont, contentFontStyleProps, isTitleLocked, isContentLocked} = this.state
 
     const fontFacesNode = _
       .chain([titleFont, contentFont])
@@ -203,7 +251,11 @@ class App extends React.Component {
             <div className="col-xs-4">
               <Sidebar
                 titleFont={titleFont}
+                titleFontStyleProps={titleFontStyleProps}
+                onToggleTitleStyle={this.handleToggleTitleStyle.bind(this)}
                 contentFont={contentFont}
+                contentFontStyleProps={contentFontStyleProps}
+                onToggleContentStyle={this.handleToggleContentStyle.bind(this)}
                 isTitleLocked={isTitleLocked}
                 isContentLocked={isContentLocked}
                 onChangeLockTitle={() => {this.setState({isTitleLocked: !this.state.isTitleLocked})}}
@@ -212,8 +264,14 @@ class App extends React.Component {
               />
             </div>
             <div className="col-xs-8">
-              <EditableTitle font={titleFont} />
-              <EditableContent font={contentFont} />
+              <EditableTitle
+                font={titleFont}
+                fontStyleProps={titleFontStyleProps}
+              />
+              <EditableContent
+                font={contentFont}
+                fontStyleProps={contentFontStyleProps}
+              />
             </div>
           </div>
         </div>

@@ -32,9 +32,16 @@ class EditableContent extends React.Component {
   }
 
   render() {
-    const font = this.props.font
+    const {fontStyleProps, font} = this.props
+    const {fontSize, fontWeight, fontStyle} = fontStyleProps
+
     const content = this.state.content
-    const style = !_.isNull(font) ? {fontFamily: font.family} : null
+    const style =
+      { fontSize: `${fontSize}px`
+      , fontWeight: `${fontWeight}`
+      , fontStyle: `${fontStyle}`
+      , fontFamily: !_.isNull(font) ? font.family : ""
+      }
 
     const contentPs = _.map(content, (line, i) => <p key={i}>{line}</p>)
 

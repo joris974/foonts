@@ -37,13 +37,39 @@
   color: #505050;
 }
 
+/* Section commands */
+
+.section-actions {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.section-command {
+  background: #028090;
+}
+
+.section-command:hover .icon-command {
+  color: #7bcbd5;
+}
+.section-command:hover .icon-command.active {
+  color: #d0edf0;
+}
+
+.icon-command {
+  color: transparent;
+  font-size: 15px;
+}
+.section-command:hover .icon-command:hover {
+  color: #d0edf0;
+}
+
+.icon-command.active {
+  color: #d0edf0;
+}
+
 .margin-top-sm { margin-top: 5px; }
 .margin-top-md { margin-top: 10px; }
 .margin-top-lg { margin-top: 25px; }
-
-.section-row {
-  border-bottom: 5px solid #028090;
-}
 
 .section-divider {
   margin-top: 25px;
@@ -75,6 +101,7 @@ pre {
   overflow: initial;
   white-space: initial;
 }
+
 
 /* Navbar */
 

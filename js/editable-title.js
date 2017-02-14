@@ -15,19 +15,25 @@ class EditableTitle extends React.Component {
   }
 
   render() {
-    const font = this.props.font
+    const {fontStyleProps, font} = this.props
+    const {fontSize, fontWeight, fontStyle} = fontStyleProps
+
     const content = this.state.content
-    const style = !_.isNull(font) ? {fontFamily: font.family} : null
+    const style =
+      { fontSize: `${fontSize}px`
+      , fontWeight: `${fontWeight}`
+      , fontStyle: `${fontStyle}`
+      , fontFamily: !_.isNull(font) ? font.family : ""
+      }
     return (
-      <div style={style}>
-        <h1
-          contentEditable="true"
-          className="editable editable-title"
-          onChange={this.handleChange.bind(this)}
-        >
+      <h1
+        style={style}
+        contentEditable="true"
+        className="editable editable-title"
+        onChange={this.handleChange.bind(this)}
+      >
         {content}
       </h1>
-      </div>
     )
   }
 }
