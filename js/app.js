@@ -132,7 +132,10 @@ class App extends React.Component {
   }
 
   handleKeyPress(event) {
-    if(_.includes(event.target.className.split(" "), "editable")) {
+    if (_.includes(event.target.className.split(" "), "editable")) {
+      return
+    }
+    if (event.target instanceof HTMLButtonElement) {
       return
     }
 

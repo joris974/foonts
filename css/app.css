@@ -29,7 +29,7 @@
 }
 
 .icon-swap {
-  color: #028090;
+  color: #05668D;
   font-size: 14px;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .section-command {
-  background: #028090;
+  background: #05668D;
 }
 
 .section-command:hover .icon-command {
@@ -79,14 +79,14 @@
 /* button */
 
 .btn-generate {
-  background-color: #028090;
+  background-color: #05668D;
   border-color: #026b79;
   color: #FFF;
 }
 
 .btn-generate:hover,
 .btn-generate:focus {
-  background-color: #0393a6;
+  background-color: #067aa7;
   border-color: #026b79;
   color: #FFF;
 }
@@ -147,8 +147,9 @@ pre {
 .navbar-default .navbar-nav>li>a:hover {
   color: #FFF;
 }
+
 .section-title {
-  color: #028090;
+  color: #05668D;
 }
 
 .banner {

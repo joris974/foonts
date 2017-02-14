@@ -3,20 +3,20 @@ import _ from 'lodash'
 
 const DefaultContent =
   [
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis porttitor diam, et feugiat sapien.
-    Cras fringilla eros in tellus ultrices porttitor.
-    Ut scelerisque volutpat velit, eu bibendum nisi fringilla at.
-    Fusce vitae ligula eget magna molestie semper eu in diam.`
+    `If I had a world of my own, everything would be nonsense.
+    Nothing would be what it is, because everything would be what it isn't.
+    And contrary wise, what is, it wouldn't be. And what it wouldn't be, it would. You see?
+    `
   , `Sed scelerisque tristique nunc ac congue.
     Vivamus dolor risus, fringilla a nisl at, pellentesque mattis nisi.
-    Duis vehicula mi nec enim hendrerit, quis convallis libero mattis.
-    Ut pharetra, sem et tincidunt porttitor, felis urna tristique lacus, nec tincidunt nibh est et sapien.
-    Vestibulum tempor nisi at congue sodales.`
+    `
   , `Aliquam facilisis blandit elit nec tempor.
     Aenean commodo tortor ac justo ultrices, quis finibus diam tempus.
     Donec efficitur diam tellus, vitae varius diam euismod eu.
     Phasellus viverra tellus lacus.
     Nam quis ultrices libero.
+    Ut pharetra, sem et tincidunt porttitor, felis urna tristique lacus, nec tincidunt nibh est et sapien.
+    Vestibulum tempor nisi at congue sodales.
     `
   ]
 
