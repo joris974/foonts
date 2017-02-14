@@ -227,18 +227,10 @@ class App extends React.Component {
             </div>
           </div>
         </nav>
-        <div className="container-fluid">
-          <div className="row banner">
-            <div className="col-xs-12 text-center">
-              Press [Space] to generate new fonts
-            </div>
-          </div>
-        </div>
-
 
         <div className="container">
 
-          <div className="row">
+          <div className="row margin-top-lg">
             <div className="col-xs-4">
               <Sidebar
                 titleFont={titleFont}
