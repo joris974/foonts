@@ -5,7 +5,7 @@ import _ from 'lodash'
 
 import Sidebar from './sidebar.js'
 import Fonts from './fonts.js'
-import DownloadModal from './download-modal.js'
+
 import EditableTitle from './editable-title.js'
 import EditableContent from './editable-content.js'
 
@@ -98,7 +98,6 @@ class App extends React.Component {
       , fontList: []
       , isTitleLocked: false
       , isContentLocked : false
-      , showDownloadModal: false
       , titleFontStyleProps: defaultTitleStyleProps
       , contentFontStyleProps: defaultContentStyleProps
       }
@@ -144,13 +143,24 @@ class App extends React.Component {
 
   handleSwap() {
     const {titleFont, contentFont, isTitleLocked, isContentLocked, titleFontStyleProps, contentFontStyleProps} = this.state
+
+    const newTitleFontStyleProps =
+      { fontSize: titleFontStyleProps.fontSize
+      , fontWeight: contentFontStyleProps.fontWeight
+      , fontStyle: contentFontStyleProps.fontStyle
+      }
+    const newContentFontStyleProps =
+      { fontSize: contentFontStyleProps.fontSize
+      , fontWeight: titleFontStyleProps.fontWeight
+      , fontStyle: titleFontStyleProps.fontStyle
+      }
     this.setState(
       { titleFont: contentFont
       , contentFont: titleFont
       , isTitleLocked: isContentLocked
       , isContentLocked: isTitleLocked
-      , titleFontStyleProps: contentFontStyleProps
-      , contentFontStyleProps: titleFontStyleProps
+      , titleFontStyleProps: newTitleFontStyleProps
+      , contentFontStyleProps: newContentFontStyleProps
       }
     )
   }
@@ -215,25 +225,6 @@ class App extends React.Component {
             <div className="navbar-header">
               <a className="navbar-brand" href="#">Foonts</a>
             </div>
-
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a
-                  onClick={this.handleClickGenerate.bind(this)}
-                  href="#"
-                >
-                  Generate
-                </a>
-              </li>
-              <li>
-                <a
-                  onClick={() => {this.setState({showDownloadModal: true})}}
-                  href="#"
-                >
-                  Download
-                </a>
-              </li>
-            </ul>
           </div>
         </nav>
         <div className="container-fluid">
@@ -261,6 +252,7 @@ class App extends React.Component {
                 onChangeLockTitle={() => {this.setState({isTitleLocked: !this.state.isTitleLocked})}}
                 onChangeLockContent={() => {this.setState({isContentLocked: !this.state.isContentLocked})}}
                 onClickSwap={this.handleSwap.bind(this)}
+                onClickGenerate={this.handleClickGenerate.bind(this)}
               />
             </div>
             <div className="col-xs-8">
@@ -275,13 +267,6 @@ class App extends React.Component {
             </div>
           </div>
         </div>
-
-        <DownloadModal
-          show={this.state.showDownloadModal}
-          onHide={() => {this.setState({showDownloadModal: false})}}
-          titleFont={titleFont}
-          contentFont={contentFont}
-        />
 
         <footer className="text-center">
           Designed and built by <a href="https://github.com/joris974">Joris Buchou</a>. ©2017

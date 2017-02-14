@@ -68,12 +68,27 @@
 }
 
 .margin-top-sm { margin-top: 5px; }
-.margin-top-md { margin-top: 10px; }
+.margin-top-md { margin-top: 15px; }
 .margin-top-lg { margin-top: 25px; }
 
 .section-divider {
   margin-top: 25px;
   margin-bottom: 15px;
+}
+
+/* button */
+
+.btn-generate {
+  background-color: #028090;
+  border-color: #026b79;
+  color: #FFF;
+}
+
+.btn-generate:hover,
+.btn-generate:focus {
+  background-color: #0393a6;
+  border-color: #026b79;
+  color: #FFF;
 }
 
 /* Modal */
