@@ -9,6 +9,8 @@ import Fonts from './fonts.js'
 import EditableTitle from './editable-title.js'
 import EditableContent from './editable-content.js'
 
+import ApplicationMeta from './application-meta.js'
+
 const googleFontsApiKey = "AIzaSyA0gI8XQTRYzu8rPdCeYsb4GNZ5BQt-lCw"
 const googleApiUrl = `https://www.googleapis.com/webfonts/v1/webfonts`
 
@@ -75,6 +77,11 @@ function updateFontStyle(changeType, fontStyleProps) {
     , fontStyle: newFontStyle
     }
   return newFontStyleProps
+}
+
+export function fontsToUrl(titleFont, contentFont) {
+  const toUrlFontFamily = st => st.replace(/ /g, "-")
+  return `/#/${toUrlFontFamily(titleFont.family)}--${toUrlFontFamily(contentFont.family)}`
 }
 
 const defaultTitleStyleProps =
@@ -192,8 +199,7 @@ class App extends React.Component {
     const newTitleFont = isTitleLocked ? titleFont : randTitleFont
     const newContentFont = isContentLocked ? contentFont : randContentFont
 
-    const toUrlFontFamily = st => st.replace(/ /g, "-")
-    const url = `/#/${toUrlFontFamily(newTitleFont.family)}--${toUrlFontFamily(newContentFont.family)}`
+    const url = fontsToUrl(newTitleFont, newContentFont)
     browserHistory.push(url)
 
     this.setState(
@@ -220,6 +226,11 @@ class App extends React.Component {
 
     return (
       <div>
+
+        <ApplicationMeta
+          titleFont={titleFont}
+          contentFont={contentFont}
+        />
 
         {fontFacesNode}
 
