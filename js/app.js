@@ -234,7 +234,7 @@ class App extends React.Component {
         <div className="container">
 
           <div className="row margin-top-lg">
-            <div className="col-xs-4">
+            <div className="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4">
               <Sidebar
                 titleFont={titleFont}
                 titleFontStyleProps={titleFontStyleProps}
@@ -250,7 +250,7 @@ class App extends React.Component {
                 onClickGenerate={this.handleClickGenerate.bind(this)}
               />
             </div>
-            <div className="col-xs-8">
+            <div className="col-xs-12 col-sm-8">
               <EditableTitle
                 font={titleFont}
                 fontStyleProps={titleFontStyleProps}

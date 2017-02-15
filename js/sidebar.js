@@ -74,7 +74,7 @@ class Sidebar extends React.Component {
       <div className="row">
         <div className="col-xs-12">
 
-          <div className="row">
+          <div className="row hidden-xs">
             <div className="col-xs-12">
               <SidebarItem
                 font={titleFont}
@@ -103,7 +103,7 @@ class Sidebar extends React.Component {
           </div>
 
           <div className="row margin-top-lg">
-            <div className="col-xs-5 col-xs-offset-1">
+            <div className="col-xs-6 col-sm-5 col-sm-offset-1">
               <button
                 className="btn btn-generate"
                 onClick={onClickGenerate}
@@ -111,7 +111,7 @@ class Sidebar extends React.Component {
                 <i className="fa fa-refresh"></i> Generate
               </button>
             </div>
-            <div className="col-xs-5">
+            <div className="col-xs-6 col-sm-5">
               <button
                 className="btn btn-default"
                 onClick={() => {this.setState({showDownloadModal: true})}}
@@ -121,8 +121,8 @@ class Sidebar extends React.Component {
             </div>
           </div>
 
-          <div className="row margin-top-sm">
-            <div className="col-xs-12 col-xs-offset-1">
+          <div className="row margin-top-sm hidden-xs">
+            <div className="col-sm-12 col-sm-offset-1">
               <p className="text-muted">
                 Tip: Press space bar to generate a new combination.
               </p>
