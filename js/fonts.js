@@ -6,10 +6,12 @@ class Fonts extends React.Component {
     const fontNode = this.props.font
     const {fontName, fontUrl} = this.props
 
+    const toHttps = st => st.replace(/http:/g, "https:")
+
     const fontFace = `
       @font-face {
         font-family: '${fontName}';
-        src: url('${fontUrl}');
+        src: url('${toHttps(fontUrl)}');
       }`;
     return (
       <style>
