@@ -6,7 +6,7 @@ import {fontsToUrl} from './app.js'
 export default function ApplicationMeta(props) {
   const {titleFont, contentFont} = props
   const hostname = window.location.hostname
-  const baseWebsiteUrl = `http://${hostname}/`
+  const baseWebsiteUrl = `https://${hostname}/`
 
   const fontUrl =
     titleFont && contentFont ?
