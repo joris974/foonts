@@ -1,26 +1,15 @@
 import { browserHistory } from 'react-router';
 import React from 'react'
-import $ from 'jquery'
 import _ from 'lodash'
+
+import {loadFonts, sendFontPairingToApi} from './helpers/api.js'
 
 import Sidebar from './sidebar.js'
 import Fonts from './fonts.js'
-
 import EditableTitle from './editable-title.js'
 import EditableContent from './editable-content.js'
-
 import ApplicationMeta from './application-meta.js'
 
-const googleFontsApiKey = "AIzaSyA0gI8XQTRYzu8rPdCeYsb4GNZ5BQt-lCw"
-const googleApiUrl = `https://www.googleapis.com/webfonts/v1/webfonts`
-
-function loadFonts() {
-  return $.ajax(
-    { url: googleApiUrl
-    , data: {key: googleFontsApiKey}
-    }
-  )
-}
 
 function fontsFromUrlParams(paramsPathPiece, fontList) {
   if (_.isEmpty(paramsPathPiece)){
@@ -112,10 +101,8 @@ class App extends React.Component {
 
   componentDidMount() {
     loadFonts()
-    .then((data) => {
-      const fontList = data.items
+    .then((fontList) => {
       this.setState({fontList}, () => {
-
         let fromParams
         if (!_.isNull(this.props.params) && !_.isNull(this.props.params.fonts)) {
           fromParams = fontsFromUrlParams(this.props.params.fonts, fontList)
@@ -127,6 +114,10 @@ class App extends React.Component {
           this.setState(
             { titleFont
             , contentFont
+            }
+          , () => {
+            const {titleFont, contentFont} = this.state
+            sendFontPairingToApi(titleFont, contentFont)
             }
           )
         } else {
@@ -172,6 +163,10 @@ class App extends React.Component {
       , titleFontStyleProps: newTitleFontStyleProps
       , contentFontStyleProps: newContentFontStyleProps
       }
+    , () => {
+        const {titleFont, contentFont} = this.state
+        sendFontPairingToApi(titleFont, contentFont)
+      }
     )
   }
 
@@ -206,6 +201,10 @@ class App extends React.Component {
       { titleFont: newTitleFont
       , contentFont: newContentFont
       }
+    , () => {
+        const {titleFont, contentFont} = this.state
+        sendFontPairingToApi(titleFont, contentFont)
+      }
     )
   }
 
@@ -219,7 +218,7 @@ class App extends React.Component {
         <Fonts
           key={font.family}
           fontName={font.family}
-          fontUrl={font.files.regular}
+          fontUrl={font.url}
         />
       )
       .value()
