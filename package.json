@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:js": "NODE_ENV=production browserify js/index.js -o dist/main.js",
-    "build": "npm run build:js",
+    "build:prod": "NODE_ENV=production browserify js/index.js -o dist/main.js",
+    "build:dev": "NODE_ENV=dev browserify js/index.js -o dist/main.js",
+    "build": "npm run build:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Joris Buchou",
