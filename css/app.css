@@ -324,3 +324,25 @@ footer a:hover {
   margin: 50px;
   color: #05668d;
 }
+
+/* Fonts Page */
+.font-item {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: #FFF;
+  padding: 15px 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+}
+
+.font-item h4 {
+  font-weight: normal;
+  color: #666;
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+.font-item h3 {
+  font-weight: normal;
+  margin: 0;
+  padding: 0px 15px;
+}
