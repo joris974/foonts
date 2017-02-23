@@ -28,11 +28,13 @@ class App extends React.Component {
         </div>
 
     return (
-      <div>
+      <div className="main-container">
 
         <Navbar />
 
-        {children}
+        <div className="body-container">
+          {children}
+        </div>
 
         <footer className="text-center">
           Designed and built by <a href="https://github.com/joris974">Joris Buchou</a>. ©2017
