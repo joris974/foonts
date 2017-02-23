@@ -40,8 +40,10 @@ class App extends React.Component {
     this.initialize()
   }
 
-  componentWillReceiveProps() {
-    this.initialize()
+  componentWillReceiveProps(nextProps) {
+    if (!_.isEqual(this.props.params, nextProps.params)) {
+      this.initialize()
+    }
   }
 
   initialize() {
