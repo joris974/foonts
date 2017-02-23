@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
 import _ from 'lodash'
+
 import FontPairingItem from './font-pairing-snippet.js'
+import Spinner from './spinner.js'
 
 class ExplorePage extends React.Component {
   constructor(props) {
@@ -19,10 +21,6 @@ class ExplorePage extends React.Component {
     const {fontList, fontPairings} = this.props
     const {numMaxVisible} = this.state
 
-    const spinner =
-      <div className="spinner">
-        <i className="fa fa-chevron fa-spin"></i>
-      </div>
 
     const pairings = _
       .chain(fontPairings)
@@ -52,6 +50,16 @@ class ExplorePage extends React.Component {
           </div>
         </div>
 
+    const pairingsNode =
+      fontPairings.length > 0 ?
+        <div className="container font-pairing-wrapper">
+          <div className="row">
+            {pairings}
+          </div>
+          {btnSeeMore}
+        </div> :
+        <Spinner />
+
     return (
       <div>
         <div className="container-fluid explore-nav">
@@ -79,14 +87,8 @@ class ExplorePage extends React.Component {
           </div>
         </div>
 
-        <div className="container font-pairing-wrapper">
-          <div className="row">
-            {pairings}
-          </div>
+        {pairingsNode}
 
-          {btnSeeMore}
-
-        </div>
       </div>
     )
   }

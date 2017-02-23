@@ -2,6 +2,7 @@ import React from 'react'
 
 import {loadFonts} from './../helpers/api.js'
 import Navbar from './navbar.js'
+import Spinner from './spinner.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -23,9 +24,7 @@ class App extends React.Component {
     const children =
       this.props.children && fontList.length > 0 ?
         React.cloneElement(this.props.children, { fontList }) :
-        <div className="spinner">
-          <i className="fa fa-chevron fa-spin"></i>
-        </div>
+        <Spinner />
 
     return (
       <div className="main-container">

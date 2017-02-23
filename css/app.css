@@ -274,8 +274,8 @@ footer a:hover {
 }
 
 .font-pairing-item-wrapper {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .font-pairing-item {
@@ -284,27 +284,27 @@ footer a:hover {
   box-shadow: 0 1px 2px rgba(0,0,0,0.07);
 }
 
-.font-pairing-item a h3,
-.font-pairing-item a p {
+.font-pairing-item-body {
+  height: 80px;
+}
+
+.font-pairing-item h3,
+.font-pairing-item p {
   text-decoration: none;
   margin: 0;
+  color: #424242;
 }
 
-.font-pairing-item a:hover {
+.font-pairing-item:hover {
   text-decoration: none;
 }
 
-.font-pairing-item a h3 {
-  color: #424242;
+.font-pairing-item h3 {
   margin-bottom: 5px;
 }
 
-.font-pairing-item a p {
-  color: #424242;
-}
-
 .font-pairing-item-status {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   color: #757575;
 }
 
@@ -315,4 +315,12 @@ footer a:hover {
 .see-more-wrapper {
   margin-top: 25px;
   margin-bottom: 25px;
+}
+
+/* Spinner */
+
+.spinner {
+  text-align: center;
+  margin: 50px;
+  color: #05668d;
 }

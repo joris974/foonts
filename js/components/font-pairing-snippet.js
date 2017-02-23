@@ -23,13 +23,11 @@ const FontPairingItem = (props) => {
 
   return (
     <div className="col-xs-12 col-md-3 col-lg-4 font-pairing-item-wrapper">
-      <div className="font-pairing-item">
-
-        {fontFacesNode}
-
-        <div className="row">
-          <div className="col-xs-12">
-            <Link to={fontsToSubUrl(fontTitle, fontContent)}>
+      <Link to={fontsToSubUrl(fontTitle, fontContent)}>
+        <div className="font-pairing-item">
+          {fontFacesNode}
+          <div className="row font-pairing-item-body">
+            <div className="col-xs-12">
               <h3
                 style={{fontFamily: fontTitle.family}}
               >
@@ -40,22 +38,22 @@ const FontPairingItem = (props) => {
               >
                 {fontContent.family}
               </p>
-            </Link>
+            </div>
+          </div>
+          <div className="row text-right">
+            <div className="col-xs-12">
+              <ul className="list-inline font-pairing-item-status">
+                <li>
+                  <i className="fa fa-eye"></i> {pairing.num_views}
+                </li>
+                <li>
+                  <i className="fa fa-heart"></i> {pairing.num_liked}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="row text-right">
-          <div className="col-xs-12">
-            <ul className="list-inline font-pairing-item-status">
-              <li>
-                <i className="fa fa-eye"></i> {pairing.num_views}
-              </li>
-              <li>
-                <i className="fa fa-heart"></i> {pairing.num_liked}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      </Link>
     </div>
   )
 }
