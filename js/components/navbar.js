@@ -25,7 +25,13 @@ const Navbar = () => {
     <nav className="navbar navbar-default navbar-foonts">
       <div className="container">
         <div className="navbar-header">
-          <a className="navbar-brand" href="#">Foonts</a>
+          <Link
+            to="/"
+            className="navbar-brand"
+            activeClassName="active"
+          >
+            Foonts
+          </Link>
         </div>
       </div>
     </nav>

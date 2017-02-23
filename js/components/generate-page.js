@@ -41,7 +41,7 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!_.isEqual(this.props.params, nextProps.params)) {
+    if (!_.isEqual(this.props.params, nextProps.params) || _.isEmpty(nextProps.params)) {
       this.initialize()
     }
   }
