@@ -36,8 +36,16 @@ class App extends React.Component {
       }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const fontList = nextProps.fontList
+  componentDidMount() {
+    this.initialize()
+  }
+
+  componentWillReceiveProps() {
+    this.initialize()
+  }
+
+  initialize() {
+    const fontList = this.props.fontList
     let fromParams
     if (!_.isNull(this.props.params) && !_.isNull(this.props.params.fonts)) {
       fromParams = fontsFromUrlParams(this.props.params.fonts, fontList)

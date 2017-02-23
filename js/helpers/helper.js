@@ -58,7 +58,7 @@ export function updateFontStyle(changeType, fontStyleProps) {
 }
 
 export function fontsToUrl(titleFont, contentFont) {
-  return `/#/${fontsToSubUrl(titleFont, contentFont)}`
+  return `/#${fontsToSubUrl(titleFont, contentFont)}`
 }
 
 export function fontsToSubUrl(titleFont, contentFont) {
