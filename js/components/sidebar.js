@@ -2,60 +2,59 @@ import React from 'react'
 import _ from 'lodash'
 import DownloadModal from './download-modal.js'
 
-class SidebarItem extends React.Component {
-  render() {
-    const {font, onChangeLock, isLocked, fontStyleProps, onToggleStyle} = this.props
-    if (_.isNull(font)) {
-      return null
-    }
 
-    const iconClassName =
-      isLocked ?
-        "icon-lock-locked fa-lock" :
-        "icon-lock-unlocked fa-unlock-alt"
+const SidebarItem = (props) => {
+  const {font, onChangeLock, isLocked, fontStyleProps, onToggleStyle} = props
+  if (_.isNull(font)) {
+    return null
+  }
 
-    const isItalic = fontStyleProps.fontStyle === "italic"
-    const isBolded = fontStyleProps.fontWeight === "bold"
+  const iconClassName =
+    isLocked ?
+      "icon-lock-locked fa-lock" :
+      "icon-lock-unlocked fa-unlock-alt"
 
-    return (
-      <div className="row">
-        <div className="col-xs-11 pull-right">
-          <div className="row">
-            <div className="col-xs-9">
-              <h3>
-                {font.family}
-              </h3>
-            </div>
-            <div className="col-xs-3 text-center">
-              <i
-                className={`h3 icon-action fa ${iconClassName}`}
-                onClick={onChangeLock}
-              >
-              </i>
-            </div>
+  const isItalic = fontStyleProps.fontStyle === "italic"
+  const isBolded = fontStyleProps.fontWeight === "bold"
+
+  return (
+    <div className="row">
+      <div className="col-xs-11 pull-right">
+        <div className="row">
+          <div className="col-xs-9">
+            <h3>
+              {font.family}
+            </h3>
           </div>
-          <div className="row section-command">
-            <div className="col-xs-12">
-              <ul className="list-inline section-actions pull-right">
-                <li>
-                  <i
-                    className={`fa fa-italic icon-action icon-command icon-italic ${isItalic ? "active" : ""}`}
-                    onClick={() => onToggleStyle("italic")}
-                  ></i>
-                </li>
-                <li>
-                  <i
-                    className={`fa fa-bold icon-action icon-command icon-bold ${isBolded ? "active" : ""}`}
-                    onClick={() => onToggleStyle("bold")}
-                  ></i>
-                </li>
-              </ul>
-            </div>
+          <div className="col-xs-3 text-center">
+            <i
+              className={`h3 icon-action fa ${iconClassName}`}
+              onClick={onChangeLock}
+            >
+            </i>
+          </div>
+        </div>
+        <div className="row section-command">
+          <div className="col-xs-12">
+            <ul className="list-inline section-actions pull-right">
+              <li>
+                <i
+                  className={`fa fa-italic icon-action icon-command icon-italic ${isItalic ? "active" : ""}`}
+                  onClick={() => onToggleStyle("italic")}
+                ></i>
+              </li>
+              <li>
+                <i
+                  className={`fa fa-bold icon-action icon-command icon-bold ${isBolded ? "active" : ""}`}
+                  onClick={() => onToggleStyle("bold")}
+                ></i>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 class Sidebar extends React.Component {

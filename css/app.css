@@ -2,6 +2,10 @@
   transition: all 200ms ease;
 }
 
+html, body {
+  background: #F4F4F4;
+}
+
 @media (min-width: 1200px) {
   .container {
     width: 970px;
@@ -148,6 +152,11 @@ pre {
   color: #FFF;
 }
 
+.navbar-default .navbar-nav>li>a.active {
+  border-bottom: 5px solid #FFF;
+  padding-bottom: 10px;
+}
+
 .section-title {
   color: #05668D;
 }
@@ -209,4 +218,76 @@ footer a {
 footer a:hover {
   text-decoration: none;
   color: #222;
+}
+
+
+/* Explore */
+
+.explore-nav {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 25px;
+}
+
+.explore-nav-menu {
+  margin-bottom: 0;
+}
+
+.explore-nav-menu li {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.explore-nav-menu li a {
+  color: #444;
+}
+
+.explore-nav-menu li a.active {
+  border-bottom: 1px solid #CCC;
+}
+
+.font-pairing-item-wrapper {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.font-pairing-item {
+  padding: 10px;
+  background: #FFF;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+}
+
+.font-pairing-item a h3,
+.font-pairing-item a p {
+  text-decoration: none;
+  margin: 0;
+}
+
+.font-pairing-item a:hover {
+  text-decoration: none;
+}
+
+.font-pairing-item a h3 {
+  color: #424242;
+  margin-bottom: 5px;
+}
+
+.font-pairing-item a p {
+  color: #424242;
+}
+
+.font-pairing-item-status {
+  margin-bottom: 0px;
+  color: #757575;
+}
+
+.font-pairing-wrapper {
+  margin-bottom: 25px;
+}
+
+.see-more-wrapper {
+  margin-top: 25px;
+  margin-bottom: 25px;
 }

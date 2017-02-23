@@ -11,6 +11,16 @@ export function loadFonts() {
   return $.ajax({url})
 }
 
+export function loadRecentFontPairings() {
+  const url = `${getApiUrl()}font-pairings/recent`
+  return $.ajax({url})
+}
+
+export function loadPopularFontPairings() {
+  const url = `${getApiUrl()}font-pairings/liked`
+  return $.ajax({url})
+}
+
 export function sendFontPairingToApi(titleFont, contentFont) {
   const url = `${getApiUrl()}font-pairings/`
   const postParams =
