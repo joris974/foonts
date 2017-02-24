@@ -22,7 +22,7 @@ const FontPairingItem = (props) => {
     .value()
 
   return (
-    <div className="col-xs-12 col-md-3 col-lg-4 font-pairing-item-wrapper">
+    <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 font-pairing-item-wrapper">
       <Link to={fontsToSubUrl(fontTitle, fontContent)}>
         <div className="font-pairing-item">
           {fontFacesNode}
