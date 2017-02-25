@@ -69,9 +69,9 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props)
     this.state =
-      { showDownloadModal: false
+    { showDownloadModal: false
       , isLiked: false
-      }
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -183,7 +183,7 @@ class Sidebar extends React.Component {
           </div>
 
           <DownloadModal
-            show={this.state.showDownloadModal}
+            show={showDownloadModal}
             onHide={() => {this.setState({showDownloadModal: false})}}
             titleFont={titleFont}
             contentFont={contentFont}

@@ -7,7 +7,7 @@ import Spinner from './spinner.js'
 
 class ExplorePage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { numMaxVisible: 12 }
   }
 

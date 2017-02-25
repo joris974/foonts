@@ -30,9 +30,9 @@ export function fontsFromUrlParams(paramsPathPiece, fontList) {
   }
 
   return (
-    { titleFont
+  { titleFont
     , contentFont
-    }
+  }
   )
 }
 

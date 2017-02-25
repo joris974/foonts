@@ -57,11 +57,11 @@ class FontsPage extends React.Component {
   constructor(props) {
     super(props)
     this.state =
-      { numMaxVisible: 12
+    { numMaxVisible: 12
       , searchInput: ""
       , filteredFontList: props.fontList
       , fontCategories: allCategories()
-      }
+    }
   }
 
   onClickSeeMore() {
