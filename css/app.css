@@ -399,3 +399,23 @@ footer a:hover {
   border-color: #05668d;
   border-width: 2px;
 }
+
+/* Custom checkbox */
+
+.custom-checkbox {
+  display: block;
+  cursor: pointer;
+}
+
+.custom-checkbox-icon {
+  color: #05668d;
+  vertical-align: middle;
+}
+
+.custom-checkbox-label {
+  margin-left: 5px;
+}
+
+.li-fixed-width {
+  width: 120px;
+}
