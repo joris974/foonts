@@ -346,3 +346,23 @@ footer a:hover {
   margin: 0;
   padding: 0px 15px;
 }
+
+/* BTN custom */
+.btn-like {
+  background: #ed2553;
+  color: #FFF;
+  outline: none;
+}
+
+.btn-like:hover,
+.btn-like:focus {
+  background: #FFF;
+  color: #ed2553;
+  outline: none;
+  border-color: #ed2553;
+}
+
+.btn-custom {
+  border-color: #05668d;
+  border-width: 2px;
+}
