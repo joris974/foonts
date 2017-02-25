@@ -20,6 +20,14 @@ const Navbar = () => {
           Explore
         </Link>
       </li>
+      <li>
+        <Link
+          to="/fonts"
+          activeClassName="active"
+        >
+          Fonts
+        </Link>
+      </li>
     </ul>
   return (
     <nav className="navbar navbar-default navbar-foonts">
