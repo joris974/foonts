@@ -1,34 +1,8 @@
 import React from 'react'
 
 import _ from 'lodash'
-import Fonts from './fonts.js'
-
-const FontItem = (props) => {
-  const font = props.font
-  return (
-    <div className="row">
-      <div className="col-xs-12">
-        <div className="font-item">
-          <Fonts
-            key={font.family}
-            fontName={font.family}
-            fontUrl={font.url}
-          />
-          <h4>
-            {font.family}
-          </h4>
-          <h3
-            className="h2"
-            style={{fontFamily: font.family}}
-          >
-            The quick brown fox jumps over the lazy dog
-          </h3>
-
-        </div>
-      </div>
-    </div>
-  )
-}
+import FontListItem from './font-list-item.js'
+import SortListFilter from './sort-list-filter.js'
 
 const filterFontList = function(fontList, searchInput, fontCategories) {
   return _
@@ -53,6 +27,20 @@ const isChecked = function(fontCategories, category) {
 
 const allCategories = () => ["display", "serif", "sans-serif", "monospace", "handwriting"]
 
+const fontPopularValue = (font, fontPairings) => {
+  return _
+    .chain(fontPairings)
+    .map(fontPairing => {
+      if (font.id === fontPairing.font_title_id || font.id === fontPairing.font_content_id) {
+        return fontPairing.num_liked
+      } else {
+        return 0
+      }
+    })
+    .some()
+    .value()
+}
+
 class FontsPage extends React.Component {
   constructor(props) {
     super(props)
@@ -61,6 +49,7 @@ class FontsPage extends React.Component {
       , searchInput: ""
       , filteredFontList: props.fontList
       , fontCategories: allCategories()
+      , sortedBy: "popular"
     }
   }
 
@@ -98,16 +87,31 @@ class FontsPage extends React.Component {
     )
   }
 
+  handleChangeSortBy(sortBy) {
+    const {sortedBy} = this.state
+    if (sortBy === sortedBy) {
+      return
+    }
+    this.setState({sortedBy: sortBy})
+  }
+
   render() {
-    const {numMaxVisible, searchInput, filteredFontList, fontCategories} = this.state
+    const {fontPairings} = this.props
+    const {numMaxVisible, searchInput, filteredFontList, fontCategories, sortedBy} = this.state
 
     const fontsNode = _
       .chain(filteredFontList)
-      .sortBy(font => font.family)
+      .sortBy(font => {
+        if (sortedBy === "alphabetical") {
+          return font.family
+        } else if (sortedBy === "popular") {
+          return fontPopularValue(font, fontPairings)
+        }
+      })
       .take(numMaxVisible)
       .map(font => {
         return (
-          <FontItem
+          <FontListItem
             key={font.id}
             font={font}
           />
@@ -156,6 +160,12 @@ class FontsPage extends React.Component {
         <div className="container">
 
           <div className="row margin-top-lg">
+            <div className="col-xs-12 col-lg-4">
+              <SortListFilter
+                sortedBy={sortedBy}
+                handleChangeSortBy={this.handleChangeSortBy.bind(this)}
+              />
+            </div>
             <div className="col-xs-12 col-lg-8">
               <ul className="list-inline">
                 {toCheckboxLi("serif", "Serif")}

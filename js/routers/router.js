@@ -6,7 +6,7 @@ import App from './../components/app.js'
 import GeneratePage from './../components/generate-page.js'
 import ExploreRecentPage from './../components/explore-recent-page.js'
 import ExplorePopularPage from './../components/explore-popular-page.js'
-import FontsPage from './../components/fonts-page.js'
+import FontsWrapper from './../components/fonts-page/fonts-page-wrapper.js'
 
 const mountNode = document.getElementById("main")
 
@@ -19,7 +19,7 @@ ReactDOM.render(
       </Route>
       <Route path="/explore/recent" component={ExploreRecentPage}/>
       <Route path="/explore/popular" component={ExplorePopularPage}/>
-      <Route path="/fonts" component={FontsPage}/>
+      <Route path="/fonts" component={FontsWrapper}/>
     </Route>
   </Router>,
   mountNode
