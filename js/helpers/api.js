@@ -21,12 +21,7 @@ export function loadPopularFontPairings() {
   return $.ajax({url})
 }
 
-export function sendFontPairingToApi(titleFont, contentFont) {
-  const url = `${getApiUrl()}font-pairings/`
-  const postParams =
-    { "font-title-id": titleFont.id
-    , "font-content-id": contentFont.id
-    }
+function sendApi(url, postParams) {
   return $.ajax(
     { url
     , method: 'POST'
@@ -34,4 +29,22 @@ export function sendFontPairingToApi(titleFont, contentFont) {
     , data: JSON.stringify(postParams)
     }
   )
+}
+
+export function sendFontPairingToApi(titleFont, contentFont) {
+  const url = `${getApiUrl()}font-pairings/`
+  const postParams =
+    { "font-title-id": titleFont.id
+    , "font-content-id": contentFont.id
+    }
+  return sendApi(url, postParams)
+}
+
+export function sendFontPairingLikeToApi(titleFont, contentFont) {
+  const url = `${getApiUrl()}font-pairings/like`
+  const postParams =
+    { "font-title-id": titleFont.id
+    , "font-content-id": contentFont.id
+    }
+  return sendApi(url, postParams)
 }

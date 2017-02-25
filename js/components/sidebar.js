@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import DownloadModal from './download-modal.js'
 
+import {sendFontPairingLikeToApi} from './../helpers/api.js'
 
 const SidebarItem = (props) => {
   const {font, onChangeLock, isLocked, fontStyleProps, onToggleStyle} = props
@@ -57,17 +58,47 @@ const SidebarItem = (props) => {
   )
 }
 
+function hasLiked(titleFont, contentFont) {
+  const existingInStorage = localStorage.getItem('font-pairing-liked')
+  const fontPairing = `${titleFont}-${contentFont}`
+  const likedPairings = existingInStorage ? existingInStorage.split(",") : []
+  return _.includes(likedPairings, fontPairing)
+}
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {showDownloadModal: false}
+    this.state =
+      { showDownloadModal: false
+      }
   }
+
+  handleClickLike() {
+    const {titleFont, contentFont} = this.props
+
+    const existingInStorage = localStorage.getItem('font-pairing-liked')
+    const likedPairings = existingInStorage ? existingInStorage.split(",") : []
+    const fontPairing = `${titleFont}-${contentFont}`
+
+    let newInStorage
+    if (_.includes(likedPairings, fontPairing)) {
+      newInStorage = _.filter(likedPairings, fp => fp !== fontPairing)
+    } else {
+      sendFontPairingLikeToApi(titleFont, contentFont)
+      newInStorage = likedPairings.concat(fontPairing)
+    }
+
+    localStorage.setItem('font-pairing-liked', newInStorage)
+  }
+
   render() {
     const {onClickSwap, onClickGenerate} = this.props
     const {titleFont, titleFontStyleProps, onToggleTitleStyle, onChangeLockTitle, isTitleLocked} = this.props
     const {contentFont, contentFontStyleProps, onToggleContentStyle, onChangeLockContent, isContentLocked} = this.props
 
     const {showDownloadModal} = this.state
+
+    const isLiked = hasLiked(titleFont, contentFont)
 
     return (
       <div className="row">
@@ -101,30 +132,49 @@ class Sidebar extends React.Component {
             </div>
           </div>
 
-          <div className="row margin-top-lg">
-            <div className="col-xs-6 col-sm-5 col-sm-offset-1">
-              <button
-                className="btn btn-generate"
-                onClick={onClickGenerate}
-              >
-                <i className="fa fa-refresh"></i> Generate
-              </button>
-            </div>
-            <div className="col-xs-6 col-sm-5">
-              <button
-                className="btn btn-default"
-                onClick={() => {this.setState({showDownloadModal: true})}}
-              >
-                <i className="fa fa-download"></i> Download
-              </button>
-            </div>
-          </div>
+          <div className="row">
+            <div className="col-xs-8 col-xs-offset-2">
 
-          <div className="row margin-top-sm hidden-xs">
-            <div className="col-sm-12 col-sm-offset-1">
-              <p className="text-muted">
-                Tip: Press space bar to generate a new combination.
-              </p>
+              <div className="row margin-top-lg">
+                <div className="col-xs-12">
+                  <button
+                    className="btn btn-block btn-generate"
+                    onClick={onClickGenerate}
+                  >
+                    <i className="fa fa-refresh"></i> Generate
+                  </button>
+                </div>
+              </div>
+
+              <div className="row margin-top-lg">
+                <div className="col-xs-12">
+                  <button
+                    className="btn btn-block btn-default btn-like"
+                    onClick={this.handleClickLike.bind(this)}
+                  >
+                    <i className={`fa fa-heart`}></i> {isLiked ? "You liked this" : "Like"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="row margin-top-lg">
+                <div className="col-xs-12">
+                  <button
+                    className="btn btn-block btn-default btn-custom"
+                    onClick={() => {this.setState({showDownloadModal: true})}}
+                  >
+                    <i className="fa fa-download"></i> Download
+                  </button>
+                </div>
+              </div>
+
+              <div className="row margin-top-sm hidden-xs">
+                <div className="col-sm-12">
+                  <p className="text-muted">
+                    Tip: Press space bar to generate a new combination.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 

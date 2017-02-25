@@ -2,7 +2,7 @@ import { browserHistory } from 'react-router';
 import React from 'react'
 import _ from 'lodash'
 
-import {loadFonts, sendFontPairingToApi} from './../helpers/api.js'
+import {sendFontPairingToApi} from './../helpers/api.js'
 
 import Sidebar from './sidebar.js'
 import Fonts from './fonts.js'
