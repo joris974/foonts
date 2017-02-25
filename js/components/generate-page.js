@@ -5,6 +5,7 @@ import _ from 'lodash'
 import {sendFontPairingToApi} from './../helpers/api.js'
 
 import Sidebar from './sidebar.js'
+import Spinner from './spinner.js'
 import Fonts from './fonts.js'
 import EditableTitle from './editable-title.js'
 import EditableContent from './editable-content.js'
@@ -188,6 +189,10 @@ class GeneratePage extends React.Component {
         />
       )
       .value()
+
+    if (!titleFont || !contentFont) {
+      return <Spinner />
+    }
 
     return (
       <div>
