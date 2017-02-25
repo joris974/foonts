@@ -74,6 +74,13 @@ class Sidebar extends React.Component {
       }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.fontTitle !== this.props.fontTitle ||
+      nextProps.contentFont !== this.props.contentFont) {
+      this.setState({isLiked: false})
+    }
+  }
+
   componentDidMount() {
     const {titleFont, contentFont} = this.props
     this.setState({isLiked: hasLiked(titleFont, contentFont)})
