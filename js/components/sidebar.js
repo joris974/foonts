@@ -60,7 +60,7 @@ const SidebarItem = (props) => {
 
 function hasLiked(titleFont, contentFont) {
   const existingInStorage = localStorage.getItem('font-pairing-liked')
-  const fontPairing = `${titleFont}-${contentFont}`
+  const fontPairing = `${titleFont.id}-${contentFont.id}`
   const likedPairings = existingInStorage ? existingInStorage.split(",") : []
   return _.includes(likedPairings, fontPairing)
 }
@@ -70,7 +70,13 @@ class Sidebar extends React.Component {
     super(props)
     this.state =
       { showDownloadModal: false
+      , isLiked: false
       }
+  }
+
+  componentDidMount() {
+    const {titleFont, contentFont} = this.props
+    this.setState({isLiked: hasLiked(titleFont, contentFont)})
   }
 
   handleClickLike() {
@@ -78,17 +84,15 @@ class Sidebar extends React.Component {
 
     const existingInStorage = localStorage.getItem('font-pairing-liked')
     const likedPairings = existingInStorage ? existingInStorage.split(",") : []
-    const fontPairing = `${titleFont}-${contentFont}`
+    const fontPairing = `${titleFont.id}-${contentFont.id}`
 
-    let newInStorage
-    if (_.includes(likedPairings, fontPairing)) {
-      newInStorage = _.filter(likedPairings, fp => fp !== fontPairing)
-    } else {
+    if (!_.includes(likedPairings, fontPairing)) {
       sendFontPairingLikeToApi(titleFont, contentFont)
-      newInStorage = likedPairings.concat(fontPairing)
+      const newInStorage = likedPairings.concat(fontPairing)
+      localStorage.setItem('font-pairing-liked', newInStorage)
     }
 
-    localStorage.setItem('font-pairing-liked', newInStorage)
+    this.setState({isLiked: true})
   }
 
   render() {
@@ -96,9 +100,7 @@ class Sidebar extends React.Component {
     const {titleFont, titleFontStyleProps, onToggleTitleStyle, onChangeLockTitle, isTitleLocked} = this.props
     const {contentFont, contentFontStyleProps, onToggleContentStyle, onChangeLockContent, isContentLocked} = this.props
 
-    const {showDownloadModal} = this.state
-
-    const isLiked = hasLiked(titleFont, contentFont)
+    const {showDownloadModal, isLiked} = this.state
 
     return (
       <div className="row">
@@ -133,10 +135,11 @@ class Sidebar extends React.Component {
           </div>
 
           <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+            <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
 
-              <div className="row margin-top-lg">
-                <div className="col-xs-12">
+              <div className="row">
+
+                <div className="col-xs-4 col-sm-12 margin-top-lg">
                   <button
                     className="btn btn-block btn-generate"
                     onClick={onClickGenerate}
@@ -144,21 +147,17 @@ class Sidebar extends React.Component {
                     <i className="fa fa-refresh"></i> Generate
                   </button>
                 </div>
-              </div>
 
-              <div className="row margin-top-lg">
-                <div className="col-xs-12">
+                <div className="col-xs-4 col-sm-12 margin-top-lg">
                   <button
-                    className="btn btn-block btn-default btn-like"
+                    className={`btn btn-block btn-default btn-like ${isLiked ? "liked" : ""}`}
                     onClick={this.handleClickLike.bind(this)}
                   >
                     <i className={`fa fa-heart`}></i> {isLiked ? "You liked this" : "Like"}
                   </button>
                 </div>
-              </div>
 
-              <div className="row margin-top-lg">
-                <div className="col-xs-12">
+                <div className="col-xs-4 col-sm-12 margin-top-lg">
                   <button
                     className="btn btn-block btn-default btn-custom"
                     onClick={() => {this.setState({showDownloadModal: true})}}
@@ -166,10 +165,8 @@ class Sidebar extends React.Component {
                     <i className="fa fa-download"></i> Download
                   </button>
                 </div>
-              </div>
 
-              <div className="row margin-top-sm hidden-xs">
-                <div className="col-sm-12">
+                <div className="col-sm-12 margin-top-sm hidden-xs">
                   <p className="text-muted">
                     Tip: Press space bar to generate a new combination.
                   </p>
