@@ -14,7 +14,7 @@ const Navbar = () => {
       </li>
       <li>
         <Link
-          to="/explore"
+          to="/explore/recent"
           activeClassName="active"
         >
           Explore
@@ -33,6 +33,7 @@ const Navbar = () => {
             Foonts
           </Link>
         </div>
+        {links}
       </div>
     </nav>
   )

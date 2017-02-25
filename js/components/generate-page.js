@@ -23,53 +23,68 @@ const defaultContentStyleProps =
   , fontStyle: "normal"
   }
 
-class App extends React.Component {
+class GeneratePage extends React.Component {
   constructor(props) {
     super(props)
+
+    let fromParams
+    if (!_.isEmpty(props.params.fonts)) {
+      fromParams = fontsFromUrlParams(this.props.params.fonts, props.fontList)
+    }
+    const titleFont = fromParams ? fromParams.titleFont : null
+    const contentFont = fromParams ? fromParams.contentFont : null
+
     this.state =
-      { titleFont: null
-      , contentFont: null
+      { titleFont
+      , contentFont
       , isTitleLocked: false
       , isContentLocked : false
       , titleFontStyleProps: defaultTitleStyleProps
       , contentFontStyleProps: defaultContentStyleProps
       }
+
+    this.handleKeyPressF = this.handleKeyPress.bind(this)
   }
 
   componentDidMount() {
-    this.initialize()
+    if(_.isEmpty(this.props.params.fonts)) {
+      if (this.props.fontList.length > 0) {
+        const [randTitleFont, randContentFont] = _.sampleSize(this.props.fontList, 2)
+        const url = fontsToUrl(randTitleFont, randContentFont)
+        browserHistory.push(url)
+        this.setState(
+          { titleFont: randTitleFont
+          , contentFont: randContentFont
+          }
+        )
+      }
+    } else {
+      const {titleFont, contentFont} = fontsFromUrlParams(this.props.params.fonts, this.props.fontList)
+      sendFontPairingToApi(titleFont, contentFont)
+    }
+    window.addEventListener('keydown', this.handleKeyPressF)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyPressF)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!_.isEqual(this.props.params, nextProps.params) || _.isEmpty(nextProps.params)) {
-      this.initialize()
-    }
-  }
-
-  initialize() {
-    const fontList = this.props.fontList
-    let fromParams
-    if (!_.isNull(this.props.params) && !_.isNull(this.props.params.fonts)) {
-      fromParams = fontsFromUrlParams(this.props.params.fonts, fontList)
-    }
-    if (fromParams) {
-      const titleFont = fromParams ? fromParams.titleFont : _.sample(fontList)
-      const contentFont = fromParams ? fromParams.contentFont : _.sample(fontList)
-
+    if(_.isEmpty(nextProps.params.fonts)) {
+      if (this.props.fontList.length > 0) {
+        const [randTitleFont, randContentFont] = _.sampleSize(this.props.fontList, 2)
+        const url = fontsToUrl(randTitleFont, randContentFont)
+        browserHistory.push(url)
+      }
+    } else {
+      const {titleFont, contentFont} = fontsFromUrlParams(nextProps.params.fonts, this.props.fontList)
+      sendFontPairingToApi(titleFont, contentFont)
       this.setState(
         { titleFont
         , contentFont
         }
-      , () => {
-        const {titleFont, contentFont} = this.state
-        sendFontPairingToApi(titleFont, contentFont)
-        }
       )
-    } else {
-      this.generate()
     }
-
-    window.addEventListener('keydown', this.handleKeyPress.bind(this))
   }
 
   handleKeyPress(event) {
@@ -114,6 +129,11 @@ class App extends React.Component {
   }
 
   handleClickGenerate(e) {
+    const {isTitleLocked, isContentLocked} = this.state
+    if (isTitleLocked && isContentLocked) {
+      return
+    }
+
     e.preventDefault()
     this.generate()
   }
@@ -215,4 +235,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default GeneratePage

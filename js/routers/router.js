@@ -14,8 +14,9 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRedirect to="/generate" />
-      <Route path="/generate" component={GeneratePage}/>
-      <Route path="/generate/:fonts" component={GeneratePage}/>
+      <Route path="/generate" component={GeneratePage}>
+        <Route path=":fonts" component={GeneratePage}/>
+      </Route>
       <Route path="/explore/recent" component={ExploreRecentPage}/>
       <Route path="/explore/popular" component={ExplorePopularPage}/>
       <Route path="/fonts" component={FontsPage}/>
