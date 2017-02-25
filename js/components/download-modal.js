@@ -16,7 +16,7 @@ class DownloadModal extends React.Component {
     const embedCode =
       `<link href="https://fonts.googleapis.com/css?family=${toUrlFontFamily(titleFont.family)}|${toUrlFontFamily(contentFont.family)}" rel="stylesheet">`
 
-     const cssCode = `
+    const cssCode = `
       font-family: '${titleFont.family}', ${toFontCategory(titleFont.category)};
       <br/>
       font-family: '${contentFont.family}', ${toFontCategory(contentFont.category)};

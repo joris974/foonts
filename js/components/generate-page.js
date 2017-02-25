@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router'
 import React from 'react'
 import _ from 'lodash'
 
@@ -36,13 +36,13 @@ class GeneratePage extends React.Component {
     const contentFont = fromParams ? fromParams.contentFont : null
 
     this.state =
-      { titleFont
+    { titleFont
       , contentFont
       , isTitleLocked: false
       , isContentLocked : false
       , titleFontStyleProps: defaultTitleStyleProps
       , contentFontStyleProps: defaultContentStyleProps
-      }
+    }
 
     this.handleKeyPressF = this.handleKeyPress.bind(this)
   }
@@ -123,9 +123,9 @@ class GeneratePage extends React.Component {
       , contentFontStyleProps: newContentFontStyleProps
       }
     , () => {
-        const {titleFont, contentFont} = this.state
-        sendFontPairingToApi(titleFont, contentFont)
-      }
+      const {titleFont, contentFont} = this.state
+      sendFontPairingToApi(titleFont, contentFont)
+    }
     )
   }
 
@@ -168,9 +168,9 @@ class GeneratePage extends React.Component {
         , contentFont: newContentFont
         }
       , () => {
-          const {titleFont, contentFont} = this.state
-          sendFontPairingToApi(titleFont, contentFont)
-        }
+        const {titleFont, contentFont} = this.state
+        sendFontPairingToApi(titleFont, contentFont)
+      }
       )
     }
   }

@@ -1,4 +1,4 @@
-import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
+import {Router, Route, IndexRedirect, hashHistory} from 'react-router'
 
 import ReactDOM from 'react-dom'
 import React from 'react'

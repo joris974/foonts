@@ -27,7 +27,7 @@ class EditableContent extends React.Component {
       { content: DefaultContent }
   }
 
-  handleChange(e) {
+  handleChange() {
     this.setState({content: event.target.value})
   }
 

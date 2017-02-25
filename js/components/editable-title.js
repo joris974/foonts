@@ -10,7 +10,7 @@ class EditableTitle extends React.Component {
       { content: DefaultTitle }
   }
 
-  handleChange(e) {
+  handleChange() {
     this.setState({content: event.target.value})
   }
 
