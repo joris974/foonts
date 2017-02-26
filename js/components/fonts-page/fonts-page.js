@@ -61,7 +61,6 @@ class FontsPage extends React.Component {
   }
 
   render() {
-    const {fontPairings} = this.props
     const {numMaxVisible, filteredFontList, fontCategories, sortedBy} = this.state
 
     const fontsNode = _
