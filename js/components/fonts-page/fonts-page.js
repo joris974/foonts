@@ -58,25 +58,26 @@ class FontsPage extends React.Component {
   render() {
     const {numMaxVisible, filteredFontList, fontCategories, sortedBy} = this.state
 
-    const fontsNode = _
+    const sortedList = _
       .chain(filteredFontList)
       .sortBy(font => {
         if (sortedBy === "alphabetical") {
           return font.family
         } else if (sortedBy === "popular") {
-          return font.num_liked
+          return -font.num_liked
         }
       })
       .take(numMaxVisible)
-      .map(font => {
-        return (
-          <FontListItem
-            key={font.id}
-            font={font}
-          />
-        )
-      })
       .value()
+
+    const fontsNode = _.map(sortedList, font => {
+      return (
+        <FontListItem
+          key={font.id}
+          font={font}
+        />
+      )
+    })
 
 
     const btnSeeMore =
