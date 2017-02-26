@@ -1,6 +1,7 @@
 import React from 'react'
 import ExplorePage from './explore-page.js'
 import {loadRecentFontPairings} from './../helpers/api.js'
+import Spinner from './spinner.js'
 
 class ExploreRecentPage extends React.Component {
   constructor(props) {
@@ -26,9 +27,7 @@ class ExploreRecentPage extends React.Component {
           fontList={fontList}
           fontPairings={recentFontPairings}
         /> :
-        <div className="spinner">
-          <i className="fa fa-chevron fa-spin"></i>
-        </div>
+        <Spinner />
     )
   }
 }

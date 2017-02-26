@@ -1,46 +1,12 @@
 import React from 'react'
 
 import _ from 'lodash'
-import Fonts from './fonts.js'
+import FontListItem from './font-list-item.js'
+import SortListFilter from './sort-list-filter.js'
 
-const FontItem = (props) => {
-  const font = props.font
-  return (
-    <div className="row">
-      <div className="col-xs-12">
-        <div className="font-item">
-          <Fonts
-            key={font.family}
-            fontName={font.family}
-            fontUrl={font.url}
-          />
-          <h4>
-            {font.family}
-          </h4>
-          <h3
-            className="h2"
-            style={{fontFamily: font.family}}
-          >
-            The quick brown fox jumps over the lazy dog
-          </h3>
-
-        </div>
-      </div>
-    </div>
-  )
-}
-
-const filterFontList = function(fontList, searchInput, fontCategories) {
+const filterFontList = function(fontList, fontCategories) {
   return _
     .chain(fontList)
-    .filter(font => {
-      if(_.isEmpty(searchInput)) {
-        return true
-      } else {
-        return !_.isEmpty(font.family.trim().toLowerCase().match(searchInput.trim().toLowerCase()))
-      }
-
-    })
     .filter(font => {
       return _.includes(fontCategories, font.category)
     })
@@ -58,9 +24,9 @@ class FontsPage extends React.Component {
     super(props)
     this.state =
     { numMaxVisible: 12
-      , searchInput: ""
       , filteredFontList: props.fontList
       , fontCategories: allCategories()
+      , sortedBy: "popular"
     }
   }
 
@@ -70,27 +36,15 @@ class FontsPage extends React.Component {
     )
   }
 
-  handleChangeSearch(e) {
-    const {fontCategories} = this.state
-    const searchInputVal = e.target.value
-    const searchInput = _.isEmpty(searchInputVal) ? "" : searchInputVal
-    const filteredFontList = filterFontList(this.props.fontList, searchInput, fontCategories)
-    this.setState(
-      { searchInput
-      , filteredFontList
-      }
-    )
-  }
-
   handleChangeCheckbox(category){
-    const {fontCategories, searchInput} = this.state
+    const {fontCategories} = this.state
 
     const newFontCategories =
       _.includes(fontCategories, category) ?
         _.filter(fontCategories, c => c !== category) :
         fontCategories.concat([category])
 
-    const filteredFontList = filterFontList(this.props.fontList, searchInput, newFontCategories)
+    const filteredFontList = filterFontList(this.props.fontList, newFontCategories)
     this.setState(
       { fontCategories: newFontCategories
       , filteredFontList
@@ -98,22 +52,37 @@ class FontsPage extends React.Component {
     )
   }
 
+  handleChangeSortBy(sortBy) {
+    const {sortedBy} = this.state
+    if (sortBy === sortedBy) {
+      return
+    }
+    this.setState({sortedBy: sortBy})
+  }
+
   render() {
-    const {numMaxVisible, searchInput, filteredFontList, fontCategories} = this.state
+    const {numMaxVisible, filteredFontList, fontCategories, sortedBy} = this.state
 
     const fontsNode = _
       .chain(filteredFontList)
-      .sortBy(font => font.family)
+      .sortBy(font => {
+        if (sortedBy === "alphabetical") {
+          return font.family
+        } else if (sortedBy === "popular") {
+          return font.num_liked
+        }
+      })
       .take(numMaxVisible)
       .map(font => {
         return (
-          <FontItem
+          <FontListItem
             key={font.id}
             font={font}
           />
         )
       })
       .value()
+
 
     const btnSeeMore =
       numMaxVisible > filteredFontList.length ?
@@ -155,8 +124,14 @@ class FontsPage extends React.Component {
       <div>
         <div className="container">
 
-          <div className="row margin-top-lg">
-            <div className="col-xs-12 col-lg-8">
+          <div className="row">
+            <div className="col-xs-12 col-lg-4 margin-top-lg">
+              <SortListFilter
+                sortedBy={sortedBy}
+                handleChangeSortBy={this.handleChangeSortBy.bind(this)}
+              />
+            </div>
+            <div className="col-xs-12 col-lg-8 margin-top-lg">
               <ul className="list-inline">
                 {toCheckboxLi("serif", "Serif")}
                 {toCheckboxLi("sans-serif", "Sans serif")}
@@ -164,15 +139,6 @@ class FontsPage extends React.Component {
                 {toCheckboxLi("handwriting", "Handwriting")}
                 {toCheckboxLi("monospace", "Monospace")}
               </ul>
-            </div>
-            <div className="col-xs-12 col-lg-4">
-              <input
-                type="text"
-                className="form-control input-lg"
-                value={searchInput}
-                placeholder="Search"
-                onChange={this.handleChangeSearch.bind(this)}
-              />
             </div>
           </div>
 

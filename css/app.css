@@ -419,3 +419,49 @@ footer a:hover {
 .li-fixed-width {
   width: 120px;
 }
+
+/* Sort Filter */
+.sort-filter-options {
+  display: none;
+}
+
+.sort-filter-options.active {
+  display: block;
+  background: #fafafa;
+  color: #4d4d4d;
+  border: 2px solid #05668d;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  position: absolute;
+  width: 150px;
+  z-index: 10;
+  border-radius: 5px 0px 5px 5px;
+  margin: 0 53px;
+  text-align: right;
+}
+
+.sort-filter-title {
+  font-size: 20px;
+}
+
+.sort-filter-options ul {
+  margin: 0;
+}
+
+.sort-filter-label {
+  padding-bottom: 3px;
+  border-bottom: 3px solid #05668d;
+}
+
+.sort-filter-label i {
+  color: #05668d;
+}
+
+.sort-filter-options li {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #9E9E9E;
+}
+
+.sort-filter-options li:last-child {
+  border-bottom: none;
+}
