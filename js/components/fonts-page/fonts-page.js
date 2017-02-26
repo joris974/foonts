@@ -5,12 +5,7 @@ import FontListItem from './font-list-item.js'
 import SortListFilter from './sort-list-filter.js'
 
 const filterFontList = function(fontList, fontCategories) {
-  return _
-    .chain(fontList)
-    .filter(font => {
-      return _.includes(fontCategories, font.category)
-    })
-    .value()
+  return _.filter(fontList, font => _.includes(fontCategories, font.category))
 }
 
 const isChecked = function(fontCategories, category) {
