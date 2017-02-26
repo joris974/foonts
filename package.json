@@ -6,11 +6,9 @@
   "scripts": {
     "build:common": "npm run eslint && npm run bundlify",
     "build:prod": "NODE_ENV=production npm run build:common ",
-    "build:dev": "NODE_ENV=dev npm run build:common",
+    "build:dev": "NODE_ENV=dev npm run bundlify",
     "build": "npm run build:prod",
-
     "bundlify": "browserify js/index.js -o dist/main.js",
-
     "eslint": "eslint js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -7,7 +7,7 @@ class SortListFilter extends React.Component {
     this.state = {showDropdown: false}
   }
 
-  handleClickChange() {
+  handleToggleDropdown() {
     this.setState({showDropdown: !this.state.showDropdown})
   }
 
@@ -24,7 +24,13 @@ class SortListFilter extends React.Component {
       <div>
         <div className="sort-filter">
           <div className="sort-filter-title">
-            Sort by <span className="sort-filter-label" onClick={this.handleClickChange.bind(this)}>{_.capitalize(sortedBy)} <i className="fa fa-chevron-down"></i></span>
+            Sort by&nbsp;
+              <span
+                className="sort-filter-label"
+                onClick={this.handleToggleDropdown.bind(this)}
+              >
+                {_.capitalize(sortedBy)} <i className="fa fa-chevron-down"></i>
+              </span>
           </div>
         </div>
         <div className={`sort-filter-options ${showDropdown ? 'active' : ''}`}>
