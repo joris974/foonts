@@ -1,61 +1,89 @@
 import React from 'react'
 import _ from 'lodash'
 import DownloadModal from './download-modal.js'
-
+import Checkbox from './checkbox.js'
 import {sendFontPairingLikeToApi} from './../helpers/api.js'
 
-const SidebarItem = (props) => {
-  const {font, onChangeLock, isLocked, fontStyleProps, onToggleStyle} = props
-  if (_.isNull(font)) {
-    return null
+
+class SidebarItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state ={showConfig: false}
   }
 
-  const iconClassName =
-    isLocked ?
-      "icon-lock-locked fa-lock" :
-      "icon-lock-unlocked fa-unlock-alt"
+  toggleConfigMenu() {
+    this.setState({showConfig: !this.state.showConfig})
+  }
 
-  const isItalic = fontStyleProps.fontStyle === "italic"
-  const isBolded = fontStyleProps.fontWeight === "bold"
+  render() {
+    const {font, onChangeLock, isLocked, fontStyleProps, onToggleStyle} = this.props
+    const {showConfig} = this.state
 
-  return (
-    <div className="row">
-      <div className="col-xs-11 pull-right">
-        <div className="row">
-          <div className="col-xs-9">
-            <h3>
-              {font.family}
-            </h3>
-          </div>
-          <div className="col-xs-3 text-center">
-            <i
-              className={`h3 icon-action fa ${iconClassName}`}
-              onClick={onChangeLock}
-            >
-            </i>
-          </div>
-        </div>
-        <div className="row section-command">
+    if (_.isNull(font)) {
+      return null
+    }
+
+    const iconLockClassName =
+      isLocked ?
+        "icon-lock-locked fa-lock" :
+        "icon-lock-unlocked fa-unlock-alt"
+
+    const isItalic = fontStyleProps.fontStyle === "italic"
+    const isBolded = fontStyleProps.fontWeight === "bold"
+
+    const configNode =
+      !showConfig ?
+        null:
+        <div className="row sidebar-item-config">
           <div className="col-xs-12">
-            <ul className="list-inline section-actions pull-right">
+            <ul className="list-unstyled section-actions">
               <li>
-                <i
-                  className={`fa fa-italic icon-action icon-command icon-italic ${isItalic ? "active" : ""}`}
-                  onClick={() => onToggleStyle("italic")}
-                ></i>
+                <Checkbox
+                  isChecked={isItalic}
+                  handleChangeCheckbox={() => onToggleStyle("italic")}
+                  label={<i className="fa fa-italic"></i>}
+                />
               </li>
               <li>
-                <i
-                  className={`fa fa-bold icon-action icon-command icon-bold ${isBolded ? "active" : ""}`}
-                  onClick={() => onToggleStyle("bold")}
-                ></i>
+                <Checkbox
+                  isChecked={isBolded}
+                  handleChangeCheckbox={() => onToggleStyle("bold")}
+                  label={<i className="fa fa-bold"></i>}
+                />
               </li>
             </ul>
           </div>
         </div>
+
+
+    return (
+      <div className="row section-command">
+        <div className="col-xs-11 pull-right">
+          <div className="row">
+            <div className="col-xs-9">
+              <h3>
+                {font.family}
+              </h3>
+            </div>
+            <div className="col-xs-3 text-right">
+              <i
+                onClick={this.toggleConfigMenu.bind(this)}
+                className={`h3 icon-action fa fa-gear icon-gear ${showConfig ? "active" : ""}`}
+              >
+              </i>
+              <i
+                className={`h3 icon-action fa ${iconLockClassName}`}
+                onClick={onChangeLock}
+              >
+              </i>
+            </div>
+          </div>
+
+          {configNode}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 function hasLiked(titleFont, contentFont) {
@@ -151,7 +179,10 @@ class Sidebar extends React.Component {
                     className="btn btn-block btn-generate"
                     onClick={onClickGenerate}
                   >
-                    <i className="fa fa-refresh"></i> Generate
+                    <i className="fa fa-refresh"></i>
+                    <span className="hidden-xs">
+                      &nbsp;Generate
+                    </span>
                   </button>
                 </div>
 
@@ -160,7 +191,10 @@ class Sidebar extends React.Component {
                     className={`btn btn-block btn-default btn-like ${isLiked ? "liked" : ""}`}
                     onClick={this.handleClickLike.bind(this)}
                   >
-                    <i className={`fa fa-heart`}></i> {isLiked ? "You liked this" : "Like"}
+                    <i className={`fa fa-heart`}></i>
+                    <span className="hidden-xs">
+                      &nbsp;{isLiked ? "You liked this" : "Like"}
+                    </span>
                   </button>
                 </div>
 
@@ -169,7 +203,10 @@ class Sidebar extends React.Component {
                     className="btn btn-block btn-default btn-custom"
                     onClick={() => {this.setState({showDownloadModal: true})}}
                   >
-                    <i className="fa fa-download"></i> Download
+                    <i className="fa fa-download"></i>
+                    <span className="hidden-xs">
+                      &nbsp;Download
+                    </span>
                   </button>
                 </div>
 

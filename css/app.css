@@ -65,18 +65,20 @@ html, body {
   cursor: pointer;
 }
 
-.icon-lock-locked {
-  color: #505050;
+.icon-action.h3:first-child {
+  margin-right: 5px;
 }
 
-.icon-lock-locked:hover {
-  color: #9e9e9e;
-}
-
+.icon-gear,
 .icon-lock-unlocked {
   color: #9e9e9e;
 }
-.icon-lock-unlocked:hover {
+
+.icon-gear.active,
+.icon-gear:hover,
+.icon-lock-unlocked:hover,
+.icon-lock-locked,
+.icon-lock-locked:hover {
   color: #505050;
 }
 
@@ -97,26 +99,11 @@ html, body {
 }
 
 .section-command {
-  background: #05668D;
+  border-bottom: solid 1px #05668D;
 }
 
-.section-command:hover .icon-command {
-  color: #7bcbd5;
-}
-.section-command:hover .icon-command.active {
-  color: #d0edf0;
-}
+.sidebar-item-config {
 
-.icon-command {
-  color: transparent;
-  font-size: 15px;
-}
-.section-command:hover .icon-command:hover {
-  color: #d0edf0;
-}
-
-.icon-command.active {
-  color: #d0edf0;
 }
 
 .margin-top-sm { margin-top: 5px; }

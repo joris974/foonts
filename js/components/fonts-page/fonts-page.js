@@ -3,6 +3,7 @@ import React from 'react'
 import _ from 'lodash'
 import FontListItem from './font-list-item.js'
 import SortListFilter from './sort-list-filter.js'
+import Checkbox from './../checkbox.js'
 
 const filterFontList = function(fontList, fontCategories) {
   return _.filter(fontList, font => _.includes(fontCategories, font.category))
@@ -95,23 +96,13 @@ class FontsPage extends React.Component {
         </div>
 
     const toCheckboxLi = (categ, title) => {
-      const icon =
-        isChecked(fontCategories, categ) ?
-          <span className="custom-checkbox-icon fa fa-2x fa-check-square"></span> :
-          <span className="custom-checkbox-icon fa fa-2x fa-square"></span>
-
       return (
         <li className="li-fixed-width">
-          <div
-            className={`custom-checkbox ${isChecked(fontCategories, categ) ? "checked" : ""}`}
-            onClick={this.handleChangeCheckbox.bind(this, categ)}
-          >
-
-            {icon}
-            <span className="custom-checkbox-label">
-              {title}
-            </span>
-          </div>
+          <Checkbox
+            isChecked={isChecked(fontCategories, categ)}
+            handleChangeCheckbox={this.handleChangeCheckbox.bind(this, categ)}
+            label={title}
+          />
         </li>
       )
     }
