@@ -88,6 +88,16 @@ export function fontsToSubUrl(titleFont, contentFont) {
   return `/generate/${toUrlFontFamily(titleFont.family)}--${toUrlFontFamily(contentFont.family)}`
 }
 
+export function labelForCategory(category) {
+  switch (category) {
+  case "serif": return "Serif"
+  case "sans-serif": return "Sans serif"
+  case "display": return "Cursive"
+  case "handwriting": return "Handwriting"
+  case "monospace": return "Monospace"
+  }
+}
+
 export function randomFont(fontList, categories) {
   return _
     .chain(fontList)

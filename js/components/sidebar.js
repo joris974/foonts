@@ -3,7 +3,7 @@ import _ from 'lodash'
 import DownloadModal from './download-modal.js'
 import Checkbox from './checkbox.js'
 import {sendFontPairingLikeToApi} from './../helpers/api.js'
-import {allCategories} from './../helpers/helper.js'
+import {allCategories, labelForCategory} from './../helpers/helper.js'
 
 class SidebarItem extends React.Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class SidebarItem extends React.Component {
         <div key={category} className="col-xs-6">
           <Checkbox
             isChecked={_.includes(fontCategories, category)}
-            label={category}
+            label={labelForCategory(category)}
             handleChangeCheckbox={() => onChangeStyle("category", category)}
           />
         </div>

@@ -4,7 +4,7 @@ import _ from 'lodash'
 import FontListItem from './font-list-item.js'
 import SortListFilter from './sort-list-filter.js'
 import Checkbox from './../checkbox.js'
-import {allCategories} from './../../helpers/helper.js'
+import {allCategories, labelForCategory} from './../../helpers/helper.js'
 
 const filterFontList = function(fontList, fontCategories) {
   return _.filter(fontList, font => _.includes(fontCategories, font.category))
@@ -119,11 +119,11 @@ class FontsPage extends React.Component {
             </div>
             <div className="col-xs-12 col-lg-8 margin-top-lg">
               <ul className="list-inline">
-                {toCheckboxLi("serif", "Serif")}
-                {toCheckboxLi("sans-serif", "Sans serif")}
-                {toCheckboxLi("display", "Cursive")}
-                {toCheckboxLi("handwriting", "Handwriting")}
-                {toCheckboxLi("monospace", "Monospace")}
+                {toCheckboxLi("serif", labelForCategory("serif"))}
+                {toCheckboxLi("sans-serif", labelForCategory("sans-serif"))}
+                {toCheckboxLi("display", labelForCategory("display"))}
+                {toCheckboxLi("handwriting", labelForCategory("handwriting"))}
+                {toCheckboxLi("monospace", labelForCategory("monospace"))}
               </ul>
             </div>
           </div>
