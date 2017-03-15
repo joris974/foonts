@@ -53,9 +53,7 @@ html, body {
   padding-bottom: 15px;
 }
 
-
-
-.container>.navbar-header {
+.container > .navbar-header {
   margin-right: 0;
   margin-left: 0;
 }
@@ -91,6 +89,11 @@ html, body {
   color: #505050;
 }
 
+.icon-font-size {
+  color: #05668d;
+  margin-bottom: 0;
+}
+
 /* Section commands */
 
 .section-actions {
@@ -103,7 +106,14 @@ html, body {
 }
 
 .sidebar-item-config {
+  border-bottom: solid 1px #05668D;
+  padding-bottom: 10px;
+}
 
+.sidebar-item-config h4 {
+  color: #616161;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .margin-top-sm { margin-top: 5px; }

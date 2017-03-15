@@ -3,7 +3,7 @@ import _ from 'lodash'
 import DownloadModal from './download-modal.js'
 import Checkbox from './checkbox.js'
 import {sendFontPairingLikeToApi} from './../helpers/api.js'
-
+import {allCategories} from './../helpers/helper.js'
 
 class SidebarItem extends React.Component {
   constructor(props) {
@@ -16,8 +16,10 @@ class SidebarItem extends React.Component {
   }
 
   render() {
-    const {font, onChangeLock, isLocked, fontStyleProps, onToggleStyle} = this.props
+    const {font, onChangeLock, isLocked, fontStyleProps, onChangeStyle} = this.props
     const {showConfig} = this.state
+
+    const {fontStyle, fontWeight, fontCategories} = fontStyleProps
 
     if (_.isNull(font)) {
       return null
@@ -28,38 +30,80 @@ class SidebarItem extends React.Component {
         "icon-lock-locked fa-lock" :
         "icon-lock-unlocked fa-unlock-alt"
 
-    const isItalic = fontStyleProps.fontStyle === "italic"
-    const isBolded = fontStyleProps.fontWeight === "bold"
+    const isItalic = fontStyle === "italic"
+    const isBolded = fontWeight === "bold"
+
+    const allCategoriesNodes = _.map(allCategories(), category => {
+      return (
+        <div key={category} className="col-xs-6">
+          <Checkbox
+            isChecked={_.includes(fontCategories, category)}
+            label={category}
+            handleChangeCheckbox={() => onChangeStyle("category", category)}
+          />
+        </div>
+      )
+    })
 
     const configNode =
       !showConfig ?
         null:
-        <div className="row sidebar-item-config">
+        <div className="row sidebar-item-config section-actions">
           <div className="col-xs-12">
-            <ul className="list-unstyled section-actions">
-              <li>
+            <div className="row">
+              <div className="col-xs-6">
+                <h4>Style</h4>
+              </div>
+              <div className="col-xs-2 col-xs-offset-2">
+                <h4>Size</h4>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-3">
                 <Checkbox
                   isChecked={isItalic}
-                  handleChangeCheckbox={() => onToggleStyle("italic")}
+                  handleChangeCheckbox={() => onChangeStyle("italic")}
                   label={<i className="fa fa-italic"></i>}
                 />
-              </li>
-              <li>
+              </div>
+              <div className="col-xs-3">
                 <Checkbox
                   isChecked={isBolded}
-                  handleChangeCheckbox={() => onToggleStyle("bold")}
+                  handleChangeCheckbox={() => onChangeStyle("bold")}
                   label={<i className="fa fa-bold"></i>}
                 />
-              </li>
-            </ul>
+              </div>
+              <div className="col-xs-2 col-xs-offset-2">
+                <i
+                  onClick={() => onChangeStyle("increment")}
+                  className="fa fa-plus-circle icon-action icon-font-size"
+                >
+                </i>
+              </div>
+              <div className="col-xs-2">
+                <i
+                  onClick={() => onChangeStyle("decrement")}
+                  className="fa fa-minus-circle icon-action icon-font-size"
+                >
+                </i>
+              </div>
+            </div>
+            <div className="row margin-top-md">
+              <div className="col-xs-12">
+                <h4>Categories</h4>
+              </div>
+            </div>
+            <div className="row">
+              {allCategoriesNodes}
+            </div>
           </div>
         </div>
 
 
     return (
-      <div className="row section-command">
+      <div className="row">
         <div className="col-xs-11 pull-right">
-          <div className="row">
+          <div className="row section-command">
             <div className="col-xs-9">
               <h3>
                 {font.family}
@@ -132,8 +176,8 @@ class Sidebar extends React.Component {
 
   render() {
     const {onClickSwap, onClickGenerate} = this.props
-    const {titleFont, titleFontStyleProps, onToggleTitleStyle, onChangeLockTitle, isTitleLocked} = this.props
-    const {contentFont, contentFontStyleProps, onToggleContentStyle, onChangeLockContent, isContentLocked} = this.props
+    const {titleFont, titleFontStyleProps, onChangeTitleStyle, onChangeLockTitle, isTitleLocked} = this.props
+    const {contentFont, contentFontStyleProps, onChangeContentStyle, onChangeLockContent, isContentLocked} = this.props
 
     const {showDownloadModal, isLiked} = this.state
 
@@ -148,7 +192,7 @@ class Sidebar extends React.Component {
                 isLocked={isTitleLocked}
                 onChangeLock={onChangeLockTitle}
                 fontStyleProps={titleFontStyleProps}
-                onToggleStyle={onToggleTitleStyle}
+                onChangeStyle={onChangeTitleStyle}
               />
               <div className="row section-divider">
                 <div className="col-xs-1 text-center">
@@ -164,7 +208,7 @@ class Sidebar extends React.Component {
                 isLocked={isContentLocked}
                 onChangeLock={onChangeLockContent}
                 fontStyleProps={contentFontStyleProps}
-                onToggleStyle={onToggleContentStyle}
+                onChangeStyle={onChangeContentStyle}
               />
             </div>
           </div>

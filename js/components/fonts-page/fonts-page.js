@@ -4,6 +4,7 @@ import _ from 'lodash'
 import FontListItem from './font-list-item.js'
 import SortListFilter from './sort-list-filter.js'
 import Checkbox from './../checkbox.js'
+import {allCategories} from './../../helpers/helper.js'
 
 const filterFontList = function(fontList, fontCategories) {
   return _.filter(fontList, font => _.includes(fontCategories, font.category))
@@ -12,8 +13,6 @@ const filterFontList = function(fontList, fontCategories) {
 const isChecked = function(fontCategories, category) {
   return _.includes(fontCategories, category)
 }
-
-const allCategories = () => ["display", "serif", "sans-serif", "monospace", "handwriting"]
 
 class FontsPage extends React.Component {
   constructor(props) {

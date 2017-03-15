@@ -10,18 +10,21 @@ import Fonts from './fonts.js'
 import EditableTitle from './editable-title.js'
 import EditableContent from './editable-content.js'
 import ApplicationMeta from './application-meta.js'
-import {fontsFromUrlParams, updateFontStyle, fontsToUrl} from './../helpers/helper.js'
+import {fontsFromUrlParams, updateFontStyle, fontsToUrl, allCategories, randomFont} from './../helpers/helper.js'
+
 
 const defaultTitleStyleProps =
   { fontSize: 36
   , fontWeight: "normal"
   , fontStyle: "normal"
+  , fontCategories: allCategories()
   }
 
 const defaultContentStyleProps =
   { fontSize: 14
   , fontWeight: "normal"
   , fontStyle: "normal"
+  , fontCategories: allCategories()
   }
 
 class GeneratePage extends React.Component {
@@ -108,11 +111,13 @@ class GeneratePage extends React.Component {
       { fontSize: titleFontStyleProps.fontSize
       , fontWeight: contentFontStyleProps.fontWeight
       , fontStyle: contentFontStyleProps.fontStyle
+      , fontCategories: contentFontStyleProps.fontCategories
       }
     const newContentFontStyleProps =
       { fontSize: contentFontStyleProps.fontSize
       , fontWeight: titleFontStyleProps.fontWeight
       , fontStyle: titleFontStyleProps.fontStyle
+      , fontCategories: titleFontStyleProps.fontCategories
       }
     this.setState(
       { titleFont: contentFont
@@ -139,23 +144,25 @@ class GeneratePage extends React.Component {
     this.generate()
   }
 
-  handleToggleTitleStyle(changeType) {
+  updateTitleStyle(changeType, changeValue) {
     const {titleFontStyleProps} = this.state
-    const newTitleFontStyleProps = updateFontStyle(changeType, titleFontStyleProps)
+    const newTitleFontStyleProps = updateFontStyle(titleFontStyleProps, changeType, changeValue)
     this.setState({titleFontStyleProps: newTitleFontStyleProps})
   }
 
-  handleToggleContentStyle(changeType) {
+  updateContentStyle(changeType, changeValue) {
     const {contentFontStyleProps} = this.state
-    const newContentFontStyleProps = updateFontStyle(changeType, contentFontStyleProps)
+    const newContentFontStyleProps = updateFontStyle(contentFontStyleProps, changeType, changeValue)
     this.setState({contentFontStyleProps: newContentFontStyleProps})
   }
 
   generate() {
     const {fontList} = this.props
     if (fontList.length > 0) {
-      const {titleFont, contentFont, isTitleLocked, isContentLocked} = this.state
-      const [randTitleFont, randContentFont] = _.sampleSize(fontList, 2)
+      const {titleFont, contentFont, isTitleLocked, isContentLocked, titleFontStyleProps, contentFontStyleProps} = this.state
+
+      const randTitleFont = randomFont(fontList, titleFontStyleProps.fontCategories)
+      const randContentFont = randomFont(fontList, contentFontStyleProps.fontCategories)
 
       const newTitleFont = isTitleLocked ? titleFont : randTitleFont
       const newContentFont = isContentLocked ? contentFont : randContentFont
@@ -211,10 +218,10 @@ class GeneratePage extends React.Component {
               <Sidebar
                 titleFont={titleFont}
                 titleFontStyleProps={titleFontStyleProps}
-                onToggleTitleStyle={this.handleToggleTitleStyle.bind(this)}
+                onChangeTitleStyle={this.updateTitleStyle.bind(this)}
                 contentFont={contentFont}
                 contentFontStyleProps={contentFontStyleProps}
-                onToggleContentStyle={this.handleToggleContentStyle.bind(this)}
+                onChangeContentStyle={this.updateContentStyle.bind(this)}
                 isTitleLocked={isTitleLocked}
                 isContentLocked={isContentLocked}
                 onChangeLockTitle={() => {this.setState({isTitleLocked: !this.state.isTitleLocked})}}
