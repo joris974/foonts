@@ -1,30 +1,29 @@
-import React from 'react'
-import _ from 'lodash'
+import React from "react";
+import _ from "lodash";
 
-const DefaultTitle = "Find best matching fonts in seconds!!"
+const DefaultTitle = "Find best matching fonts in seconds!!";
 
 class EditableTitle extends React.Component {
   constructor(props) {
-    super(props)
-    this.state =
-      { content: DefaultTitle }
+    super(props);
+    this.state = { content: DefaultTitle };
   }
 
-  handleChange() {
-    this.setState({content: event.target.value})
+  handleChange(event) {
+    this.setState({ content: event.target.value });
   }
 
   render() {
-    const {fontStyleProps, font} = this.props
-    const {fontSize, fontWeight, fontStyle} = fontStyleProps
+    const { fontStyleProps, font } = this.props;
+    const { fontSize, fontWeight, fontStyle } = fontStyleProps;
 
-    const content = this.state.content
-    const style =
-      { fontSize: `${fontSize}px`
-      , fontWeight: `${fontWeight}`
-      , fontStyle: `${fontStyle}`
-      , fontFamily: !_.isNull(font) ? font.family : ""
-      }
+    const content = this.state.content;
+    const style = {
+      fontSize: `${fontSize}px`,
+      fontWeight: `${fontWeight}`,
+      fontStyle: `${fontStyle}`,
+      fontFamily: !_.isNull(font) ? font.family : ""
+    };
     return (
       <h1
         style={style}
@@ -34,8 +33,8 @@ class EditableTitle extends React.Component {
       >
         {content}
       </h1>
-    )
+    );
   }
 }
 
-export default EditableTitle
+export default EditableTitle;
