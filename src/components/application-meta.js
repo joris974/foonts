@@ -1,27 +1,25 @@
-import React from 'react'
-import Helmet from 'react-helmet'
+import React from "react";
+// import Helmet from "react-helmet";
 
-import {fontsToUrl} from './../helpers/helper.js'
+import { fontsToUrl } from "./../helpers/helper.js";
 
 export default function ApplicationMeta(props) {
-  const {titleFont, contentFont} = props
-  const hostname = window.location.hostname
-  const baseWebsiteUrl = `https://${hostname}/`
+  const { titleFont, contentFont } = props;
+  const hostname = window.location.hostname;
+  const baseWebsiteUrl = `https://${hostname}/`;
 
   const fontUrl =
-    titleFont && contentFont ?
-      fontsToUrl(titleFont, contentFont) :
-      ""
-  const canonicalUrl = `${baseWebsiteUrl}${fontUrl}`
+    titleFont && contentFont ? fontsToUrl(titleFont, contentFont) : "";
+  const canonicalUrl = `${baseWebsiteUrl}${fontUrl}`;
 
   const title =
-    titleFont && contentFont ?
-      `${titleFont.family} with ${contentFont.family}` :
-      null
+    titleFont && contentFont
+      ? `${titleFont.family} with ${contentFont.family}`
+      : null;
 
   return (
     <div className="application">
-      <Helmet
+      {/* <Helmet
         title={title}
         titleTemplate="Foonts - %s"
         defaultTitle="Find perfect matchings fonts in seconds!"
@@ -33,7 +31,7 @@ export default function ApplicationMeta(props) {
         link={[
           {rel: "canonical", href: canonicalUrl},
         ]}
-      />
+      /> */}
     </div>
-  )
+  );
 }
