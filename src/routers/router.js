@@ -17,13 +17,19 @@ export function AppRouter() {
           </App>
         </Route>
         <Route path="/explore/recent">
-          <ExploreRecentPage />
+          <App>
+            <ExploreRecentPage />
+          </App>
         </Route>
         <Route path="/explore/popular">
-          <ExplorePopularPage />
+          <App>
+            <ExplorePopularPage />
+          </App>
         </Route>
         <Route path="/fonts">
-          <FontsWrapper />
+          <App>
+            <FontsWrapper />
+          </App>
         </Route>
       </Switch>
     </HashRouter>
