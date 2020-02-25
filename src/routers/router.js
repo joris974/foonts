@@ -1,4 +1,4 @@
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import React from "react";
 import App from "./../components/app.js";
 import GeneratePage from "./../components/generate-page.js";
@@ -10,6 +10,7 @@ export function AppRouter() {
   return (
     <HashRouter>
       <Switch>
+        <Redirect exact from="/" to="/generate" />
         <Route path="/generate/:fonts?">
           <App>
             <GeneratePage />

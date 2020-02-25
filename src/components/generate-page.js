@@ -60,7 +60,7 @@ class GeneratePage extends React.Component {
     const { history, location, match, fontList } = this.props;
     const params = match && match.params;
 
-    if (_.isEmpty(params) && _.isEmpty(params.fonts)) {
+    if (_.isEmpty(params) || _.isEmpty(params.fonts)) {
       if (fontList.length > 0) {
         const [randTitleFont, randContentFont] = _.sampleSize(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
@@ -88,7 +88,7 @@ class GeneratePage extends React.Component {
     const { fontList, history, match } = nextProps;
     const params = match && match.params;
 
-    if (_.isEmpty(params) && _.isEmpty(params.fonts)) {
+    if (_.isEmpty(params) || _.isEmpty(params.fonts)) {
       if (fontList.length > 0) {
         const [randTitleFont, randContentFont] = _.sampleSize(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
@@ -233,16 +233,16 @@ class GeneratePage extends React.Component {
       isContentLocked
     } = this.state;
 
+    if (!titleFont || !contentFont) {
+      return <Spinner />;
+    }
+
     const fontFacesNode = _.chain([titleFont, contentFont])
       .filter(x => !_.isNull(x))
       .map(font => (
         <Fonts key={font.family} fontName={font.family} fontUrl={font.url} />
       ))
       .value();
-
-    if (!titleFont || !contentFont) {
-      return <Spinner />;
-    }
 
     return (
       <div>
