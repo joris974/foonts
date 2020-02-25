@@ -1,29 +1,25 @@
-import React from 'react'
-import { Link } from 'react-router'
-import _ from 'lodash'
+import React from "react";
+import { Link } from "react-router-dom";
+import _ from "lodash";
 
-import FontPairingItem from './font-pairing-snippet.js'
-import Spinner from './spinner.js'
+import FontPairingItem from "./font-pairing-snippet.js";
+import Spinner from "./spinner.js";
 
 class ExplorePage extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { numMaxVisible: 12 }
+    super(props);
+    this.state = { numMaxVisible: 12 };
   }
 
   onClickSeeMore() {
-    this.setState(
-      { numMaxVisible: this.state.numMaxVisible + 12 }
-    )
+    this.setState({ numMaxVisible: this.state.numMaxVisible + 12 });
   }
 
   render() {
-    const {fontList, fontPairings} = this.props
-    const {numMaxVisible} = this.state
+    const { fontList, fontPairings } = this.props;
+    const { numMaxVisible } = this.state;
 
-
-    const pairings = _
-      .chain(fontPairings)
+    const pairings = _.chain(fontPairings)
       .take(numMaxVisible)
       .map(pairing => {
         return (
@@ -32,13 +28,12 @@ class ExplorePage extends React.Component {
             fontList={fontList}
             pairing={pairing}
           />
-        )
+        );
       })
-      .value()
+      .value();
 
     const btnSeeMore =
-      numMaxVisible > fontPairings.length ?
-        null:
+      numMaxVisible > fontPairings.length ? null : (
         <div className="row see-more-wrapper">
           <div className="col-xs-12 text-center">
             <button
@@ -49,16 +44,17 @@ class ExplorePage extends React.Component {
             </button>
           </div>
         </div>
+      );
 
     const pairingsNode =
-      fontPairings.length > 0 ?
+      fontPairings.length > 0 ? (
         <div className="container font-pairing-wrapper">
-          <div className="row">
-            {pairings}
-          </div>
+          <div className="row">{pairings}</div>
           {btnSeeMore}
-        </div> :
+        </div>
+      ) : (
         <Spinner />
+      );
 
     return (
       <div>
@@ -67,18 +63,12 @@ class ExplorePage extends React.Component {
             <div className="col-xs-12 text-center">
               <ul className="explore-nav-menu list-inline">
                 <li>
-                  <Link
-                    to="/explore/recent"
-                    activeClassName="active"
-                  >
+                  <Link to="/explore/recent" activeClassName="active">
                     Recent
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/explore/popular"
-                    activeClassName="active"
-                  >
+                  <Link to="/explore/popular" activeClassName="active">
                     Popular
                   </Link>
                 </li>
@@ -88,10 +78,9 @@ class ExplorePage extends React.Component {
         </div>
 
         {pairingsNode}
-
       </div>
-    )
+    );
   }
 }
 
-export default ExplorePage
+export default ExplorePage;
