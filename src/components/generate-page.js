@@ -36,9 +36,10 @@ class GeneratePage extends React.Component {
   constructor(props) {
     super(props);
 
+    const params = props.match && props.match.params;
     let fromParams;
-    if (!_.isEmpty(props.params.fonts)) {
-      fromParams = fontsFromUrlParams(this.props.params.fonts, props.fontList);
+    if (!_.isEmpty(params)) {
+      fromParams = fontsFromUrlParams(params.fonts, props.fontList);
     }
     const titleFont = fromParams ? fromParams.titleFont : null;
     const contentFont = fromParams ? fromParams.contentFont : null;
@@ -56,14 +57,14 @@ class GeneratePage extends React.Component {
   }
 
   componentDidMount() {
-    if (_.isEmpty(this.props.params.fonts)) {
-      if (this.props.fontList.length > 0) {
-        const [randTitleFont, randContentFont] = _.sampleSize(
-          this.props.fontList,
-          2
-        );
+    const { history, location, match, fontList } = this.props;
+    const params = match && match.params;
+
+    if (_.isEmpty(params)) {
+      if (fontList.length > 0) {
+        const [randTitleFont, randContentFont] = _.sampleSize(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
-        this.props.history.push(url);
+        history.push(url);
         this.setState({
           titleFont: randTitleFont,
           contentFont: randContentFont
@@ -71,8 +72,8 @@ class GeneratePage extends React.Component {
       }
     } else {
       const { titleFont, contentFont } = fontsFromUrlParams(
-        this.props.params.fonts,
-        this.props.fontList
+        params.fonts,
+        fontList
       );
       sendFontPairingToApi(titleFont, contentFont);
     }
@@ -84,19 +85,18 @@ class GeneratePage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { fontList, history } = this.props;
+
     if (_.isEmpty(nextProps.params.fonts)) {
-      if (this.props.fontList.length > 0) {
-        const [randTitleFont, randContentFont] = _.sampleSize(
-          this.props.fontList,
-          2
-        );
+      if (fontList.length > 0) {
+        const [randTitleFont, randContentFont] = _.sampleSize(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
-        this.props.history.push(url);
+        history.push(url);
       }
     } else {
       const { titleFont, contentFont } = fontsFromUrlParams(
         nextProps.params.fonts,
-        this.props.fontList
+        fontList
       );
       sendFontPairingToApi(titleFont, contentFont);
       this.setState({ titleFont, contentFont });
@@ -185,7 +185,8 @@ class GeneratePage extends React.Component {
   }
 
   generate() {
-    const { fontList } = this.props;
+    const { fontList, history } = this.props;
+
     if (fontList.length > 0) {
       const {
         titleFont,
@@ -209,7 +210,7 @@ class GeneratePage extends React.Component {
       const newContentFont = isContentLocked ? contentFont : randContentFont;
 
       const url = fontsToUrl(newTitleFont, newContentFont);
-      this.props.history.push(url);
+      history.push(url);
 
       this.setState(
         { titleFont: newTitleFont, contentFont: newContentFont },

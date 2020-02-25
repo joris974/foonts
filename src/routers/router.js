@@ -9,25 +9,22 @@ import FontsWrapper from "./../components/fonts-page/fonts-page-wrapper.js";
 export function AppRouter() {
   return (
     <HashRouter>
-      <App>
-        <Switch>
-          <Route path="/">
+      <Switch>
+        <Route path="/generate/:fonts?">
+          <App>
             <GeneratePage />
-          </Route>
-          <Route path="/generate/:fonts">
-            <GeneratePage />
-          </Route>
-          <Route path="/explore/recent">
-            <ExploreRecentPage />
-          </Route>
-          <Route path="/explore/popular">
-            <ExplorePopularPage />
-          </Route>
-          <Route path="/fonts">
-            <FontsWrapper />
-          </Route>
-        </Switch>
-      </App>
+          </App>
+        </Route>
+        <Route path="/explore/recent">
+          <ExploreRecentPage />
+        </Route>
+        <Route path="/explore/popular">
+          <ExplorePopularPage />
+        </Route>
+        <Route path="/fonts">
+          <FontsWrapper />
+        </Route>
+      </Switch>
     </HashRouter>
   );
 }
