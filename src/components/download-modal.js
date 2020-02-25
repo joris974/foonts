@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-// import Modal from "react-bootstrap/lib/Modal";
+import Modal from "react-bootstrap/Modal";
 
 class DownloadModal extends React.Component {
   render() {
@@ -25,45 +25,32 @@ class DownloadModal extends React.Component {
     `;
 
     return (
-      <span>Draft</span>
-      // <Modal show={show} onHide={onHide}>
-      //   <Modal.Header closeButton>
-      //     <Modal.Title>Fast ways to use these fonts</Modal.Title>
-      //   </Modal.Header>
-      //   <Modal.Body>
-      //     <h4 className="section-title">You have selected these fonts</h4>
+      <Modal show={show} onHide={onHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>Fast ways to use these fonts</Modal.Title>
+        </Modal.Header>
 
-      //     <div className="row margin-top-lg">
-      //       <div className="col-xs-6 text-center">
-      //         <div className="row">
-      //           <div className="col-xs-12">
-      //             <b className="section-title">Title</b>
-      //           </div>
-      //           <div className="col-xs-12">{titleFont.family}</div>
-      //         </div>
-      //       </div>
-      //       <div className="col-xs-6 text-center">
-      //         <div className="row">
-      //           <div className="col-xs-12">
-      //             <b className="section-title">Paragraphs</b>
-      //           </div>
-      //           <div className="col-xs-12">{contentFont.family}</div>
-      //         </div>
-      //       </div>
-      //     </div>
+        <Modal.Body>
+          <h4 className="section-title">You have selected these fonts</h4>
+          <br />
+          <h4 className="section-title">Title</h4>
+          <p>{titleFont.family}</p>
 
-      //     <h4 className="section-title margin-top-lg">Embed Font</h4>
-      //     <p>
-      //       To embed your selected fonts into a webpage, copy this code into the
-      //       head of your HTML document.
-      //     </p>
-      //     <pre>{embedCode}</pre>
+          <h4 className="section-title">Paragraphs</h4>
+          <p>{contentFont.family}</p>
 
-      //     <h4 className="section-title margin-top-lg">Specify in CSS</h4>
-      //     <p>Use the following CSS rules to specify these families:</p>
-      //     <pre dangerouslySetInnerHTML={{ __html: cssCode }} />
-      //   </Modal.Body>
-      // </Modal>
+          <h4 className="section-title margin-top-lg">Embed Font</h4>
+          <p>
+            To embed your selected fonts into a webpage, copy this code into the
+            head of your HTML document.
+          </p>
+          <pre>{embedCode}</pre>
+
+          <h4 className="section-title margin-top-lg">Specify in CSS</h4>
+          <p>Use the following CSS rules to specify these families:</p>
+          <pre dangerouslySetInnerHTML={{ __html: cssCode }} />
+        </Modal.Body>
+      </Modal>
     );
   }
 }
