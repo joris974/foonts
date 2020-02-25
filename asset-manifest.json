@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/foonts/static/css/main.0933f4e7.chunk.css",
+    "main.js": "/foonts/static/js/main.1f176679.chunk.js",
+    "main.js.map": "/foonts/static/js/main.1f176679.chunk.js.map",
+    "runtime-main.js": "/foonts/static/js/runtime-main.3db3c7e6.js",
+    "runtime-main.js.map": "/foonts/static/js/runtime-main.3db3c7e6.js.map",
+    "static/css/2.67123b20.chunk.css": "/foonts/static/css/2.67123b20.chunk.css",
+    "static/js/2.87cd2c27.chunk.js": "/foonts/static/js/2.87cd2c27.chunk.js",
+    "static/js/2.87cd2c27.chunk.js.map": "/foonts/static/js/2.87cd2c27.chunk.js.map",
+    "index.html": "/foonts/index.html",
+    "precache-manifest.64e89e86b55231a6bd48041b2b7df5cd.js": "/foonts/precache-manifest.64e89e86b55231a6bd48041b2b7df5cd.js",
+    "service-worker.js": "/foonts/service-worker.js",
+    "static/css/2.67123b20.chunk.css.map": "/foonts/static/css/2.67123b20.chunk.css.map",
+    "static/css/main.0933f4e7.chunk.css.map": "/foonts/static/css/main.0933f4e7.chunk.css.map",
+    "static/js/2.87cd2c27.chunk.js.LICENSE.txt": "/foonts/static/js/2.87cd2c27.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3db3c7e6.js",
+    "static/css/2.67123b20.chunk.css",
+    "static/js/2.87cd2c27.chunk.js",
+    "static/css/main.0933f4e7.chunk.css",
+    "static/js/main.1f176679.chunk.js"
+  ]
+}
