@@ -4,7 +4,7 @@ import _ from "lodash";
 
 import { sendFontPairingToApi } from "./../helpers/api";
 
-import Sidebar from "./sidebar.js";
+import Sidebar from "./sidebar";
 import Spinner from "./spinner";
 import Fonts from "./fonts.tsx";
 import EditableTitle from "./editable-title.js";

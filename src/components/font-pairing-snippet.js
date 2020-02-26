@@ -6,13 +6,13 @@ import { fontsToSubUrl } from "./../helpers/helper";
 
 const FontPairingItem = props => {
   const { fontList, pairing } = props;
-  const fontTitle = _.find(fontList, font => font.id === pairing.font_title_id);
+  const titleFont = _.find(fontList, font => font.id === pairing.font_title_id);
   const fontContent = _.find(
     fontList,
     font => font.id === pairing.font_content_id
   );
 
-  const fontFacesNode = _.chain([fontTitle, fontContent])
+  const fontFacesNode = _.chain([titleFont, fontContent])
     .filter(x => !_.isNull(x))
     .map(font => (
       <Fonts key={font.family} fontName={font.family} fontUrl={font.url} />
@@ -21,13 +21,13 @@ const FontPairingItem = props => {
 
   return (
     <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 font-pairing-item-wrapper">
-      <Link to={fontsToSubUrl(fontTitle, fontContent)}>
+      <Link to={fontsToSubUrl(titleFont, fontContent)}>
         <div className="font-pairing-item">
           {fontFacesNode}
           <div className="row font-pairing-item-body">
             <div className="col-xs-12">
-              <h3 style={{ fontFamily: fontTitle.family }}>
-                {fontTitle.family}
+              <h3 style={{ fontFamily: titleFont.family }}>
+                {titleFont.family}
               </h3>
               <p style={{ fontFamily: fontContent.family }}>
                 {fontContent.family}

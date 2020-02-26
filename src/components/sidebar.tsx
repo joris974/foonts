@@ -2,11 +2,24 @@ import React from "react";
 import _ from "lodash";
 import DownloadModal from "./download-modal.js";
 import Checkbox from "./checkbox.js";
-import { sendFontPairingLikeToApi } from "./../helpers/api";
-import { allCategories, labelForCategory } from "./../helpers/helper";
+import { sendFontPairingLikeToApi } from "../helpers/api";
+import { allCategories, labelForCategory } from "../helpers/helper";
+import { Font } from "./fonts-page/font-list-item.js";
 
-class SidebarItem extends React.Component {
-  constructor(props) {
+interface Props {
+  font: Font;
+  onChangeLock: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  isLocked: boolean;
+  fontStyleProps: any;
+  onChangeStyle: Function;
+}
+
+interface State {
+  showConfig: boolean;
+}
+
+class SidebarItem extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { showConfig: false };
   }
@@ -38,7 +51,7 @@ class SidebarItem extends React.Component {
     const isItalic = fontStyle === "italic";
     const isBolded = fontWeight === "bold";
 
-    const allCategoriesNodes = _.map(allCategories(), category => {
+    const allCategoriesNodes = allCategories().map(category => {
       return (
         <div key={category} className="col-xs-6">
           <Checkbox
@@ -127,22 +140,45 @@ class SidebarItem extends React.Component {
   }
 }
 
-function hasLiked(titleFont, contentFont) {
+function hasLiked(titleFont: Font, contentFont: Font) {
   const existingInStorage = localStorage.getItem("font-pairing-liked");
   const fontPairing = `${titleFont.id}-${contentFont.id}`;
   const likedPairings = existingInStorage ? existingInStorage.split(",") : [];
   return likedPairings.includes(fontPairing);
 }
 
-class Sidebar extends React.Component {
-  constructor(props) {
+interface SidebarProps {
+  titleFont: Font;
+  contentFont: Font;
+  onClickSwap: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClickGenerate: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  titleFontStyleProps: any;
+  onChangeTitleStyle: Function;
+  onChangeLockTitle: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  isTitleLocked: boolean;
+
+  contentFontStyleProps: any;
+  onChangeContentStyle: Function;
+  onChangeLockContent: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ) => void;
+  isContentLocked: boolean;
+}
+
+interface SidebarState {
+  showDownloadModal: boolean;
+  isLiked: boolean;
+}
+
+class Sidebar extends React.Component<SidebarProps, SidebarState> {
+  constructor(props: SidebarProps) {
     super(props);
     this.state = { showDownloadModal: false, isLiked: false };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: SidebarProps) {
     if (
-      nextProps.fontTitle !== this.props.fontTitle ||
+      nextProps.titleFont !== this.props.titleFont ||
       nextProps.contentFont !== this.props.contentFont
     ) {
       this.setState({ isLiked: false });
@@ -164,27 +200,26 @@ class Sidebar extends React.Component {
     if (!likedPairings.includes(fontPairing)) {
       sendFontPairingLikeToApi(titleFont, contentFont);
       const newInStorage = likedPairings.concat(fontPairing);
-      localStorage.setItem("font-pairing-liked", newInStorage);
+      localStorage.setItem("font-pairing-liked", JSON.stringify(newInStorage));
     }
 
     this.setState({ isLiked: true });
   }
 
   render() {
-    const { onClickSwap, onClickGenerate } = this.props;
     const {
+      onClickSwap,
+      onClickGenerate,
       titleFont,
       titleFontStyleProps,
       onChangeTitleStyle,
       onChangeLockTitle,
-      isTitleLocked
-    } = this.props;
-    const {
-      contentFont,
+      isTitleLocked,
       contentFontStyleProps,
       onChangeContentStyle,
       onChangeLockContent,
-      isContentLocked
+      isContentLocked,
+      contentFont
     } = this.props;
 
     const { showDownloadModal, isLiked } = this.state;
