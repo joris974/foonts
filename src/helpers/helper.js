@@ -60,7 +60,7 @@ export function updateFontStyle(fontStyleProps, changeType, changeValue) {
   }
 
   if (changeType === "category") {
-    if (_.includes(newFontCategories, changeValue)) {
+    if (newFontCategories.includes(changeValue)) {
       newFontCategories = _.difference(newFontCategories, [changeValue]);
     } else {
       newFontCategories = _.concat(newFontCategories, [changeValue]);
@@ -104,7 +104,7 @@ export function labelForCategory(category) {
 
 export function randomFont(fontList, categories) {
   return _.chain(fontList)
-    .filter(font => _.includes(categories, font.category))
+    .filter(font => categories.includes(font.category))
     .sample()
     .value();
 }

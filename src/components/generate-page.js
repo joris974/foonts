@@ -105,7 +105,7 @@ class GeneratePage extends React.Component {
   }
 
   handleKeyPress(event) {
-    if (_.includes(event.target.className.split(" "), "editable")) {
+    if (event.target.className.split(" ").includes("editable")) {
       return;
     }
     if (event.target instanceof HTMLButtonElement) {
