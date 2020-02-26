@@ -5,19 +5,13 @@ const Navbar = () => {
   const links = (
     <ul className="nav navbar-nav navbar-right">
       <li>
-        <Link to="/generate" activeClassName="active">
-          Generate
-        </Link>
+        <Link to="/generate">Generate</Link>
       </li>
       <li>
-        <Link to="/explore/recent" activeClassName="active">
-          Explore
-        </Link>
+        <Link to="/explore/recent">Explore</Link>
       </li>
       <li>
-        <Link to="/fonts" activeClassName="active">
-          Fonts
-        </Link>
+        <Link to="/fonts">Fonts</Link>
       </li>
     </ul>
   );
@@ -25,7 +19,7 @@ const Navbar = () => {
     <nav className="navbar navbar-default navbar-foonts">
       <div className="container">
         <div className="navbar-header">
-          <Link to="/" className="navbar-brand" activeClassName="active">
+          <Link to="/" className="navbar-brand">
             Foonts
           </Link>
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { loadFonts } from "./../helpers/api";
-import Navbar from "./navbar.js";
+import Navbar from "./navbar";
 import Spinner from "./spinner";
 
 class App extends React.Component {
