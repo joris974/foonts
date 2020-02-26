@@ -1,11 +1,20 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-import { loadFonts } from "./../helpers/api";
+import { loadFonts } from "../helpers/api";
 import Navbar from "./navbar";
 import Spinner from "./spinner";
+import { Font } from "./fonts-page/font-list-item";
 
-class App extends React.Component {
-  constructor(props) {
+interface Props {
+  children: ReactNode;
+}
+
+interface State {
+  fontList: Font[];
+}
+
+class App extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { fontList: [] };
   }
