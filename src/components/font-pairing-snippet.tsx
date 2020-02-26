@@ -1,33 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import Fonts from "./fonts.tsx";
-import { fontsToSubUrl } from "./../helpers/helper.js";
+import Fonts from "./fonts";
+import { fontsToSubUrl } from "./../helpers/helper";
+import { Font } from "./fonts-page/font-list-item";
 
-const FontPairingItem = props => {
+type Props = {
+  fontList: Font[];
+  pairing: any;
+};
+
+function FontPairingItem(props: Props) {
   const { fontList, pairing } = props;
-  const fontTitle = _.find(fontList, font => font.id === pairing.font_title_id);
-  const fontContent = _.find(
-    fontList,
+  const titleFont = fontList.find(font => font.id === pairing.font_title_id);
+  const fontContent = fontList.find(
     font => font.id === pairing.font_content_id
   );
 
-  const fontFacesNode = _.chain([fontTitle, fontContent])
-    .filter(x => !_.isNull(x))
-    .map(font => (
+  if (
+    titleFont === null ||
+    titleFont === undefined ||
+    fontContent === null ||
+    fontContent === undefined
+  ) {
+    return null;
+  }
+
+  const fontFacesNode = _.chain([titleFont, fontContent])
+    .filter(x => x !== null && x !== undefined)
+    .map((font: Font) => (
       <Fonts key={font.family} fontName={font.family} fontUrl={font.url} />
     ))
     .value();
 
   return (
     <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 font-pairing-item-wrapper">
-      <Link to={fontsToSubUrl(fontTitle, fontContent)}>
+      <Link to={fontsToSubUrl(titleFont, fontContent)}>
         <div className="font-pairing-item">
           {fontFacesNode}
           <div className="row font-pairing-item-body">
             <div className="col-xs-12">
-              <h3 style={{ fontFamily: fontTitle.family }}>
-                {fontTitle.family}
+              <h3 style={{ fontFamily: titleFont.family }}>
+                {titleFont.family}
               </h3>
               <p style={{ fontFamily: fontContent.family }}>
                 {fontContent.family}
@@ -50,6 +64,6 @@ const FontPairingItem = props => {
       </Link>
     </div>
   );
-};
+}
 
 export default FontPairingItem;

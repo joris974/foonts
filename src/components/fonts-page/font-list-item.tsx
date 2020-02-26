@@ -1,9 +1,22 @@
 import React from "react";
 
-import Fonts from "./../fonts.tsx";
+import Fonts from "./../fonts";
+import { Category } from "../../helpers/helper";
 
-const FontListItem = props => {
-  const font = props.font;
+export type Font = {
+  id: string;
+  family: string;
+  url: string;
+  category: Category;
+  num_liked: number;
+};
+
+type Props = {
+  font: Font;
+};
+
+function FontListItem(props: Props) {
+  const { font } = props;
   return (
     <div className="row">
       <div className="col-xs-12">
@@ -17,6 +30,6 @@ const FontListItem = props => {
       </div>
     </div>
   );
-};
+}
 
 export default FontListItem;

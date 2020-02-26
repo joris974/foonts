@@ -1,9 +1,15 @@
 import React from "react";
 // import Helmet from "react-helmet";
 
-import { fontsToUrl } from "./../helpers/helper.js";
+import { fontsToUrl } from "../helpers/helper";
+import { Font } from "./fonts-page/font-list-item";
 
-export default function ApplicationMeta(props) {
+type Props = {
+  titleFont: Font;
+  contentFont: Font;
+};
+
+export default function ApplicationMeta(props: Props) {
   const { titleFont, contentFont } = props;
   const hostname = window.location.hostname;
   const baseWebsiteUrl = `https://${hostname}/`;

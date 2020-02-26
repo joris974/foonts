@@ -1,15 +1,25 @@
 import React from "react";
 import _ from "lodash";
+import { Font } from "./fonts-page/font-list-item";
 
 const DefaultTitle = "Find best matching fonts in seconds!!";
 
-class EditableTitle extends React.Component {
-  constructor(props) {
+type Props = {
+  fontStyleProps: any;
+  font: Font;
+};
+
+type State = {
+  content: string;
+};
+
+class EditableTitle extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { content: DefaultTitle };
   }
 
-  handleChange(event) {
+  handleChange(event: any) {
     this.setState({ content: event.target.value });
   }
 
@@ -20,8 +30,8 @@ class EditableTitle extends React.Component {
     const content = this.state.content;
     const style = {
       fontSize: `${fontSize}px`,
-      fontWeight: `${fontWeight}`,
-      fontStyle: `${fontStyle}`,
+      fontWeight,
+      fontStyle,
       fontFamily: !_.isNull(font) ? font.family : ""
     };
     return (

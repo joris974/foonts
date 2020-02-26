@@ -2,21 +2,22 @@ import { withRouter } from "react-router-dom";
 import React from "react";
 import _ from "lodash";
 
-import { sendFontPairingToApi } from "./../helpers/api.js";
+import { sendFontPairingToApi } from "./../helpers/api";
 
-import Sidebar from "./sidebar.js";
-import Spinner from "./spinner.js";
-import Fonts from "./fonts.tsx";
-import EditableTitle from "./editable-title.js";
-import EditableContent from "./editable-content.js";
-import ApplicationMeta from "./application-meta.js";
+import Sidebar from "./sidebar";
+import Spinner from "./spinner";
+import Fonts from "./fonts";
+import EditableTitle from "./editable-title";
+import EditableContent from "./editable-content";
+import ApplicationMeta from "./application-meta";
 import {
   fontsFromUrlParams,
   updateFontStyle,
   fontsToUrl,
   allCategories,
   randomFont
-} from "./../helpers/helper.js";
+} from "./../helpers/helper";
+import { withFontList } from "./withFontList";
 
 const defaultTitleStyleProps = {
   fontSize: 36,
@@ -105,7 +106,7 @@ class GeneratePage extends React.Component {
   }
 
   handleKeyPress(event) {
-    if (_.includes(event.target.className.split(" "), "editable")) {
+    if (event.target.className.split(" ").includes("editable")) {
       return;
     }
     if (event.target instanceof HTMLButtonElement) {
@@ -291,4 +292,4 @@ class GeneratePage extends React.Component {
   }
 }
 
-export default withRouter(GeneratePage);
+export default withRouter(withFontList(GeneratePage));
