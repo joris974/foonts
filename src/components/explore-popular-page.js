@@ -1,7 +1,7 @@
 import React from "react";
 import ExplorePage from "./explore-page.js";
 import { loadPopularFontPairings } from "./../helpers/api";
-import Spinner from "./spinner.js";
+import Spinner from "./spinner";
 
 class ExplorePopularPage extends React.Component {
   constructor(props) {

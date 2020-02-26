@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import _ from "lodash";
 
 import FontPairingItem from "./font-pairing-snippet.js";
-import Spinner from "./spinner.js";
+import Spinner from "./spinner";
 
 class ExplorePage extends React.Component {
   constructor(props) {
