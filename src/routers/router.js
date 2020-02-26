@@ -4,7 +4,7 @@ import App from "./../components/app.js";
 import GeneratePage from "./../components/generate-page.js";
 import ExploreRecentPage from "./../components/explore-recent-page.js";
 import ExplorePopularPage from "./../components/explore-popular-page.js";
-import FontsWrapper from "./../components/fonts-page/fonts-page-wrapper.js";
+import FontsWrapper from "./../components/fonts-page/fonts-page-wrapper.tsx";
 
 export function AppRouter() {
   return (
