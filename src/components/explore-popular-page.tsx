@@ -1,16 +1,25 @@
 import React from "react";
 import ExplorePage from "./explore-page";
-import { loadRecentFontPairings } from "./../helpers/api";
+import { loadPopularFontPairings } from "../helpers/api";
 import Spinner from "./spinner";
+import { Font } from "./fonts-page/font-list-item";
 
-class ExploreRecentPage extends React.Component {
-  constructor(props) {
+interface Props {
+  fontList: Font[];
+}
+
+interface State {
+  recentFontPairings: any;
+}
+
+class ExplorePopularPage extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { recentFontPairings: [] };
   }
 
   componentDidMount() {
-    loadRecentFontPairings().then(recentFontPairings => {
+    loadPopularFontPairings().then(recentFontPairings => {
       this.setState({ recentFontPairings });
     });
   }
@@ -27,4 +36,4 @@ class ExploreRecentPage extends React.Component {
   }
 }
 
-export default ExploreRecentPage;
+export default ExplorePopularPage;

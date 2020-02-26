@@ -4,9 +4,19 @@ import _ from "lodash";
 
 import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "./spinner";
+import { Font } from "./fonts-page/font-list-item";
 
-class ExplorePage extends React.Component {
-  constructor(props) {
+interface Props {
+  fontList: Font[];
+  fontPairings: any;
+}
+
+interface State {
+  numMaxVisible: number;
+}
+
+class ExplorePage extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { numMaxVisible: 12 };
   }
@@ -63,14 +73,10 @@ class ExplorePage extends React.Component {
             <div className="col-xs-12 text-center">
               <ul className="explore-nav-menu list-inline">
                 <li>
-                  <Link to="/explore/recent" activeClassName="active">
-                    Recent
-                  </Link>
+                  <Link to="/explore/recent">Recent</Link>
                 </li>
                 <li>
-                  <Link to="/explore/popular" activeClassName="active">
-                    Popular
-                  </Link>
+                  <Link to="/explore/popular">Popular</Link>
                 </li>
               </ul>
             </div>
