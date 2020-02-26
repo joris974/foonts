@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { Font } from "../components/fonts-page/font-list-item";
 
 function getApiUrl() {
   return window.location.hostname === "foonts.localhost.com"
@@ -21,7 +22,7 @@ export function loadPopularFontPairings() {
   return $.ajax({ url });
 }
 
-function sendApi(url, postParams) {
+function sendApi(url: string, postParams: any) {
   return $.ajax({
     url,
     method: "POST",
@@ -30,7 +31,7 @@ function sendApi(url, postParams) {
   });
 }
 
-export function sendFontPairingToApi(titleFont, contentFont) {
+export function sendFontPairingToApi(titleFont: Font, contentFont: Font) {
   const url = `${getApiUrl()}font-pairings/`;
   const postParams = {
     "font-title-id": titleFont.id,
@@ -39,7 +40,7 @@ export function sendFontPairingToApi(titleFont, contentFont) {
   return sendApi(url, postParams);
 }
 
-export function sendFontPairingLikeToApi(titleFont, contentFont) {
+export function sendFontPairingLikeToApi(titleFont: Font, contentFont: Font) {
   const url = `${getApiUrl()}font-pairings/like`;
   const postParams = {
     "font-title-id": titleFont.id,

@@ -2,7 +2,7 @@ import { withRouter } from "react-router-dom";
 import React from "react";
 import _ from "lodash";
 
-import { sendFontPairingToApi } from "./../helpers/api.js";
+import { sendFontPairingToApi } from "./../helpers/api";
 
 import Sidebar from "./sidebar.js";
 import Spinner from "./spinner.js";

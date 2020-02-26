@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 import DownloadModal from "./download-modal.js";
 import Checkbox from "./checkbox.js";
-import { sendFontPairingLikeToApi } from "./../helpers/api.js";
+import { sendFontPairingLikeToApi } from "./../helpers/api";
 import { allCategories, labelForCategory } from "./../helpers/helper";
 
 class SidebarItem extends React.Component {
