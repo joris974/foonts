@@ -1,13 +1,13 @@
 import React from "react";
 import _ from "lodash";
 
-interface Props {
+type Props = {
   sortedBy: string;
   handleChangeSortBy: (sortedBy: string) => void;
-}
-interface State {
+};
+type State = {
   showDropdown: boolean;
-}
+};
 
 class SortListFilter extends React.Component<Props, State> {
   constructor(props: Props) {

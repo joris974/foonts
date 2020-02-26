@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 
-interface Props {
+type Props = {
   isChecked: boolean;
   label: string | ReactNode;
   handleChangeCheckbox: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
-}
+};
 
 export default function Checkbox(props: Props) {
   const { isChecked, label, handleChangeCheckbox } = props;

@@ -3,9 +3,9 @@ import FontsPage from "./fonts-page";
 import { Font } from "./font-list-item";
 import { withFontList } from "../withFontList";
 
-interface Props {
+type Props = {
   fontList: Font[];
-}
+};
 
 function FontsPageWrapper(props: Props) {
   const { fontList } = props;

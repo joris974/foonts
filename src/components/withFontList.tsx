@@ -4,13 +4,13 @@ import { Font } from "./fonts-page/font-list-item";
 import { loadFonts } from "../helpers/api";
 import Spinner from "./spinner";
 
-export interface Props {
+export type Props = {
   fontList: Font[];
-}
+};
 
-interface State {
+type State = {
   fontList: Font[];
-}
+};
 
 export function withFontList<P extends Props>(
   Component: React.ComponentType<P>

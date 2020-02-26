@@ -2,9 +2,9 @@ import React from "react";
 
 import Navbar from "./navbar";
 
-interface Props {
+type Props = {
   children?: any;
-}
+};
 
 class App extends React.Component<Props> {
   render() {

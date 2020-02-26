@@ -5,13 +5,13 @@ import Spinner from "./spinner";
 import { Font } from "./fonts-page/font-list-item";
 import { withFontList } from "./withFontList";
 
-interface Props {
+type Props = {
   fontList: Font[];
-}
+};
 
-interface State {
+type State = {
   recentFontPairings: any;
-}
+};
 
 class ExploreRecentPage extends React.Component<Props, State> {
   constructor(props: Props) {

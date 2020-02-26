@@ -21,14 +21,14 @@ const DefaultContent = [
     `
 ];
 
-interface Props {
+type Props = {
   fontStyleProps: any;
   font: Font;
-}
+};
 
-interface State {
+type State = {
   content: string[];
-}
+};
 
 class EditableContent extends React.Component<Props, State> {
   constructor(props: Props) {

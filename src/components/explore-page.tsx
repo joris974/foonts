@@ -6,14 +6,14 @@ import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "./spinner";
 import { Font } from "./fonts-page/font-list-item";
 
-interface Props {
+type Props = {
   fontList: Font[];
   fontPairings: any;
-}
+};
 
-interface State {
+type State = {
   numMaxVisible: number;
-}
+};
 
 class ExplorePage extends React.Component<Props, State> {
   constructor(props: Props) {

@@ -8,16 +8,16 @@ import { allCategories, labelForCategory } from "../../helpers/helper";
 import { Category } from "../../helpers/helper";
 import { Font } from "./font-list-item";
 
-interface Props {
+type Props = {
   fontList: Font[];
-}
+};
 
-interface State {
+type State = {
   numMaxVisible: number;
   filteredFontList: Font[];
   fontCategories: Category[];
   sortedBy: string;
-}
+};
 
 const filterFontList = function(fontList: Font[], fontCategories: Category[]) {
   return fontList.filter((font: Font) =>

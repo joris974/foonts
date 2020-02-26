@@ -4,14 +4,14 @@ import { Font } from "./fonts-page/font-list-item";
 
 const DefaultTitle = "Find best matching fonts in seconds!!";
 
-interface Props {
+type Props = {
   fontStyleProps: any;
   font: Font;
-}
+};
 
-interface State {
+type State = {
   content: string;
-}
+};
 
 class EditableTitle extends React.Component<Props, State> {
   constructor(props: Props) {

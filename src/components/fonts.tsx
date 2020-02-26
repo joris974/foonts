@@ -1,9 +1,9 @@
 import React from "react";
 
-interface Props {
+type Props = {
   fontName: string;
   fontUrl: string;
-}
+};
 
 function Fonts(props: Props) {
   const { fontName, fontUrl } = props;

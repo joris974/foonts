@@ -4,10 +4,10 @@ import React from "react";
 import { fontsToUrl } from "../helpers/helper";
 import { Font } from "./fonts-page/font-list-item";
 
-interface Props {
+type Props = {
   titleFont: Font;
   contentFont: Font;
-}
+};
 
 export default function ApplicationMeta(props: Props) {
   const { titleFont, contentFont } = props;

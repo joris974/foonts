@@ -3,17 +3,17 @@ import React from "react";
 import Fonts from "./../fonts";
 import { Category } from "../../helpers/helper";
 
-export interface Font {
+export type Font = {
   id: string;
   family: string;
   url: string;
   category: Category;
   num_liked: number;
-}
+};
 
-interface Props {
+type Props = {
   font: Font;
-}
+};
 
 function FontListItem(props: Props) {
   const { font } = props;

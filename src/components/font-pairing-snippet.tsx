@@ -5,10 +5,10 @@ import Fonts from "./fonts";
 import { fontsToSubUrl } from "./../helpers/helper";
 import { Font } from "./fonts-page/font-list-item";
 
-interface Props {
+type Props = {
   fontList: Font[];
   pairing: any;
-}
+};
 
 function FontPairingItem(props: Props) {
   const { fontList, pairing } = props;

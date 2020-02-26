@@ -6,17 +6,17 @@ import { sendFontPairingLikeToApi } from "../helpers/api";
 import { allCategories, labelForCategory } from "../helpers/helper";
 import { Font } from "./fonts-page/font-list-item";
 
-interface Props {
+type Props = {
   font: Font;
   onChangeLock: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isLocked: boolean;
   fontStyleProps: any;
   onChangeStyle: Function;
-}
+};
 
-interface State {
+type State = {
   showConfig: boolean;
-}
+};
 
 class SidebarItem extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -147,7 +147,7 @@ function hasLiked(titleFont: Font, contentFont: Font) {
   return likedPairings.includes(fontPairing);
 }
 
-interface SidebarProps {
+type SidebarProps = {
   titleFont: Font;
   contentFont: Font;
   onClickSwap: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -163,12 +163,12 @@ interface SidebarProps {
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => void;
   isContentLocked: boolean;
-}
+};
 
-interface SidebarState {
+type SidebarState = {
   showDownloadModal: boolean;
   isLiked: boolean;
-}
+};
 
 class Sidebar extends React.Component<SidebarProps, SidebarState> {
   constructor(props: SidebarProps) {

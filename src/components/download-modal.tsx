@@ -3,12 +3,12 @@ import _ from "lodash";
 import Modal from "react-bootstrap/Modal";
 import { Font } from "./fonts-page/font-list-item";
 
-interface Props {
+type Props = {
   titleFont: Font | null;
   contentFont: Font | null;
   show: boolean;
   onHide: () => void;
-}
+};
 
 function DownloadModal(props: Props) {
   const { titleFont, contentFont, show, onHide } = props;
