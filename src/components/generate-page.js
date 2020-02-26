@@ -6,7 +6,7 @@ import { sendFontPairingToApi } from "./../helpers/api.js";
 
 import Sidebar from "./sidebar.js";
 import Spinner from "./spinner.js";
-import Fonts from "./fonts.js";
+import Fonts from "./fonts.tsx";
 import EditableTitle from "./editable-title.js";
 import EditableContent from "./editable-content.js";
 import ApplicationMeta from "./application-meta.js";

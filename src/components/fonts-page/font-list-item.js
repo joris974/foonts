@@ -1,6 +1,6 @@
 import React from "react";
 
-import Fonts from "./../fonts.js";
+import Fonts from "./../fonts.tsx";
 
 const FontListItem = props => {
   const font = props.font;
