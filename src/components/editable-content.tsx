@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import { Font } from "./fonts-page/font-list-item";
 
 const DefaultContent = [
   ` Edit Me!`,
@@ -20,13 +21,22 @@ const DefaultContent = [
     `
 ];
 
-class EditableContent extends React.Component {
-  constructor(props) {
+interface Props {
+  fontStyleProps: any;
+  font: Font;
+}
+
+interface State {
+  content: string[];
+}
+
+class EditableContent extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { content: DefaultContent };
   }
 
-  handleChange(event) {
+  handleChange(event: any) {
     this.setState({ content: event.target.value });
   }
 
@@ -37,12 +47,12 @@ class EditableContent extends React.Component {
     const content = this.state.content;
     const style = {
       fontSize: `${fontSize}px`,
-      fontWeight: `${fontWeight}`,
-      fontStyle: `${fontStyle}`,
+      fontWeight,
+      fontStyle,
       fontFamily: !_.isNull(font) ? font.family : ""
     };
 
-    const contentPs = _.map(content, (line, i) => <p key={i}>{line}</p>);
+    const contentPs = content.map((line, i) => <p key={i}>{line}</p>);
 
     return (
       <div

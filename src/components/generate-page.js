@@ -8,7 +8,7 @@ import Sidebar from "./sidebar";
 import Spinner from "./spinner";
 import Fonts from "./fonts.tsx";
 import EditableTitle from "./editable-title.js";
-import EditableContent from "./editable-content.js";
+import EditableContent from "./editable-content";
 import ApplicationMeta from "./application-meta.js";
 import {
   fontsFromUrlParams,

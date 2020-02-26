@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import DownloadModal from "./download-modal.js";
+import DownloadModal from "./download-modal";
 import Checkbox from "./checkbox";
 import { sendFontPairingLikeToApi } from "../helpers/api";
 import { allCategories, labelForCategory } from "../helpers/helper";
