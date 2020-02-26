@@ -1,7 +1,7 @@
 import React from "react";
 // import Helmet from "react-helmet";
 
-import { fontsToUrl } from "./../helpers/helper.js";
+import { fontsToUrl } from "./../helpers/helper";
 
 export default function ApplicationMeta(props) {
   const { titleFont, contentFont } = props;

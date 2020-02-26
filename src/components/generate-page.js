@@ -16,7 +16,7 @@ import {
   fontsToUrl,
   allCategories,
   randomFont
-} from "./../helpers/helper.js";
+} from "./../helpers/helper";
 
 const defaultTitleStyleProps = {
   fontSize: 36,

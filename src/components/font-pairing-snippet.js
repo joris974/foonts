@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import Fonts from "./fonts.tsx";
-import { fontsToSubUrl } from "./../helpers/helper.js";
+import { fontsToSubUrl } from "./../helpers/helper";
 
 const FontPairingItem = props => {
   const { fontList, pairing } = props;

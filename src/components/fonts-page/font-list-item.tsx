@@ -1,12 +1,13 @@
 import React from "react";
 
 import Fonts from "./../fonts";
+import { Category } from "../../helpers/helper";
 
 export interface Font {
   id: string;
   family: string;
   url: string;
-  category: string;
+  category: Category;
   num_liked: number;
 }
 

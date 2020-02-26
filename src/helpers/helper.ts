@@ -1,11 +1,29 @@
 import _ from "lodash";
+import { Font } from "../components/fonts-page/font-list-item";
 
-export function allCategories() {
-  return ["display", "serif", "sans-serif", "monospace", "handwriting"];
+export enum Category {
+  Display = "display",
+  Serif = "serif",
+  SansSerif = "sans-serif",
+  Monospace = "monospace",
+  Handwriting = "handwriting"
 }
 
-export function fontsFromUrlParams(paramsPathPiece, fontList) {
-  if (_.isEmpty(paramsPathPiece)) {
+export function allCategories(): Category[] {
+  return [
+    Category.Display,
+    Category.Serif,
+    Category.SansSerif,
+    Category.Monospace,
+    Category.Handwriting
+  ];
+}
+
+export function fontsFromUrlParams(
+  paramsPathPiece: string | null,
+  fontList: Font[]
+) {
+  if (paramsPathPiece === null || paramsPathPiece === undefined) {
     return {};
   }
 
@@ -15,15 +33,15 @@ export function fontsFromUrlParams(paramsPathPiece, fontList) {
   }
 
   const [titleFontPathPiece, contentFontPathPiece] = paramChunks;
-  const fromUrl = st => st.replace(/-/g, " ");
+  const fromUrl = (st: string) => st.replace(/-/g, " ");
 
   const [titleFontFamily, contentFontFamily] = [
     fromUrl(titleFontPathPiece),
     fromUrl(contentFontPathPiece)
   ];
 
-  const findFontByFamily = family =>
-    _.find(fontList, font => font.family === family);
+  const findFontByFamily = (family: string) =>
+    fontList.find(font => font.family === family);
 
   const [titleFont, contentFont] = [
     findFontByFamily(titleFontFamily),
@@ -37,7 +55,11 @@ export function fontsFromUrlParams(paramsPathPiece, fontList) {
   return { titleFont, contentFont };
 }
 
-export function updateFontStyle(fontStyleProps, changeType, changeValue) {
+export function updateFontStyle(
+  fontStyleProps: any,
+  changeType: any,
+  changeValue: any
+) {
   const { fontSize, fontWeight, fontStyle, fontCategories } = fontStyleProps;
 
   let newFontSize = fontSize;
@@ -76,18 +98,18 @@ export function updateFontStyle(fontStyleProps, changeType, changeValue) {
   return newFontStyleProps;
 }
 
-export function fontsToUrl(titleFont, contentFont) {
+export function fontsToUrl(titleFont: Font, contentFont: Font) {
   return fontsToSubUrl(titleFont, contentFont);
 }
 
-export function fontsToSubUrl(titleFont, contentFont) {
-  const toUrlFontFamily = st => st.replace(/ /g, "-");
+export function fontsToSubUrl(titleFont: Font, contentFont: Font) {
+  const toUrlFontFamily = (st: string) => st.replace(/ /g, "-");
   return `/generate/${toUrlFontFamily(titleFont.family)}--${toUrlFontFamily(
     contentFont.family
   )}`;
 }
 
-export function labelForCategory(category) {
+export function labelForCategory(category: Category) {
   switch (category) {
     case "serif":
       return "Serif";
@@ -102,7 +124,7 @@ export function labelForCategory(category) {
   }
 }
 
-export function randomFont(fontList, categories) {
+export function randomFont(fontList: Font[], categories: Category[]) {
   return _.chain(fontList)
     .filter(font => categories.includes(font.category))
     .sample()

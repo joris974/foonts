@@ -4,7 +4,8 @@ import _ from "lodash";
 import FontListItem from "./font-list-item";
 import SortListFilter from "./sort-list-filter.js";
 import Checkbox from "../checkbox.js";
-import { allCategories, labelForCategory } from "../../helpers/helper.js";
+import { allCategories, labelForCategory } from "../../helpers/helper";
+import { Category } from "../../helpers/helper";
 import { Font } from "./font-list-item";
 
 interface Props {
@@ -14,17 +15,17 @@ interface Props {
 interface State {
   numMaxVisible: number;
   filteredFontList: Font[];
-  fontCategories: string[];
+  fontCategories: Category[];
   sortedBy: string;
 }
 
-const filterFontList = function(fontList: Font[], fontCategories: string[]) {
+const filterFontList = function(fontList: Font[], fontCategories: Category[]) {
   return fontList.filter((font: Font) =>
     fontCategories.includes(font.category)
   );
 };
 
-const isChecked = function(fontCategories: string[], category: string) {
+const isChecked = function(fontCategories: Category[], category: Category) {
   return fontCategories.includes(category);
 };
 
@@ -43,10 +44,10 @@ class FontsPage extends React.Component<Props, State> {
     this.setState({ numMaxVisible: this.state.numMaxVisible + 12 });
   }
 
-  handleChangeCheckbox(category: string) {
+  handleChangeCheckbox(category: Category) {
     const { fontCategories } = this.state;
 
-    const newFontCategories = fontCategories.includes(category)
+    const newFontCategories = Object.values(fontCategories).includes(category)
       ? fontCategories.filter(c => c !== category)
       : [...fontCategories, category];
 
@@ -102,13 +103,16 @@ class FontsPage extends React.Component<Props, State> {
         </div>
       );
 
-    const toCheckboxLi = (categ, title) => {
+    const toCheckboxLi = (category: Category) => {
       return (
         <li className="li-fixed-width">
           <Checkbox
-            isChecked={isChecked(fontCategories, categ)}
-            handleChangeCheckbox={this.handleChangeCheckbox.bind(this, categ)}
-            label={title}
+            isChecked={isChecked(fontCategories, category)}
+            handleChangeCheckbox={this.handleChangeCheckbox.bind(
+              this,
+              category
+            )}
+            label={labelForCategory(category)}
           />
         </li>
       );
@@ -126,11 +130,11 @@ class FontsPage extends React.Component<Props, State> {
             </div>
             <div className="col-xs-12 col-lg-8 margin-top-lg">
               <ul className="list-inline">
-                {toCheckboxLi("serif", labelForCategory("serif"))}
-                {toCheckboxLi("sans-serif", labelForCategory("sans-serif"))}
-                {toCheckboxLi("display", labelForCategory("display"))}
-                {toCheckboxLi("handwriting", labelForCategory("handwriting"))}
-                {toCheckboxLi("monospace", labelForCategory("monospace"))}
+                {toCheckboxLi(Category.Serif)}
+                {toCheckboxLi(Category.SansSerif)}
+                {toCheckboxLi(Category.Display)}
+                {toCheckboxLi(Category.Handwriting)}
+                {toCheckboxLi(Category.Monospace)}
               </ul>
             </div>
           </div>
