@@ -1,20 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import Fonts from "./fonts.tsx";
+import Fonts from "./fonts";
 import { fontsToSubUrl } from "./../helpers/helper";
+import { Font } from "./fonts-page/font-list-item";
 
-const FontPairingItem = props => {
+interface Props {
+  fontList: Font[];
+  pairing: any;
+}
+
+function FontPairingItem(props: Props) {
   const { fontList, pairing } = props;
-  const titleFont = _.find(fontList, font => font.id === pairing.font_title_id);
-  const fontContent = _.find(
-    fontList,
+  const titleFont = fontList.find(font => font.id === pairing.font_title_id);
+  const fontContent = fontList.find(
     font => font.id === pairing.font_content_id
   );
 
+  if (
+    titleFont === null ||
+    titleFont === undefined ||
+    fontContent === null ||
+    fontContent === undefined
+  ) {
+    return null;
+  }
+
   const fontFacesNode = _.chain([titleFont, fontContent])
-    .filter(x => !_.isNull(x))
-    .map(font => (
+    .filter(x => x !== null && x !== undefined)
+    .map((font: Font) => (
       <Fonts key={font.family} fontName={font.family} fontUrl={font.url} />
     ))
     .value();
@@ -50,6 +64,6 @@ const FontPairingItem = props => {
       </Link>
     </div>
   );
-};
+}
 
 export default FontPairingItem;

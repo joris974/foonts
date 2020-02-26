@@ -4,7 +4,7 @@ import DownloadModal from "./download-modal";
 import Checkbox from "./checkbox";
 import { sendFontPairingLikeToApi } from "../helpers/api";
 import { allCategories, labelForCategory } from "../helpers/helper";
-import { Font } from "./fonts-page/font-list-item.js";
+import { Font } from "./fonts-page/font-list-item";
 
 interface Props {
   font: Font;

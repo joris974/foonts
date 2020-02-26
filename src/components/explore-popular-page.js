@@ -1,5 +1,5 @@
 import React from "react";
-import ExplorePage from "./explore-page.js";
+import ExplorePage from "./explore-page";
 import { loadPopularFontPairings } from "./../helpers/api";
 import Spinner from "./spinner";
 

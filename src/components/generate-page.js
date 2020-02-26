@@ -6,10 +6,10 @@ import { sendFontPairingToApi } from "./../helpers/api";
 
 import Sidebar from "./sidebar";
 import Spinner from "./spinner";
-import Fonts from "./fonts.tsx";
-import EditableTitle from "./editable-title.js";
+import Fonts from "./fonts";
+import EditableTitle from "./editable-title";
 import EditableContent from "./editable-content";
-import ApplicationMeta from "./application-meta.js";
+import ApplicationMeta from "./application-meta";
 import {
   fontsFromUrlParams,
   updateFontStyle,

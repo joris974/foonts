@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
-import FontPairingItem from "./font-pairing-snippet.js";
+import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "./spinner";
 
 class ExplorePage extends React.Component {
