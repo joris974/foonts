@@ -3,6 +3,7 @@ import ExplorePage from "./explore-page";
 import { loadRecentFontPairings } from "./../helpers/api";
 import Spinner from "./spinner";
 import { Font } from "./fonts-page/font-list-item";
+import { withFontList } from "./withFontList";
 
 interface Props {
   fontList: Font[];
@@ -36,4 +37,4 @@ class ExploreRecentPage extends React.Component<Props, State> {
   }
 }
 
-export default ExploreRecentPage;
+export default withFontList(ExploreRecentPage);

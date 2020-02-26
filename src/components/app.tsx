@@ -1,39 +1,14 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
-import { loadFonts } from "../helpers/api";
 import Navbar from "./navbar";
-import Spinner from "./spinner";
-import { Font } from "./fonts-page/font-list-item";
 
 interface Props {
-  children: ReactNode;
+  children?: any;
 }
 
-interface State {
-  fontList: Font[];
-}
-
-class App extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { fontList: [] };
-  }
-
-  componentDidMount() {
-    loadFonts().then(fontList => {
-      this.setState({ fontList });
-    });
-  }
-
+class App extends React.Component<Props> {
   render() {
-    const { fontList } = this.state;
-
-    const children =
-      this.props.children && fontList.length > 0 ? (
-        React.cloneElement(this.props.children, { fontList })
-      ) : (
-        <Spinner />
-      );
+    const { children } = this.props;
 
     return (
       <div className="main-container">

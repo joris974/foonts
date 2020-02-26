@@ -1,6 +1,7 @@
 import React from "react";
 import FontsPage from "./fonts-page";
 import { Font } from "./font-list-item";
+import { withFontList } from "../withFontList";
 
 interface Props {
   fontList: Font[];
@@ -11,4 +12,4 @@ function FontsPageWrapper(props: Props) {
   return <FontsPage fontList={fontList} />;
 }
 
-export default FontsPageWrapper;
+export default withFontList(FontsPageWrapper);

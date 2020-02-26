@@ -17,6 +17,7 @@ import {
   allCategories,
   randomFont
 } from "./../helpers/helper";
+import { withFontList } from "./withFontList";
 
 const defaultTitleStyleProps = {
   fontSize: 36,
@@ -291,4 +292,4 @@ class GeneratePage extends React.Component {
   }
 }
 
-export default withRouter(GeneratePage);
+export default withRouter(withFontList(GeneratePage));

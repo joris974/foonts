@@ -3,6 +3,7 @@ import ExplorePage from "./explore-page";
 import { loadPopularFontPairings } from "../helpers/api";
 import Spinner from "./spinner";
 import { Font } from "./fonts-page/font-list-item";
+import { withFontList } from "./withFontList";
 
 interface Props {
   fontList: Font[];
@@ -36,4 +37,4 @@ class ExplorePopularPage extends React.Component<Props, State> {
   }
 }
 
-export default ExplorePopularPage;
+export default withFontList(ExplorePopularPage);
