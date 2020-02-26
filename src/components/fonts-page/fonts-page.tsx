@@ -2,8 +2,8 @@ import React from "react";
 
 import _ from "lodash";
 import FontListItem from "./font-list-item";
-import SortListFilter from "./sort-list-filter.js";
-import Checkbox from "../checkbox.js";
+import SortListFilter from "./sort-list-filter";
+import Checkbox from "../checkbox";
 import { allCategories, labelForCategory } from "../../helpers/helper";
 import { Category } from "../../helpers/helper";
 import { Font } from "./font-list-item";

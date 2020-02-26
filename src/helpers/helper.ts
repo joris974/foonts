@@ -121,6 +121,8 @@ export function labelForCategory(category: Category) {
       return "Handwriting";
     case "monospace":
       return "Monospace";
+    default:
+      throw new Error(`Invalid category`);
   }
 }
 

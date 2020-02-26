@@ -1,6 +1,14 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-export default function Checkbox(props) {
+interface Props {
+  isChecked: boolean;
+  label: string | ReactNode;
+  handleChangeCheckbox: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
+}
+
+export default function Checkbox(props: Props) {
   const { isChecked, label, handleChangeCheckbox } = props;
   const icon = isChecked ? (
     <span className="custom-checkbox-icon fa fa-2x fa-check-square"></span>
