@@ -1,8 +1,9 @@
 import { withRouter } from "react-router-dom";
+import { RouteComponentProps } from "react-router";
 import React from "react";
 import _ from "lodash";
 
-import { sendFontPairingToApi } from "./../helpers/api";
+import { sendFontPairingToApi } from "../helpers/api";
 
 import Sidebar from "./sidebar";
 import Spinner from "./spinner";
@@ -16,8 +17,9 @@ import {
   fontsToUrl,
   allCategories,
   randomFont
-} from "./../helpers/helper";
+} from "../helpers/helper";
 import { withFontList } from "./withFontList";
+import { Font } from "./fonts-page/font-list-item";
 
 const defaultTitleStyleProps = {
   fontSize: 36,
@@ -33,14 +35,34 @@ const defaultContentStyleProps = {
   fontCategories: allCategories()
 };
 
-class GeneratePage extends React.Component {
-  constructor(props) {
+type PathParamsType = {
+  fonts?: string | undefined;
+};
+
+type Props = RouteComponentProps<PathParamsType> & {
+  fontList: Font[];
+};
+
+type State = {
+  titleFont: Font | null | undefined;
+  contentFont: Font | null | undefined;
+  isTitleLocked: boolean;
+  isContentLocked: boolean;
+  titleFontStyleProps: any;
+  contentFontStyleProps: any;
+};
+
+class GeneratePage extends React.Component<Props, State> {
+  handleKeyPressF: Function;
+
+  constructor(props: Props) {
     super(props);
 
-    const params = props.match && props.match.params;
+    const fontsParams =
+      props.match && props.match.params && props.match.params.fonts;
     let fromParams;
-    if (!_.isEmpty(params)) {
-      fromParams = fontsFromUrlParams(params.fonts, props.fontList);
+    if (fontsParams !== null && fontsParams !== undefined) {
+      fromParams = fontsFromUrlParams(fontsParams, props.fontList);
     }
     const titleFont = fromParams ? fromParams.titleFont : null;
     const contentFont = fromParams ? fromParams.contentFont : null;
@@ -58,10 +80,10 @@ class GeneratePage extends React.Component {
   }
 
   componentDidMount() {
-    const { history, location, match, fontList } = this.props;
-    const params = match && match.params;
+    const { history, match, fontList } = this.props;
+    const fontsParams = match && match.params && match.params.fonts;
 
-    if (_.isEmpty(params) || _.isEmpty(params.fonts)) {
+    if (fontsParams === null || fontsParams === undefined) {
       if (fontList.length > 0) {
         const [randTitleFont, randContentFont] = _.sampleSize(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
@@ -73,7 +95,7 @@ class GeneratePage extends React.Component {
       }
     } else {
       const { titleFont, contentFont } = fontsFromUrlParams(
-        params.fonts,
+        fontsParams,
         fontList
       );
       sendFontPairingToApi(titleFont, contentFont);
@@ -85,11 +107,11 @@ class GeneratePage extends React.Component {
     window.removeEventListener("keydown", this.handleKeyPressF);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     const { fontList, history, match } = nextProps;
-    const params = match && match.params;
+    const fontsParams = match && match.params && match.params.fonts;
 
-    if (_.isEmpty(params) || _.isEmpty(params.fonts)) {
+    if (fontsParams === null || fontsParams === undefined) {
       if (fontList.length > 0) {
         const [randTitleFont, randContentFont] = _.sampleSize(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
@@ -97,7 +119,7 @@ class GeneratePage extends React.Component {
       }
     } else {
       const { titleFont, contentFont } = fontsFromUrlParams(
-        params.fonts,
+        fontsParams,
         fontList
       );
       sendFontPairingToApi(titleFont, contentFont);
@@ -166,7 +188,7 @@ class GeneratePage extends React.Component {
     this.generate();
   }
 
-  updateTitleStyle(changeType, changeValue) {
+  updateTitleStyle(changeType: string, changeValue: string) {
     const { titleFontStyleProps } = this.state;
     const newTitleFontStyleProps = updateFontStyle(
       titleFontStyleProps,
@@ -176,7 +198,7 @@ class GeneratePage extends React.Component {
     this.setState({ titleFontStyleProps: newTitleFontStyleProps });
   }
 
-  updateContentStyle(changeType, changeValue) {
+  updateContentStyle(changeType: string, changeValue: string) {
     const { contentFontStyleProps } = this.state;
     const newContentFontStyleProps = updateFontStyle(
       contentFontStyleProps,
