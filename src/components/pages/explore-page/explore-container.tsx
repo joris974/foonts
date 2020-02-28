@@ -15,7 +15,7 @@ type State = {
   numMaxVisible: number;
 };
 
-class ExplorePage extends React.Component<Props, State> {
+class ExploreContainer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { numMaxVisible: 12 };
@@ -89,4 +89,4 @@ class ExplorePage extends React.Component<Props, State> {
   }
 }
 
-export default ExplorePage;
+export default ExploreContainer;

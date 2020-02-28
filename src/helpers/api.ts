@@ -14,7 +14,7 @@ export function loadFonts() {
 
 export function loadRecentFontPairings() {
   const url = `${getApiUrl()}font-pairings/recent`;
-  return $.ajax({ url });
+  return $.ajax({ url }).promise();
 }
 
 export function loadPopularFontPairings() {
