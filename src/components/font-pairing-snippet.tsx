@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import _ from "lodash";
 import Fonts from "./fonts";
 import { fontsToSubUrl } from "./../helpers/helper";
 import { Font } from "../types/font";
+import Card from "react-bootstrap/Card";
 
 type Props = {
   fontList: Font[];
@@ -26,43 +26,34 @@ function FontPairingItem(props: Props) {
     return null;
   }
 
-  const fontFacesNode = _.chain([titleFont, fontContent])
-    .filter(x => x !== null && x !== undefined)
-    .map((font: Font) => (
-      <Fonts key={font.family} fontName={font.family} fontUrl={font.url} />
-    ))
-    .value();
+  const fontFacesNode = [titleFont, fontContent].map((font: Font) => (
+    <Fonts key={font.family} fontName={font.family} fontUrl={font.url} />
+  ));
 
   return (
-    <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 font-pairing-item-wrapper">
-      <Link to={fontsToSubUrl(titleFont, fontContent)}>
-        <div className="font-pairing-item">
-          {fontFacesNode}
-          <div className="row font-pairing-item-body">
-            <div className="col-xs-12">
-              <h3 style={{ fontFamily: titleFont.family }}>
-                {titleFont.family}
-              </h3>
-              <p style={{ fontFamily: fontContent.family }}>
-                {fontContent.family}
-              </p>
-            </div>
-          </div>
-          <div className="row text-right">
-            <div className="col-xs-12">
-              <ul className="list-inline font-pairing-item-status">
-                <li>
-                  <i className="fa fa-eye"></i> {pairing.num_views}
-                </li>
-                <li>
-                  <i className="fa fa-heart"></i> {pairing.num_liked}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </Link>
-    </div>
+    <>
+      <Card>
+        <Card.Body>
+          <Card.Title style={{ fontFamily: titleFont.family }}>
+            {titleFont.family}
+          </Card.Title>
+          <Card.Text style={{ fontFamily: fontContent.family }}>
+            {fontContent.family}
+
+            <ul className="list-inline font-pairing-item-status">
+              <li>
+                <i className="fa fa-eye"></i> {pairing.num_views}
+              </li>
+              <li>
+                <i className="fa fa-heart"></i> {pairing.num_liked}
+              </li>
+            </ul>
+          </Card.Text>
+          <Link to={fontsToSubUrl(titleFont, fontContent)}>View More</Link>
+        </Card.Body>
+      </Card>
+      {fontFacesNode}
+    </>
   );
 }
 

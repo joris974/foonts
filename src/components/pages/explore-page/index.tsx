@@ -1,16 +1,17 @@
 import React from "react";
-import ExplorePage from "./pages/explore-page/explore-page";
-import { loadRecentFontPairings } from "./../helpers/api";
-import Spinner from "./spinner";
-import { Font } from "../types/font";
-import { withFontList } from "./withFontList";
+import ExplorePage from "./explore-page";
+import { loadRecentFontPairings } from "./../../../helpers/api";
+import Spinner from "./../../spinner";
+import { Font } from "../../../types/font";
+import { withFontList } from "./../../withFontList";
+import { FontPairing } from "../../../types/font-pairing";
 
 type Props = {
   fontList: Font[];
 };
 
 type State = {
-  recentFontPairings: any;
+  recentFontPairings: FontPairing[];
 };
 
 class ExploreRecentPage extends React.Component<Props, State> {
@@ -20,7 +21,7 @@ class ExploreRecentPage extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    loadRecentFontPairings().then(recentFontPairings => {
+    loadRecentFontPairings().then((recentFontPairings: FontPairing[]) => {
       this.setState({ recentFontPairings });
     });
   }
