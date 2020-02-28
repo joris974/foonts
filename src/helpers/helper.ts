@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Font } from "../components/fonts-page/font-list-item";
+import { Font } from "../types/font";
 
 export enum Category {
   Display = "display",

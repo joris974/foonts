@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import { Font } from "./fonts-page/font-list-item";
+import { Font } from "../types/font";
 
 const DefaultContent = [
   ` Edit Me!`,

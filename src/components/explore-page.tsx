@@ -4,7 +4,7 @@ import _ from "lodash";
 
 import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "./spinner";
-import { Font } from "./fonts-page/font-list-item";
+import { Font } from "../types/font";
 
 type Props = {
   fontList: Font[];
@@ -21,7 +21,7 @@ class ExplorePage extends React.Component<Props, State> {
     this.state = { numMaxVisible: 12 };
   }
 
-  onClickSeeMore() {
+  handleClickSeeMore() {
     this.setState({ numMaxVisible: this.state.numMaxVisible + 12 });
   }
 
@@ -48,7 +48,7 @@ class ExplorePage extends React.Component<Props, State> {
           <div className="col-xs-12 text-center">
             <button
               className="btn btn-default"
-              onClick={this.onClickSeeMore.bind(this)}
+              onClick={this.handleClickSeeMore.bind(this)}
             >
               See more <i className="fa fa-chevron-down"></i>
             </button>

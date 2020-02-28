@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import _ from "lodash";
 import Fonts from "./fonts";
 import { fontsToSubUrl } from "./../helpers/helper";
-import { Font } from "./fonts-page/font-list-item";
+import { Font } from "../types/font";
 
 type Props = {
   fontList: Font[];

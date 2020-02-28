@@ -2,7 +2,7 @@ import React from "react";
 import ExplorePage from "./explore-page";
 import { loadPopularFontPairings } from "../helpers/api";
 import Spinner from "./spinner";
-import { Font } from "./fonts-page/font-list-item";
+import { Font } from "../types/font";
 import { withFontList } from "./withFontList";
 
 type Props = {

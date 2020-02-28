@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { Font } from "../components/fonts-page/font-list-item";
+import { Font } from "../types/font";
 
 function getApiUrl() {
   return window.location.hostname === "foonts.localhost.com"

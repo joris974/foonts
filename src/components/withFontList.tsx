@@ -1,6 +1,6 @@
 import React from "react";
 import { Subtract } from "utility-types";
-import { Font } from "./fonts-page/font-list-item";
+import { Font } from "../types/font";
 import { loadFonts } from "../helpers/api";
 import Spinner from "./spinner";
 
