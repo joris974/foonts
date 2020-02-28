@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Fonts from "../fonts";
-import { fontsToSubUrl } from "../../helpers/helper";
-import { Font } from "../../types/font";
+import Fonts from "../../../fonts";
+import { fontsToSubUrl } from "../../../../helpers/helper";
+import { Font } from "../../../../types/font";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
