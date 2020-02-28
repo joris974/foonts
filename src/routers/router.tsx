@@ -4,7 +4,7 @@ import App from "../components/app";
 import GeneratePage from "../components/generate-page";
 import ExploreRecentPage from "../components/explore-recent-page";
 import ExplorePopularPage from "../components/explore-popular-page";
-import FontsWrapper from "../components/fonts-page/fonts-page-wrapper";
+import FontsPage from "../components/pages/fonts-page";
 
 export function AppRouter() {
   return (
@@ -22,7 +22,7 @@ export function AppRouter() {
             <ExplorePopularPage />
           </Route>
           <Route path="/fonts">
-            <FontsWrapper />
+            <FontsPage />
           </Route>
         </Switch>
       </App>
