@@ -2,6 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Fonts from "../../fonts";
 import { Font } from "../../../types/font";
+import "./font-list-item.css";
 
 type Props = {
   font: Font;
@@ -11,7 +12,7 @@ function FontsListItem(props: Props) {
   const { font } = props;
   return (
     <>
-      <Card>
+      <Card className="font-card">
         <Card.Body>
           <Card.Title>{font.family}</Card.Title>
           <Card.Text>
