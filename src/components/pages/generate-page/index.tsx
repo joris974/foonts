@@ -5,7 +5,7 @@ import { Font } from "../../../types/font";
 import GeneratePageContainer from "./generate-page-container";
 import { fontsToUrl, extractFromMatch } from "../../../helpers/helper";
 import { sendFontPairingToApi } from "../../../helpers/api";
-import Spinner from "../../spinner";
+import Spinner from "../../common/spinner";
 import { withFontList } from "../../withFontList";
 
 type Params = {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Fonts from "../../../fonts";
+import Fonts from "../../../common/fonts";
 import { fontsToSubUrl } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
 import Card from "@material-ui/core/Card";

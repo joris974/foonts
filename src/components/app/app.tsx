@@ -1,6 +1,6 @@
 import React from "react";
-
 import Navbar from "./navbar";
+import "./app.css";
 
 type Props = {
   children?: any;

@@ -1,8 +1,8 @@
 import React from "react";
 // import Helmet from "react-helmet";
 
-import { fontsToUrl } from "../helpers/helper";
-import { Font } from "../types/font";
+import { fontsToUrl } from "../../../helpers/helper";
+import { Font } from "../../../types/font";
 
 type Props = {
   titleFont: Font;

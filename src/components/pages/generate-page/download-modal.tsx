@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { Font } from "../types/font";
+import { Font } from "../../../types/font";
 
 type Props = {
   titleFont: Font;

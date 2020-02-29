@@ -1,6 +1,6 @@
 import React from "react";
 import ExplorePage from "./explore-container";
-import Spinner from "../../spinner";
+import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
 

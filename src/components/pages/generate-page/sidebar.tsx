@@ -1,14 +1,14 @@
 import React from "react";
 import DownloadModal from "./download-modal";
-import Checkbox from "./checkbox";
-import { sendFontPairingLikeToApi } from "../helpers/api";
+import Checkbox from "../../common/checkbox";
+import { sendFontPairingLikeToApi } from "../../../helpers/api";
 import {
   allCategories,
   labelForCategory,
   UpdateFontProperties
-} from "../helpers/helper";
-import { Font } from "../types/font";
-import { FontProperties } from "../types/font-style";
+} from "../../../helpers/helper";
+import { Font } from "../../../types/font";
+import { FontProperties } from "../../../types/font-style";
 
 type Props = {
   font: Font;

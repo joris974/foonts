@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import take from "lodash/take";
 
 import FontPairingItem from "./font-pairing-snippet";
-import Spinner from "../../spinner";
+import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
 

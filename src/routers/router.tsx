@@ -1,6 +1,6 @@
 import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import React from "react";
-import App from "../components/app";
+import App from "../components/app/app";
 import GeneratePage from "../components/pages/generate-page";
 import ExploreRecentPage from "../components/pages/explore-page/explore-recent-handler";
 import ExplorePopularPage from "../components/pages/explore-page/explore-popular-handler";

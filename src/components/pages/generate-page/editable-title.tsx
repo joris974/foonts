@@ -1,6 +1,6 @@
 import React from "react";
-import { Font } from "../types/font";
-import { FontProperties } from "../types/font-style";
+import { Font } from "../../../types/font";
+import { FontProperties } from "../../../types/font-style";
 
 const DefaultTitle = "Find best matching fonts in seconds!!";
 

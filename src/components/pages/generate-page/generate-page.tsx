@@ -1,10 +1,10 @@
 import React from "react";
 import { Font } from "../../../types/font";
-import Spinner from "../../spinner";
-import Fonts from "../../fonts";
-import Sidebar from "../../sidebar";
-import EditableTitle from "../../editable-title";
-import EditableContent from "../../editable-content";
+import Spinner from "../../common/spinner";
+import Fonts from "../../common/fonts";
+import Sidebar from "./sidebar";
+import EditableTitle from "./editable-title";
+import EditableContent from "./editable-content";
 import { FontProperties } from "../../../types/font-style";
 import { UpdateFontProperties } from "../../../helpers/helper";
 

@@ -2,7 +2,7 @@ import React from "react";
 import sortBy from "lodash/sortBy";
 import take from "lodash/take";
 import SortListFilter from "./sort-list-filter";
-import Checkbox from "../../checkbox";
+import Checkbox from "../../common/checkbox";
 import { labelForCategory } from "../../../helpers/helper";
 import { Category } from "../../../helpers/helper";
 import { Font } from "../../../types/font";

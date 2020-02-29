@@ -2,7 +2,7 @@ import React from "react";
 import { Subtract } from "utility-types";
 import { Font } from "../types/font";
 import { loadFonts } from "../helpers/api";
-import Spinner from "./spinner";
+import Spinner from "./common/spinner";
 
 export type Props = {
   fontList: Font[];

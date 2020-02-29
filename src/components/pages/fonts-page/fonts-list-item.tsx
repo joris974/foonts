@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import Fonts from "../../fonts";
+import Fonts from "../../common/fonts";
 import { Font } from "../../../types/font";
 import "./font-list-item.css";
 
