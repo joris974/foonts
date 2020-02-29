@@ -2,7 +2,8 @@ import React from "react";
 import {
   allCategories,
   randomFont,
-  updateFontProperties
+  updateFontProperties,
+  UpdateFontProperties
 } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
 import GeneratePage from "./generate-page";
@@ -48,8 +49,10 @@ class GeneratePageContainer extends React.Component<Props, State> {
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.updateTitleStyle = this.updateTitleStyle.bind(this);
-    this.updateContentStyle = this.updateContentStyle.bind(this);
+    this.updateTitleFontProperties = this.updateTitleFontProperties.bind(this);
+    this.updateContentFontProperties = this.updateContentFontProperties.bind(
+      this
+    );
     this.handleSwap = this.handleSwap.bind(this);
     this.handleClickGenerate = this.handleClickGenerate.bind(this);
     this.handleChangeLockTitle = this.handleChangeLockTitle.bind(this);
@@ -114,26 +117,24 @@ class GeneratePageContainer extends React.Component<Props, State> {
     );
   }
 
-  handleClickGenerate(e: any) {
+  handleClickGenerate(event: React.MouseEvent<HTMLElement, MouseEvent>) {
     this.generate();
   }
 
-  updateTitleStyle(changeType: any, changeValue: any) {
+  updateTitleFontProperties(update: UpdateFontProperties) {
     const { titleFontPropertiesProps } = this.state;
     const newTitleFontPropertiesProps = updateFontProperties(
       titleFontPropertiesProps,
-      changeType,
-      changeValue
+      update
     );
     this.setState({ titleFontPropertiesProps: newTitleFontPropertiesProps });
   }
 
-  updateContentStyle(changeType: any, changeValue: any) {
+  updateContentFontProperties(update: UpdateFontProperties) {
     const { contentFontPropertiesProps } = this.state;
     const newContentFontPropertiesProps = updateFontProperties(
       contentFontPropertiesProps,
-      changeType,
-      changeValue
+      update
     );
     this.setState({
       contentFontPropertiesProps: newContentFontPropertiesProps
@@ -196,8 +197,8 @@ class GeneratePageContainer extends React.Component<Props, State> {
         contentFontPropertiesProps={contentFontPropertiesProps}
         isTitleLocked={isTitleLocked}
         isContentLocked={isContentLocked}
-        updateTitleStyle={this.updateTitleStyle}
-        updateContentStyle={this.updateContentStyle}
+        updateTitleFontProperties={this.updateTitleFontProperties}
+        updateContentFontProperties={this.updateContentFontProperties}
         handleSwap={this.handleSwap}
         handleClickGenerate={this.handleClickGenerate}
         handleChangeLockTitle={this.handleChangeLockTitle}

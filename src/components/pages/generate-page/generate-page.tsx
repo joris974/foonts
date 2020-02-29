@@ -6,6 +6,7 @@ import Sidebar from "../../sidebar";
 import EditableTitle from "../../editable-title";
 import EditableContent from "../../editable-content";
 import { FontProperties } from "../../../types/font-style";
+import { UpdateFontProperties } from "../../../helpers/helper";
 
 type Props = {
   titleFont: Font;
@@ -14,8 +15,8 @@ type Props = {
   contentFontPropertiesProps: FontProperties;
   isTitleLocked: boolean;
   isContentLocked: boolean;
-  updateTitleStyle: Function;
-  updateContentStyle: Function;
+  updateTitleFontProperties: (update: UpdateFontProperties) => void;
+  updateContentFontProperties: (update: UpdateFontProperties) => void;
   handleSwap: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   handleClickGenerate: (
     event: React.MouseEvent<HTMLElement, MouseEvent>
@@ -36,8 +37,8 @@ function GeneratePage(props: Props) {
     contentFontPropertiesProps,
     isTitleLocked,
     isContentLocked,
-    updateTitleStyle,
-    updateContentStyle,
+    updateTitleFontProperties,
+    updateContentFontProperties,
     handleSwap,
     handleClickGenerate,
     handleChangeLockTitle,
@@ -62,10 +63,10 @@ function GeneratePage(props: Props) {
             <Sidebar
               titleFont={titleFont}
               titleFontPropertiesProps={titleFontPropertiesProps}
-              onChangeTitleStyle={updateTitleStyle}
+              onChangeTitleFontProperty={updateTitleFontProperties}
               contentFont={contentFont}
               contentFontPropertiesProps={contentFontPropertiesProps}
-              onChangeContentStyle={updateContentStyle}
+              onChangeContentFontProperty={updateContentFontProperties}
               isTitleLocked={isTitleLocked}
               isContentLocked={isContentLocked}
               onChangeLockTitle={handleChangeLockTitle}

@@ -34,6 +34,8 @@ class EditableContent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { content: DefaultContent };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event: any) {
@@ -59,7 +61,7 @@ class EditableContent extends React.Component<Props, State> {
         style={style}
         contentEditable="true"
         className="p editable editable-content"
-        onChange={this.handleChange.bind(this)}
+        onChange={this.handleChange}
       >
         {contentPs}
       </div>

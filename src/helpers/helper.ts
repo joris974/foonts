@@ -2,7 +2,7 @@ import sample from "lodash/sample";
 import difference from "lodash/difference";
 import concat from "lodash/concat";
 import { Font } from "../types/font";
-import { FontProperties } from "../types/font-style";
+import { FontProperties, FontStyle, FontWeight } from "../types/font-style";
 
 export enum Category {
   Display = "display",
@@ -65,44 +65,50 @@ export function extractFromMatch(
   return { titleFont, contentFont };
 }
 
+export type UpdateFontProperties =
+  | { type: "fontSize"; action: "increment" | "decrement" }
+  | { type: "fontStyle"; value: FontStyle }
+  | { type: "fontWeight"; value: FontWeight }
+  | { type: "category"; value: Category };
+
 export function updateFontProperties(
   fontProperties: FontProperties,
-  changeType: any,
-  changeValue: any
+  update: UpdateFontProperties
 ) {
   const { fontSize, fontWeight, fontStyle, fontCategories } = fontProperties;
 
   let newFontSize = fontSize;
   let newFontWeight = fontWeight;
-  let newFontProperties = fontStyle;
+  let newFontStyle = fontStyle;
   let newFontCategories = fontCategories;
 
-  if (changeType === "italic") {
-    newFontProperties = fontStyle === "italic" ? "normal" : "italic";
-  }
-  if (changeType === "bold") {
-    newFontWeight = fontWeight === "bold" ? "normal" : "bold";
-  }
-  if (changeType === "increment") {
-    newFontSize = newFontSize + 1;
-  }
-
-  if (changeType === "decrement") {
-    newFontSize = newFontSize - 1;
-  }
-
-  if (changeType === "category") {
-    if (newFontCategories.includes(changeValue)) {
-      newFontCategories = difference(newFontCategories, [changeValue]);
-    } else {
-      newFontCategories = concat(newFontCategories, [changeValue]);
-    }
+  switch (update.type) {
+    case "fontSize":
+      if (update.action === "increment") {
+        newFontSize = newFontSize + 1;
+      } else if (update.action === "decrement") {
+        newFontSize = newFontSize - 1;
+      }
+      break;
+    case "fontStyle":
+      newFontStyle = fontStyle === "italic" ? "normal" : "italic";
+      break;
+    case "fontWeight":
+      newFontWeight = fontWeight === "bold" ? "normal" : "bold";
+      break;
+    case "category":
+      if (newFontCategories.includes(update.value)) {
+        newFontCategories = difference(newFontCategories, [update.value]);
+      } else {
+        newFontCategories = concat(newFontCategories, [update.value]);
+      }
+      break;
   }
 
   const newFontPropertiesProps = {
     fontSize: newFontSize,
     fontWeight: newFontWeight,
-    fontStyle: newFontProperties,
+    fontStyle: newFontStyle,
     fontCategories: newFontCategories
   };
   return newFontPropertiesProps;

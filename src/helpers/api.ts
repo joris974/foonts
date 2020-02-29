@@ -22,7 +22,12 @@ export function loadPopularFontPairings() {
   return $.ajax({ url });
 }
 
-function sendApi(url: string, postParams: any) {
+type PostParams = {
+  "font-title-id": number;
+  "font-content-id": number;
+};
+
+function sendApi(url: string, postParams: PostParams) {
   return $.ajax({
     url,
     method: "POST",

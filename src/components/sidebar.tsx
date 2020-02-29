@@ -2,7 +2,11 @@ import React from "react";
 import DownloadModal from "./download-modal";
 import Checkbox from "./checkbox";
 import { sendFontPairingLikeToApi } from "../helpers/api";
-import { allCategories, labelForCategory } from "../helpers/helper";
+import {
+  allCategories,
+  labelForCategory,
+  UpdateFontProperties
+} from "../helpers/helper";
 import { Font } from "../types/font";
 import { FontProperties } from "../types/font-style";
 
@@ -11,7 +15,7 @@ type Props = {
   onChangeLock: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isLocked: boolean;
   fontStyleProps: FontProperties;
-  onChangeStyle: Function;
+  onChangeFontProperty: (update: UpdateFontProperties) => void;
 };
 
 type State = {
@@ -34,7 +38,7 @@ class SidebarItem extends React.Component<Props, State> {
       onChangeLock,
       isLocked,
       fontStyleProps,
-      onChangeStyle
+      onChangeFontProperty
     } = this.props;
     const { showConfig } = this.state;
 
@@ -57,7 +61,9 @@ class SidebarItem extends React.Component<Props, State> {
           <Checkbox
             isChecked={fontCategories.includes(category)}
             label={labelForCategory(category)}
-            handleChangeCheckbox={() => onChangeStyle("category", category)}
+            handleChangeCheckbox={() =>
+              onChangeFontProperty({ type: "category", value: category })
+            }
           />
         </div>
       );
@@ -78,26 +84,40 @@ class SidebarItem extends React.Component<Props, State> {
             <div className="col-xs-3">
               <Checkbox
                 isChecked={isItalic}
-                handleChangeCheckbox={() => onChangeStyle("italic")}
+                handleChangeCheckbox={() =>
+                  onChangeFontProperty({ type: "fontStyle", value: "italic" })
+                }
                 label={<i className="fa fa-italic"></i>}
               />
             </div>
             <div className="col-xs-3">
               <Checkbox
                 isChecked={isBolded}
-                handleChangeCheckbox={() => onChangeStyle("bold")}
+                handleChangeCheckbox={() =>
+                  onChangeFontProperty({ type: "fontWeight", value: "bold" })
+                }
                 label={<i className="fa fa-bold"></i>}
               />
             </div>
             <div className="col-xs-2 col-xs-offset-2">
               <i
-                onClick={() => onChangeStyle("increment")}
+                onClick={() =>
+                  onChangeFontProperty({
+                    type: "fontSize",
+                    action: "increment"
+                  })
+                }
                 className="fa fa-plus-circle icon-action icon-font-size"
               ></i>
             </div>
             <div className="col-xs-2">
               <i
-                onClick={() => onChangeStyle("decrement")}
+                onClick={() =>
+                  onChangeFontProperty({
+                    type: "fontSize",
+                    action: "decrement"
+                  })
+                }
                 className="fa fa-minus-circle icon-action icon-font-size"
               ></i>
             </div>
@@ -153,12 +173,12 @@ type SidebarProps = {
   onClickSwap: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onClickGenerate: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   titleFontPropertiesProps: FontProperties;
-  onChangeTitleStyle: Function;
+  onChangeTitleFontProperty: (update: UpdateFontProperties) => void;
   onChangeLockTitle: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isTitleLocked: boolean;
 
   contentFontPropertiesProps: FontProperties;
-  onChangeContentStyle: Function;
+  onChangeContentFontProperty: (update: UpdateFontProperties) => void;
   onChangeLockContent: (
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => void;
@@ -212,11 +232,11 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
       onClickGenerate,
       titleFont,
       titleFontPropertiesProps,
-      onChangeTitleStyle,
+      onChangeTitleFontProperty,
       onChangeLockTitle,
       isTitleLocked,
       contentFontPropertiesProps,
-      onChangeContentStyle,
+      onChangeContentFontProperty,
       onChangeLockContent,
       isContentLocked,
       contentFont
@@ -234,7 +254,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
                 isLocked={isTitleLocked}
                 onChangeLock={onChangeLockTitle}
                 fontStyleProps={titleFontPropertiesProps}
-                onChangeStyle={onChangeTitleStyle}
+                onChangeFontProperty={onChangeTitleFontProperty}
               />
               <div className="row section-divider">
                 <div className="col-xs-1 text-center">
@@ -249,7 +269,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
                 isLocked={isContentLocked}
                 onChangeLock={onChangeLockContent}
                 fontStyleProps={contentFontPropertiesProps}
-                onChangeStyle={onChangeContentStyle}
+                onChangeFontProperty={onChangeContentFontProperty}
               />
             </div>
           </div>

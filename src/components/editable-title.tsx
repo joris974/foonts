@@ -17,6 +17,7 @@ class EditableTitle extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { content: DefaultTitle };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event: any) {
@@ -39,7 +40,7 @@ class EditableTitle extends React.Component<Props, State> {
         style={style}
         contentEditable="true"
         className="editable editable-title"
-        onChange={this.handleChange.bind(this)}
+        onChange={this.handleChange}
       >
         {content}
       </h1>
