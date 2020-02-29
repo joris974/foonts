@@ -20,6 +20,8 @@ class ExploreContainer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { numMaxVisible: 12 };
+
+    this.handleClickSeeMore = this.handleClickSeeMore.bind(this);
   }
 
   handleClickSeeMore() {
@@ -48,7 +50,7 @@ class ExploreContainer extends React.Component<Props, State> {
           <div className="col-xs-12 text-center">
             <button
               className="btn btn-default"
-              onClick={this.handleClickSeeMore.bind(this)}
+              onClick={this.handleClickSeeMore}
             >
               See more <i className="fa fa-chevron-down"></i>
             </button>

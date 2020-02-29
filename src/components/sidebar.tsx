@@ -26,6 +26,8 @@ class SidebarItem extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { showConfig: false };
+
+    this.toggleConfigMenu = this.toggleConfigMenu.bind(this);
   }
 
   toggleConfigMenu() {
@@ -141,7 +143,7 @@ class SidebarItem extends React.Component<Props, State> {
             </div>
             <div className="col-xs-3 text-right">
               <i
-                onClick={this.toggleConfigMenu.bind(this)}
+                onClick={this.toggleConfigMenu}
                 className={`h3 icon-action fa fa-gear icon-gear ${
                   showConfig ? "active" : ""
                 }`}
@@ -194,6 +196,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
   constructor(props: SidebarProps) {
     super(props);
     this.state = { showDownloadModal: false, isLiked: false };
+    this.handleClickLike = this.handleClickLike.bind(this);
   }
 
   componentWillReceiveProps(nextProps: SidebarProps) {
@@ -292,7 +295,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
                     className={`btn btn-block btn-default btn-like ${
                       isLiked ? "liked" : ""
                     }`}
-                    onClick={this.handleClickLike.bind(this)}
+                    onClick={this.handleClickLike}
                   >
                     <i className={`fa fa-heart`}></i>
                     <span className="hidden-xs">
