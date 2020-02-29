@@ -19,17 +19,19 @@ export function allCategories(): Category[] {
   ];
 }
 
-export function fontsFromUrlParams(
-  paramsPathPiece: string | null,
+export function extractFromMatch(
+  match: any,
   fontList: Font[]
-) {
-  if (paramsPathPiece === null || paramsPathPiece === undefined) {
-    return {};
+): { titleFont: Font; contentFont: Font } | null {
+  const fontsParams = match && match.params && match.params.fonts;
+
+  if (fontsParams === null || fontsParams === undefined) {
+    return null;
   }
 
-  const paramChunks = paramsPathPiece.split("--");
+  const paramChunks = fontsParams.split("--");
   if (paramChunks.length !== 2) {
-    return {};
+    return null;
   }
 
   const [titleFontPathPiece, contentFontPathPiece] = paramChunks;
@@ -48,7 +50,12 @@ export function fontsFromUrlParams(
     findFontByFamily(contentFontFamily)
   ];
 
-  if (_.some([titleFont, contentFont], x => !x)) {
+  if (
+    titleFont === null ||
+    titleFont === undefined ||
+    contentFont === null ||
+    contentFont === undefined
+  ) {
     return null;
   }
 

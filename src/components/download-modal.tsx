@@ -1,21 +1,16 @@
 import React from "react";
-import _ from "lodash";
 import Modal from "react-bootstrap/Modal";
 import { Font } from "../types/font";
 
 type Props = {
-  titleFont: Font | null;
-  contentFont: Font | null;
+  titleFont: Font;
+  contentFont: Font;
   show: boolean;
   onHide: () => void;
 };
 
 function DownloadModal(props: Props) {
   const { titleFont, contentFont, show, onHide } = props;
-
-  if (_.isNull(titleFont) || _.isNull(contentFont)) {
-    return null;
-  }
 
   const toUrlFontFamily = (st: string) => st.replace(/ /g, "+");
   const toFontCategory = (st: string) => st.replace("display", "cursive");

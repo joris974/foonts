@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 import DownloadModal from "./download-modal";
 import Checkbox from "./checkbox";
 import { sendFontPairingLikeToApi } from "../helpers/api";
@@ -40,7 +39,7 @@ class SidebarItem extends React.Component<Props, State> {
 
     const { fontStyle, fontWeight, fontCategories } = fontStyleProps;
 
-    if (_.isNull(font)) {
+    if (font === null || font === undefined) {
       return null;
     }
 
