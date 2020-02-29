@@ -1,7 +1,7 @@
 import { Category } from "../helpers/helper";
 
 export interface Font {
-  id: string;
+  id: number;
   family: string;
   url: string;
   category: Category;

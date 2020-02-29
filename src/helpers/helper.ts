@@ -1,5 +1,8 @@
-import _ from "lodash";
+import sample from "lodash/sample";
+import difference from "lodash/difference";
+import concat from "lodash/concat";
 import { Font } from "../types/font";
+import { FontProperties } from "../types/font-style";
 
 export enum Category {
   Display = "display",
@@ -62,20 +65,20 @@ export function extractFromMatch(
   return { titleFont, contentFont };
 }
 
-export function updateFontStyle(
-  fontStyleProps: any,
+export function updateFontProperties(
+  fontProperties: FontProperties,
   changeType: any,
   changeValue: any
 ) {
-  const { fontSize, fontWeight, fontStyle, fontCategories } = fontStyleProps;
+  const { fontSize, fontWeight, fontStyle, fontCategories } = fontProperties;
 
   let newFontSize = fontSize;
   let newFontWeight = fontWeight;
-  let newFontStyle = fontStyle;
+  let newFontProperties = fontStyle;
   let newFontCategories = fontCategories;
 
   if (changeType === "italic") {
-    newFontStyle = fontStyle === "italic" ? "normal" : "italic";
+    newFontProperties = fontStyle === "italic" ? "normal" : "italic";
   }
   if (changeType === "bold") {
     newFontWeight = fontWeight === "bold" ? "normal" : "bold";
@@ -90,19 +93,19 @@ export function updateFontStyle(
 
   if (changeType === "category") {
     if (newFontCategories.includes(changeValue)) {
-      newFontCategories = _.difference(newFontCategories, [changeValue]);
+      newFontCategories = difference(newFontCategories, [changeValue]);
     } else {
-      newFontCategories = _.concat(newFontCategories, [changeValue]);
+      newFontCategories = concat(newFontCategories, [changeValue]);
     }
   }
 
-  const newFontStyleProps = {
+  const newFontPropertiesProps = {
     fontSize: newFontSize,
     fontWeight: newFontWeight,
-    fontStyle: newFontStyle,
+    fontStyle: newFontProperties,
     fontCategories: newFontCategories
   };
-  return newFontStyleProps;
+  return newFontPropertiesProps;
 }
 
 export function fontsToUrl(titleFont: Font, contentFont: Font) {
@@ -133,9 +136,13 @@ export function labelForCategory(category: Category) {
   }
 }
 
-export function randomFont(fontList: Font[], categories: Category[]) {
-  return _.chain(fontList)
-    .filter(font => categories.includes(font.category))
-    .sample()
-    .value();
+export function randomFont(fontList: Font[], categories: Category[]): Font {
+  const fontsInCategory = fontList.filter(font =>
+    categories.includes(font.category)
+  );
+  const randomFont = sample(fontsInCategory);
+  if (randomFont === null || randomFont === undefined) {
+    throw new Error("Empty list");
+  }
+  return randomFont;
 }

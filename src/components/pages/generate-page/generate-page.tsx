@@ -5,12 +5,13 @@ import Fonts from "../../fonts";
 import Sidebar from "../../sidebar";
 import EditableTitle from "../../editable-title";
 import EditableContent from "../../editable-content";
+import { FontProperties } from "../../../types/font-style";
 
 type Props = {
   titleFont: Font;
-  titleFontStyleProps: any;
+  titleFontPropertiesProps: FontProperties;
   contentFont: Font;
-  contentFontStyleProps: any;
+  contentFontPropertiesProps: FontProperties;
   isTitleLocked: boolean;
   isContentLocked: boolean;
   updateTitleStyle: Function;
@@ -30,9 +31,9 @@ type Props = {
 function GeneratePage(props: Props) {
   const {
     titleFont,
-    titleFontStyleProps,
+    titleFontPropertiesProps,
     contentFont,
-    contentFontStyleProps,
+    contentFontPropertiesProps,
     isTitleLocked,
     isContentLocked,
     updateTitleStyle,
@@ -60,10 +61,10 @@ function GeneratePage(props: Props) {
           <div className="col-xs-12 col-sm-offset-0 col-sm-4">
             <Sidebar
               titleFont={titleFont}
-              titleFontStyleProps={titleFontStyleProps}
+              titleFontPropertiesProps={titleFontPropertiesProps}
               onChangeTitleStyle={updateTitleStyle}
               contentFont={contentFont}
-              contentFontStyleProps={contentFontStyleProps}
+              contentFontPropertiesProps={contentFontPropertiesProps}
               onChangeContentStyle={updateContentStyle}
               isTitleLocked={isTitleLocked}
               isContentLocked={isContentLocked}
@@ -76,11 +77,11 @@ function GeneratePage(props: Props) {
           <div className="col-xs-12 col-sm-8">
             <EditableTitle
               font={titleFont}
-              fontStyleProps={titleFontStyleProps}
+              fontStyleProps={titleFontPropertiesProps}
             />
             <EditableContent
               font={contentFont}
-              fontStyleProps={contentFontStyleProps}
+              fontStyleProps={contentFontPropertiesProps}
             />
           </div>
         </div>

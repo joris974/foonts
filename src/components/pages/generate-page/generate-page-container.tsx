@@ -2,19 +2,20 @@ import React from "react";
 import {
   allCategories,
   randomFont,
-  updateFontStyle
+  updateFontProperties
 } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
 import GeneratePage from "./generate-page";
+import { FontProperties } from "../../../types/font-style";
 
-const defaultTitleStyleProps = {
+const defaultTitleStyleProps: FontProperties = {
   fontSize: 36,
   fontWeight: "normal",
   fontStyle: "normal",
   fontCategories: allCategories()
 };
 
-const defaultContentStyleProps = {
+const defaultContentStyleProps: FontProperties = {
   fontSize: 14,
   fontWeight: "normal",
   fontStyle: "normal",
@@ -31,8 +32,8 @@ type Props = {
 type State = {
   isTitleLocked: boolean;
   isContentLocked: boolean;
-  titleFontStyleProps: any;
-  contentFontStyleProps: any;
+  titleFontPropertiesProps: FontProperties;
+  contentFontPropertiesProps: FontProperties;
 };
 
 class GeneratePageContainer extends React.Component<Props, State> {
@@ -42,8 +43,8 @@ class GeneratePageContainer extends React.Component<Props, State> {
     this.state = {
       isTitleLocked: false,
       isContentLocked: false,
-      titleFontStyleProps: defaultTitleStyleProps,
-      contentFontStyleProps: defaultContentStyleProps
+      titleFontPropertiesProps: defaultTitleStyleProps,
+      contentFontPropertiesProps: defaultContentStyleProps
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -82,30 +83,30 @@ class GeneratePageContainer extends React.Component<Props, State> {
     const {
       isTitleLocked,
       isContentLocked,
-      titleFontStyleProps,
-      contentFontStyleProps
+      titleFontPropertiesProps,
+      contentFontPropertiesProps
     } = this.state;
 
-    const newTitleFontStyleProps = {
-      fontSize: titleFontStyleProps.fontSize,
-      fontWeight: contentFontStyleProps.fontWeight,
-      fontStyle: contentFontStyleProps.fontStyle,
-      fontCategories: contentFontStyleProps.fontCategories
+    const newTitleFontPropertiesProps = {
+      fontSize: titleFontPropertiesProps.fontSize,
+      fontWeight: contentFontPropertiesProps.fontWeight,
+      fontStyle: contentFontPropertiesProps.fontStyle,
+      fontCategories: contentFontPropertiesProps.fontCategories
     };
 
-    const newContentFontStyleProps = {
-      fontSize: contentFontStyleProps.fontSize,
-      fontWeight: titleFontStyleProps.fontWeight,
-      fontStyle: titleFontStyleProps.fontStyle,
-      fontCategories: titleFontStyleProps.fontCategories
+    const newContentFontPropertiesProps = {
+      fontSize: contentFontPropertiesProps.fontSize,
+      fontWeight: titleFontPropertiesProps.fontWeight,
+      fontStyle: titleFontPropertiesProps.fontStyle,
+      fontCategories: titleFontPropertiesProps.fontCategories
     };
 
     this.setState(
       {
         isTitleLocked: isContentLocked,
         isContentLocked: isTitleLocked,
-        titleFontStyleProps: newTitleFontStyleProps,
-        contentFontStyleProps: newContentFontStyleProps
+        titleFontPropertiesProps: newTitleFontPropertiesProps,
+        contentFontPropertiesProps: newContentFontPropertiesProps
       },
       () => {
         updateFonts(contentFont, titleFont);
@@ -118,44 +119,45 @@ class GeneratePageContainer extends React.Component<Props, State> {
   }
 
   updateTitleStyle(changeType: any, changeValue: any) {
-    const { titleFontStyleProps } = this.state;
-    const newTitleFontStyleProps = updateFontStyle(
-      titleFontStyleProps,
+    const { titleFontPropertiesProps } = this.state;
+    const newTitleFontPropertiesProps = updateFontProperties(
+      titleFontPropertiesProps,
       changeType,
       changeValue
     );
-    this.setState({ titleFontStyleProps: newTitleFontStyleProps });
+    this.setState({ titleFontPropertiesProps: newTitleFontPropertiesProps });
   }
 
   updateContentStyle(changeType: any, changeValue: any) {
-    const { contentFontStyleProps } = this.state;
-    const newContentFontStyleProps = updateFontStyle(
-      contentFontStyleProps,
+    const { contentFontPropertiesProps } = this.state;
+    const newContentFontPropertiesProps = updateFontProperties(
+      contentFontPropertiesProps,
       changeType,
       changeValue
     );
-    this.setState({ contentFontStyleProps: newContentFontStyleProps });
+    this.setState({
+      contentFontPropertiesProps: newContentFontPropertiesProps
+    });
   }
 
   generate() {
-    const { fontList, updateFonts } = this.props;
+    const { fontList, updateFonts, titleFont, contentFont } = this.props;
 
     if (fontList.length > 0) {
-      const { titleFont, contentFont } = this.props;
       const {
         isTitleLocked,
         isContentLocked,
-        titleFontStyleProps,
-        contentFontStyleProps
+        titleFontPropertiesProps,
+        contentFontPropertiesProps
       } = this.state;
 
       const randTitleFont = randomFont(
         fontList,
-        titleFontStyleProps.fontCategories
+        titleFontPropertiesProps.fontCategories
       );
       const randContentFont = randomFont(
         fontList,
-        contentFontStyleProps.fontCategories
+        contentFontPropertiesProps.fontCategories
       );
 
       const newTitleFont = isTitleLocked ? titleFont : randTitleFont;
@@ -180,8 +182,8 @@ class GeneratePageContainer extends React.Component<Props, State> {
   render() {
     const { titleFont, contentFont } = this.props;
     const {
-      contentFontStyleProps,
-      titleFontStyleProps,
+      contentFontPropertiesProps,
+      titleFontPropertiesProps,
       isTitleLocked,
       isContentLocked
     } = this.state;
@@ -189,9 +191,9 @@ class GeneratePageContainer extends React.Component<Props, State> {
     return (
       <GeneratePage
         titleFont={titleFont}
-        titleFontStyleProps={titleFontStyleProps}
+        titleFontPropertiesProps={titleFontPropertiesProps}
         contentFont={contentFont}
-        contentFontStyleProps={contentFontStyleProps}
+        contentFontPropertiesProps={contentFontPropertiesProps}
         isTitleLocked={isTitleLocked}
         isContentLocked={isContentLocked}
         updateTitleStyle={this.updateTitleStyle}

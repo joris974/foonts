@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import _ from "lodash";
+import take from "lodash/take";
 
 import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "../../spinner";
 import { Font } from "../../../types/font";
+import { FontPairing } from "../../../types/font-pairing";
 
 type Props = {
   fontList: Font[];
-  fontPairings: any;
+  fontPairings: FontPairing[];
 };
 
 type State = {
@@ -29,18 +30,17 @@ class ExploreContainer extends React.Component<Props, State> {
     const { fontList, fontPairings } = this.props;
     const { numMaxVisible } = this.state;
 
-    const pairings = _.chain(fontPairings)
-      .take(numMaxVisible)
-      .map(pairing => {
-        return (
-          <FontPairingItem
-            key={pairing.id}
-            fontList={fontList}
-            pairing={pairing}
-          />
-        );
-      })
-      .value();
+    const visibleFontPairings = take(fontPairings, numMaxVisible);
+
+    const pairings = visibleFontPairings.map(pairing => {
+      return (
+        <FontPairingItem
+          key={pairing.id}
+          fontList={fontList}
+          pairing={pairing}
+        />
+      );
+    });
 
     const btnSeeMore =
       numMaxVisible > fontPairings.length ? null : (

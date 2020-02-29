@@ -1,11 +1,11 @@
 import React from "react";
-import _ from "lodash";
 import { Font } from "../types/font";
+import { FontProperties } from "../types/font-style";
 
 const DefaultTitle = "Find best matching fonts in seconds!!";
 
 type Props = {
-  fontStyleProps: any;
+  fontStyleProps: FontProperties;
   font: Font;
 };
 
@@ -32,7 +32,7 @@ class EditableTitle extends React.Component<Props, State> {
       fontSize: `${fontSize}px`,
       fontWeight,
       fontStyle,
-      fontFamily: !_.isNull(font) ? font.family : ""
+      fontFamily: font.family
     };
     return (
       <h1

@@ -4,12 +4,13 @@ import Checkbox from "./checkbox";
 import { sendFontPairingLikeToApi } from "../helpers/api";
 import { allCategories, labelForCategory } from "../helpers/helper";
 import { Font } from "../types/font";
+import { FontProperties } from "../types/font-style";
 
 type Props = {
   font: Font;
   onChangeLock: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isLocked: boolean;
-  fontStyleProps: any;
+  fontStyleProps: FontProperties;
   onChangeStyle: Function;
 };
 
@@ -151,12 +152,12 @@ type SidebarProps = {
   contentFont: Font;
   onClickSwap: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   onClickGenerate: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  titleFontStyleProps: any;
+  titleFontPropertiesProps: FontProperties;
   onChangeTitleStyle: Function;
   onChangeLockTitle: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isTitleLocked: boolean;
 
-  contentFontStyleProps: any;
+  contentFontPropertiesProps: FontProperties;
   onChangeContentStyle: Function;
   onChangeLockContent: (
     event: React.MouseEvent<HTMLElement, MouseEvent>
@@ -210,11 +211,11 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
       onClickSwap,
       onClickGenerate,
       titleFont,
-      titleFontStyleProps,
+      titleFontPropertiesProps,
       onChangeTitleStyle,
       onChangeLockTitle,
       isTitleLocked,
-      contentFontStyleProps,
+      contentFontPropertiesProps,
       onChangeContentStyle,
       onChangeLockContent,
       isContentLocked,
@@ -232,7 +233,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
                 font={titleFont}
                 isLocked={isTitleLocked}
                 onChangeLock={onChangeLockTitle}
-                fontStyleProps={titleFontStyleProps}
+                fontStyleProps={titleFontPropertiesProps}
                 onChangeStyle={onChangeTitleStyle}
               />
               <div className="row section-divider">
@@ -247,7 +248,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
                 font={contentFont}
                 isLocked={isContentLocked}
                 onChangeLock={onChangeLockContent}
-                fontStyleProps={contentFontStyleProps}
+                fontStyleProps={contentFontPropertiesProps}
                 onChangeStyle={onChangeContentStyle}
               />
             </div>

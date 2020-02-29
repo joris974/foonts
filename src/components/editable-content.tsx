@@ -1,6 +1,6 @@
 import React from "react";
-import _ from "lodash";
 import { Font } from "../types/font";
+import { FontProperties } from "../types/font-style";
 
 const DefaultContent = [
   ` Edit Me!`,
@@ -22,7 +22,7 @@ const DefaultContent = [
 ];
 
 type Props = {
-  fontStyleProps: any;
+  fontStyleProps: FontProperties;
   font: Font;
 };
 
@@ -49,7 +49,7 @@ class EditableContent extends React.Component<Props, State> {
       fontSize: `${fontSize}px`,
       fontWeight,
       fontStyle,
-      fontFamily: !_.isNull(font) ? font.family : ""
+      fontFamily: font.family
     };
 
     const contentPs = content.map((line, i) => <p key={i}>{line}</p>);

@@ -10,10 +10,11 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import IconButton from "@material-ui/core/IconButton";
 import "./font-pairing-snippet.css";
+import { FontPairing } from "../../../../types/font-pairing";
 
 type Props = {
   fontList: Font[];
-  pairing: any;
+  pairing: FontPairing;
 };
 
 function FontPairingItem(props: Props) {
