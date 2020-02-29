@@ -1,28 +1,24 @@
 import React, { ReactNode } from "react";
+import { FormControlLabel, Checkbox } from "@material-ui/core";
 
 type Props = {
   isChecked: boolean;
   label: string | ReactNode;
-  handleChangeCheckbox: (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void;
+  handleChangeCheckbox: (x: any) => void;
 };
 
-export default function Checkbox(props: Props) {
+export default function MyCheckbox(props: Props) {
   const { isChecked, label, handleChangeCheckbox } = props;
-  const icon = isChecked ? (
-    <span className="custom-checkbox-icon fa fa-2x fa-check-square"></span>
-  ) : (
-    <span className="custom-checkbox-icon fa fa-2x fa-square"></span>
-  );
-
   return (
-    <div
-      className={`custom-checkbox ${isChecked ? "checked" : ""}`}
-      onClick={handleChangeCheckbox}
-    >
-      {icon}
-      <span className="custom-checkbox-label">{label}</span>
-    </div>
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={isChecked}
+          onChange={handleChangeCheckbox}
+          color="primary"
+        />
+      }
+      label={label}
+    />
   );
 }

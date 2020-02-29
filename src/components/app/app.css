@@ -8,20 +8,21 @@
   transition: all 200ms ease;
 }
 
-html, body {
-  background: #F4F4F4;
+html,
+body {
+  background: #f4f4f4;
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 #main {
-  height:100%;
+  height: 100%;
 }
 
 .main-container {
-  min-height:100%;
-  position:relative;
+  min-height: 100%;
+  position: relative;
 }
 
 .body-container {
@@ -41,14 +42,14 @@ html, body {
 .navbar-nav {
   margin: 0;
 }
-.navbar-nav>li {
+.navbar-nav > li {
   float: left;
 }
 .navbar-right {
-  float: right!important;
+  float: right !important;
   margin-right: -15px;
 }
-.navbar-nav>li>a {
+.navbar-nav > li > a {
   padding-top: 15px;
   padding-bottom: 15px;
 }
@@ -81,7 +82,7 @@ html, body {
 }
 
 .icon-swap {
-  color: #05668D;
+  color: #05668d;
   font-size: 14px;
 }
 
@@ -102,11 +103,11 @@ html, body {
 }
 
 .section-command {
-  border-bottom: solid 1px #05668D;
+  border-bottom: solid 1px #05668d;
 }
 
 .sidebar-item-config {
-  border-bottom: solid 1px #05668D;
+  border-bottom: solid 1px #05668d;
   padding-bottom: 10px;
 }
 
@@ -116,9 +117,15 @@ html, body {
   font-size: 14px;
 }
 
-.margin-top-sm { margin-top: 5px; }
-.margin-top-md { margin-top: 15px; }
-.margin-top-lg { margin-top: 25px; }
+.margin-top-sm {
+  margin-top: 5px;
+}
+.margin-top-md {
+  margin-top: 15px;
+}
+.margin-top-lg {
+  margin-top: 25px;
+}
 
 .section-divider {
   margin-top: 25px;
@@ -128,16 +135,16 @@ html, body {
 /* button */
 
 .btn-generate {
-  background-color: #05668D;
+  background-color: #05668d;
   border-color: #026b79;
-  color: #FFF;
+  color: #fff;
 }
 
 .btn-generate:hover,
 .btn-generate:focus {
   background-color: #067aa7;
   border-color: #026b79;
-  color: #FFF;
+  color: #fff;
 }
 
 /* Modal */
@@ -147,16 +154,17 @@ html, body {
 }
 
 .modal-header {
-  background: #05668D;
-  color: #FFF;
+  background: #05668d;
+  color: #fff;
   border-radius: 5px 5px 0 0;
 }
 
 .modal-header .close {
-  color: #FFF;
+  color: #fff;
 }
 
-h4, .h4 {
+h4,
+.h4 {
   font-weight: bold;
   font-size: 16px;
 }
@@ -166,53 +174,52 @@ pre {
   white-space: initial;
 }
 
-
 /* Navbar */
 
 .navbar-foonts {
-  background-color: #05668D;
+  background-color: #05668d;
   border-radius: 0;
   border: 0;
   margin-bottom: 0;
 }
 
-.navbar-foonts  .navbar-brand {
+.navbar-foonts .navbar-brand {
   color: #f5f5f5;
   font-size: 25px;
-  font-family: 'Sonsie One', cursive;
+  font-family: "Sonsie One", cursive;
 }
 
-.navbar-foonts  .navbar-brand:hover,
-.navbar-foonts  .navbar-brand:focus {
-  color: #FFF;
+.navbar-foonts .navbar-brand:hover,
+.navbar-foonts .navbar-brand:focus {
+  color: #fff;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav > li > a {
   color: #f5f5f5;
   font-size: 16px;
 }
 
-.navbar-default .navbar-nav>li>a:focus,
-.navbar-default .navbar-nav>li>a:hover {
-  color: #FFF;
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+  color: #fff;
 }
 
-.navbar-default .navbar-nav>li>a.active {
-  border-bottom: 5px solid #FFF;
+.navbar-default .navbar-nav > li > a.active {
+  border-bottom: 5px solid #fff;
   padding-bottom: 10px;
 }
 
 .section-title {
-  color: #05668D;
+  color: #05668d;
 }
 
 .banner {
-  background: #FFF;
-  color: #757575  ;
+  background: #fff;
+  color: #757575;
   margin-bottom: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
 }
 
 /* Editable */
@@ -234,8 +241,8 @@ pre {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 36px;
-  display:inline-block;
-  min-height:10px;
+  display: inline-block;
+  min-height: 10px;
 }
 
 .editable-content {
@@ -246,7 +253,7 @@ pre {
 
 footer {
   font-size: 12px;
-  background: #F5F5F5;
+  background: #f5f5f5;
   color: #616161;
   font-family: sans-serif;
   padding: 8px;
@@ -267,7 +274,6 @@ footer a:hover {
   text-decoration: none;
   color: #222;
 }
-
 
 /* Explore */
 
@@ -293,7 +299,7 @@ footer a:hover {
 }
 
 .explore-nav-menu li a.active {
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
 }
 
 .font-pairing-item-wrapper {
@@ -303,8 +309,8 @@ footer a:hover {
 
 .font-pairing-item {
   padding: 10px;
-  background: #FFF;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
 }
 
 .font-pairing-item-body {
@@ -352,9 +358,9 @@ footer a:hover {
 .font-item {
   margin-top: 15px;
   margin-bottom: 15px;
-  background: #FFF;
+  background: #fff;
   padding: 15px 10px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
 }
 
 .font-item h4 {
@@ -373,13 +379,13 @@ footer a:hover {
 /* BTN custom */
 .btn-like {
   background: #ed2553;
-  color: #FFF;
+  color: #fff;
   outline: none;
 }
 
 .btn-like:hover,
 .btn-like:focus {
-  background: #FFF;
+  background: #fff;
   color: #ed2553;
   outline: none;
   border-color: #ed2553;
@@ -388,29 +394,13 @@ footer a:hover {
 .btn-like.liked:hover,
 .btn-like.liked:focus {
   background: #ed2553;
-  color: #FFF;
+  color: #fff;
   outline: none;
 }
 
 .btn-custom {
   border-color: #05668d;
   border-width: 2px;
-}
-
-/* Custom checkbox */
-
-.custom-checkbox {
-  display: block;
-  cursor: pointer;
-}
-
-.custom-checkbox-icon {
-  color: #05668d;
-  vertical-align: middle;
-}
-
-.custom-checkbox-label {
-  margin-left: 5px;
 }
 
 .li-fixed-width {
@@ -427,7 +417,7 @@ footer a:hover {
   background: #fafafa;
   color: #4d4d4d;
   border: 2px solid #05668d;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
   position: absolute;
   width: 150px;
   z-index: 10;
@@ -456,7 +446,7 @@ footer a:hover {
 .sort-filter-options li {
   padding: 5px;
   cursor: pointer;
-  border-bottom: 1px solid #9E9E9E;
+  border-bottom: 1px solid #9e9e9e;
 }
 
 .sort-filter-options li:last-child {

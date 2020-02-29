@@ -9,7 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import IconButton from "@material-ui/core/IconButton";
-import "./font-pairing-snippet.css";
 import { FontPairing } from "../../../../types/font-pairing";
 
 type Props = {
@@ -39,7 +38,7 @@ function FontPairingItem(props: Props) {
 
   return (
     <>
-      <Card className="font-pairing-snippet">
+      <Card>
         <CardContent>
           <h2 style={{ fontFamily: titleFont.family }}>{titleFont.family}</h2>
           <p style={{ fontFamily: fontContent.family }}>{fontContent.family}</p>

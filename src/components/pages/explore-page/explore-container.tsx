@@ -6,6 +6,8 @@ import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
+import { Grid, Container, Button } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 type Props = {
   fontList: Font[];
@@ -36,57 +38,49 @@ class ExploreContainer extends React.Component<Props, State> {
 
     const pairings = visibleFontPairings.map(pairing => {
       return (
-        <FontPairingItem
-          key={pairing.id}
-          fontList={fontList}
-          pairing={pairing}
-        />
+        <Grid item xs={12} sm={6} md={3} key={pairing.id}>
+          <FontPairingItem fontList={fontList} pairing={pairing} />
+        </Grid>
       );
     });
 
     const btnSeeMore =
       numMaxVisible > fontPairings.length ? null : (
-        <div className="row see-more-wrapper">
-          <div className="col-xs-12 text-center">
-            <button
-              className="btn btn-default"
+        <Grid container spacing={10}>
+          <Grid item xs={12} style={{ textAlign: "center" }}>
+            <Button
+              color="primary"
+              endIcon={<ExpandMoreIcon />}
               onClick={this.handleClickSeeMore}
             >
-              See more <i className="fa fa-chevron-down"></i>
-            </button>
-          </div>
-        </div>
+              See more
+            </Button>
+          </Grid>
+        </Grid>
       );
 
     const pairingsNode =
       fontPairings.length > 0 ? (
-        <div className="container font-pairing-wrapper">
-          <div className="row">{pairings}</div>
+        <>
+          <Grid container spacing={4}>
+            {pairings}
+          </Grid>
           {btnSeeMore}
-        </div>
+        </>
       ) : (
         <Spinner />
       );
 
     return (
-      <div>
-        <div className="container-fluid explore-nav">
-          <div className="row">
-            <div className="col-xs-12 text-center">
-              <ul className="explore-nav-menu list-inline">
-                <li>
-                  <Link to="/explore/recent">Recent</Link>
-                </li>
-                <li>
-                  <Link to="/explore/popular">Popular</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
+      <Container>
+        <Grid container spacing={4}>
+          <Grid item xs={12} style={{ textAlign: "center" }}>
+            <Link to="/explore/recent">Recent</Link>&nbsp;|&nbsp;
+            <Link to="/explore/popular">Popular</Link>
+          </Grid>
+        </Grid>
         {pairingsNode}
-      </div>
+      </Container>
     );
   }
 }
