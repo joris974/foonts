@@ -8,10 +8,12 @@ import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
 import { Grid, Container, Button } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import SortListFilter from "./sort-list-filter";
 
 type Props = {
   fontList: Font[];
   fontPairings: FontPairing[];
+  sortedBy: "recent" | "popular";
 };
 
 type State = {
@@ -31,7 +33,7 @@ class ExploreContainer extends React.Component<Props, State> {
   }
 
   render() {
-    const { fontList, fontPairings } = this.props;
+    const { fontList, fontPairings, sortedBy } = this.props;
     const { numMaxVisible } = this.state;
 
     const visibleFontPairings = take(fontPairings, numMaxVisible);
@@ -75,8 +77,7 @@ class ExploreContainer extends React.Component<Props, State> {
       <Container>
         <Grid container spacing={4}>
           <Grid item xs={12} style={{ textAlign: "center" }}>
-            <Link to="/explore/recent">Recent</Link>&nbsp;|&nbsp;
-            <Link to="/explore/popular">Popular</Link>
+            <SortListFilter sortedBy={sortedBy} />
           </Grid>
         </Grid>
         {pairingsNode}

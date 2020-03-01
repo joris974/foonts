@@ -14,6 +14,7 @@ function ExplorePopularHandler(props: Props) {
     <ExploreHandler
       fontList={fontList}
       loadFontPairings={loadPopularFontPairings}
+      sortedBy="popular"
     />
   );
 }

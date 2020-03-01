@@ -1,12 +1,13 @@
 import React from "react";
 import ExplorePage from "./explore-container";
-import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
+import Spinner from "../../common/spinner";
 
 type Props = {
   fontList: Font[];
   loadFontPairings: () => any;
+  sortedBy: "recent" | "popular";
 };
 
 type State = {
@@ -28,11 +29,15 @@ class ExploreHandler extends React.Component<Props, State> {
   }
 
   render() {
+    const { fontList, sortedBy } = this.props;
     const { fontPairings } = this.state;
-    const { fontList } = this.props;
 
     return fontPairings.length > 0 ? (
-      <ExplorePage fontList={fontList} fontPairings={fontPairings} />
+      <ExplorePage
+        fontList={fontList}
+        fontPairings={fontPairings}
+        sortedBy={sortedBy}
+      />
     ) : (
       <Spinner />
     );

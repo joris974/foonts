@@ -14,6 +14,7 @@ function ExploreRecentHandler(props: Props) {
     <ExploreHandler
       fontList={fontList}
       loadFontPairings={loadRecentFontPairings}
+      sortedBy="recent"
     />
   );
 }
