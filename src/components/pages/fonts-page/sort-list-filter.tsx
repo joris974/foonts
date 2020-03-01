@@ -1,6 +1,6 @@
 import React from "react";
 import capitalize from "lodash/capitalize";
-import Dropdown from "react-bootstrap/Dropdown";
+import { Button, Menu, MenuItem } from "@material-ui/core";
 
 type Props = {
   sortedBy: string;
@@ -8,23 +8,44 @@ type Props = {
 };
 
 function SortListFilter(props: Props) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const { sortedBy, handleChangeSortBy } = props;
 
-  return (
-    <Dropdown>
-      <Dropdown.Toggle id="dropdown-sort-by" variant="link">
-        Sort by&nbsp;{capitalize(sortedBy)}
-      </Dropdown.Toggle>
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={() => handleChangeSortBy("popular")}>
-          Popular
-        </Dropdown.Item>
-        <Dropdown.Item onClick={() => handleChangeSortBy("alphabetical")}>
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handlePick = (sortedBy: string) => {
+    handleChangeSortBy(sortedBy);
+    handleClose();
+  };
+
+  return (
+    <div>
+      <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        Sort by&nbsp;{capitalize(sortedBy)}
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={() => handlePick("popular")}>Popular</MenuItem>
+        <MenuItem onClick={() => handlePick("alphabetical")}>
           Alphabetical
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+        </MenuItem>
+      </Menu>
+    </div>
   );
 }
 

@@ -6,9 +6,9 @@ import Checkbox from "../../common/checkbox";
 import { labelForCategory } from "../../../helpers/helper";
 import { Category } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
 import FontsListItem from "./fonts-list-item";
+import { Grid, Button, Container } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 type Props = {
   fontList: Font[];
@@ -42,18 +42,24 @@ function FontsPage(props: Props) {
   const limitedResults = take(sortedList, numMaxVisible);
 
   const fontsNode = limitedResults.map(font => (
-    <FontsListItem key={font.id} font={font} />
+    <Grid item xs={12} key={font.id}>
+      <FontsListItem font={font} />
+    </Grid>
   ));
 
   const btnSeeMore =
     numMaxVisible > filteredFontList.length ? null : (
-      <div className="row see-more-wrapper">
-        <div className="col-xs-12 text-center">
-          <Button variant="link" onClick={handleClickSeeMore}>
-            See more <i className="fa fa-chevron-down"></i>
+      <Grid container spacing={10}>
+        <Grid item xs={12} style={{ textAlign: "center" }}>
+          <Button
+            color="primary"
+            endIcon={<ExpandMoreIcon />}
+            onClick={handleClickSeeMore}
+          >
+            See more
           </Button>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     );
 
   const toCheckboxLi = (category: Category) => {
@@ -70,14 +76,16 @@ function FontsPage(props: Props) {
 
   return (
     <Container>
-      <div className="row">
-        <div className="col-xs-12 col-lg-4 margin-top-lg">
+      <Grid container spacing={4}>
+        <Grid item xs={12} style={{ textAlign: "center" }}>
           <SortListFilter
             sortedBy={sortedBy}
             handleChangeSortBy={handleChangeSortBy}
           />
-        </div>
-        <div className="col-xs-12 col-lg-8 margin-top-lg">
+        </Grid>
+      </Grid>
+      <Grid container spacing={4}>
+        <Grid item xs={12} style={{ textAlign: "center" }}>
           <ul className="list-inline">
             {toCheckboxLi(Category.Serif)}
             {toCheckboxLi(Category.SansSerif)}
@@ -85,10 +93,11 @@ function FontsPage(props: Props) {
             {toCheckboxLi(Category.Handwriting)}
             {toCheckboxLi(Category.Monospace)}
           </ul>
-        </div>
-      </div>
-
-      {fontsNode}
+        </Grid>
+      </Grid>
+      <Grid container spacing={4}>
+        {fontsNode}
+      </Grid>
       {btnSeeMore}
     </Container>
   );
