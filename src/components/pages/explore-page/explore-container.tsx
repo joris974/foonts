@@ -1,7 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import take from "lodash/take";
-
 import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
