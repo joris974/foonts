@@ -7,10 +7,27 @@ import {
 } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
 import { FontProperties } from "../../../../types/font-style";
+import {
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  Switch,
+  IconButton,
+  Grid
+} from "@material-ui/core";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MCheckbox from "@material-ui/core/Checkbox";
+
+import LockIcon from "@material-ui/icons/Lock";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 
 type Props = {
   font: Font;
-  onChangeLock: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onChangeLock: () => void;
   isLocked: boolean;
   fontStyleProps: FontProperties;
   onChangeFontProperty: (update: UpdateFontProperties) => void;
@@ -69,93 +86,100 @@ class SidebarItem extends React.Component<Props, State> {
       );
     });
 
-    const configNode = !showConfig ? null : (
-      <div className="row sidebar-item-config section-actions">
-        <div className="col-xs-12">
-          <div className="row">
-            <div className="col-xs-6">
-              <h4>Style</h4>
-            </div>
-            <div className="col-xs-2 col-xs-offset-2">
-              <h4>Size</h4>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-3">
-              <Checkbox
-                isChecked={isItalic}
-                handleChangeCheckbox={() =>
-                  onChangeFontProperty({ type: "fontStyle", value: "italic" })
-                }
-                label={<i className="fa fa-italic"></i>}
-              />
-            </div>
-            <div className="col-xs-3">
-              <Checkbox
-                isChecked={isBolded}
-                handleChangeCheckbox={() =>
-                  onChangeFontProperty({ type: "fontWeight", value: "bold" })
-                }
-                label={<i className="fa fa-bold"></i>}
-              />
-            </div>
-            <div className="col-xs-2 col-xs-offset-2">
-              <i
-                onClick={() =>
-                  onChangeFontProperty({
-                    type: "fontSize",
-                    action: "increment"
-                  })
-                }
-                className="fa fa-plus-circle icon-action icon-font-size"
-              ></i>
-            </div>
-            <div className="col-xs-2">
-              <i
-                onClick={() =>
-                  onChangeFontProperty({
-                    type: "fontSize",
-                    action: "decrement"
-                  })
-                }
-                className="fa fa-minus-circle icon-action icon-font-size"
-              ></i>
-            </div>
-          </div>
-          <div className="row margin-top-md">
-            <div className="col-xs-12">
-              <h4>Categories</h4>
-            </div>
-          </div>
-          <div className="row">{allCategoriesNodes}</div>
-        </div>
-      </div>
-    );
-
+    const lockIcon = isLocked ? <LockIcon /> : <LockOpenIcon />;
     return (
-      <div className="row">
-        <div className="col-xs-11 pull-right">
-          <div className="row section-command">
-            <div className="col-xs-9">
-              <h3>{font.family}</h3>
-            </div>
-            <div className="col-xs-3 text-right">
-              <i
-                onClick={this.toggleConfigMenu}
-                className={`h3 icon-action fa fa-gear icon-gear ${
-                  showConfig ? "active" : ""
-                }`}
-              ></i>
-              <i
-                className={`h3 icon-action fa ${iconLockClassName}`}
-                onClick={onChangeLock}
-              ></i>
-            </div>
-          </div>
-
-          {configNode}
-        </div>
-      </div>
+      <>
+        <ExpansionPanel>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-label="Expand"
+            aria-controls="additional-actions1-content"
+            id="additional-actions1-header"
+          >
+            <FormControlLabel
+              aria-label="Acknowledge"
+              onClick={event => {
+                event.stopPropagation();
+                onChangeLock();
+              }}
+              onFocus={event => {
+                event.stopPropagation();
+                onChangeLock();
+              }}
+              control={lockIcon}
+              label={font.family}
+            />
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Grid container>
+              <Grid item xs={4}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isBolded}
+                      onChange={() =>
+                        onChangeFontProperty({
+                          type: "fontWeight",
+                          value: "bold"
+                        })
+                      }
+                      value="checkedB"
+                      color="primary"
+                    />
+                  }
+                  label="Bold"
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isItalic}
+                      onChange={() =>
+                        onChangeFontProperty({
+                          type: "fontStyle",
+                          value: "italic"
+                        })
+                      }
+                      value="checkedB"
+                      color="primary"
+                    />
+                  }
+                  label="Italic"
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <IconButton
+                  aria-label="increment"
+                  onClick={() =>
+                    onChangeFontProperty({
+                      type: "fontSize",
+                      action: "increment"
+                    })
+                  }
+                >
+                  <AddIcon />
+                </IconButton>
+                <IconButton
+                  aria-label="delete"
+                  onClick={() =>
+                    onChangeFontProperty({
+                      type: "fontSize",
+                      action: "decrement"
+                    })
+                  }
+                >
+                  <RemoveIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={12}>
+                <h4>Categories</h4>
+                <div className="row">{allCategoriesNodes}</div>
+              </Grid>
+            </Grid>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </>
     );
   }
 }

@@ -21,12 +21,8 @@ type Props = {
   handleClickGenerate: (
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => void;
-  handleChangeLockTitle: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => void;
-  handleChangeLockContent: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => void;
+  handleChangeLockTitle: () => void;
+  handleChangeLockContent: () => void;
 };
 
 function GeneratePage(props: Props) {

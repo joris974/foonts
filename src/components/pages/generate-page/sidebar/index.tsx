@@ -4,7 +4,17 @@ import { sendFontPairingLikeToApi } from "../../../../helpers/api";
 import { UpdateFontProperties } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
 import { FontProperties } from "../../../../types/font-style";
-import { Button, Grid } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Hidden,
+  Drawer,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LoopIcon from "@material-ui/icons/Loop";
@@ -24,14 +34,12 @@ type Props = {
   onClickGenerate: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   titleFontPropertiesProps: FontProperties;
   onChangeTitleFontProperty: (update: UpdateFontProperties) => void;
-  onChangeLockTitle: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onChangeLockTitle: () => void;
   isTitleLocked: boolean;
 
   contentFontPropertiesProps: FontProperties;
   onChangeContentFontProperty: (update: UpdateFontProperties) => void;
-  onChangeLockContent: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => void;
+  onChangeLockContent: () => void;
   isContentLocked: boolean;
 };
 
@@ -114,6 +122,14 @@ class Sidebar extends React.Component<Props, State> {
                 fontStyleProps={titleFontPropertiesProps}
                 onChangeFontProperty={onChangeTitleFontProperty}
               />
+
+              <SidebarItem
+                font={contentFont}
+                isLocked={isContentLocked}
+                onChangeLock={onChangeLockContent}
+                fontStyleProps={contentFontPropertiesProps}
+                onChangeFontProperty={onChangeContentFontProperty}
+              />
               <div className="row section-divider">
                 <div className="col-xs-1 text-center">
                   <i
@@ -122,13 +138,6 @@ class Sidebar extends React.Component<Props, State> {
                   ></i>
                 </div>
               </div>
-              <SidebarItem
-                font={contentFont}
-                isLocked={isContentLocked}
-                onChangeLock={onChangeLockContent}
-                fontStyleProps={contentFontPropertiesProps}
-                onChangeFontProperty={onChangeContentFontProperty}
-              />
             </div>
           </div>
           <Grid container spacing={2}>
@@ -181,3 +190,51 @@ class Sidebar extends React.Component<Props, State> {
 }
 
 export default Sidebar;
+
+function x() {
+  return (
+    <nav aria-label="mailbox folders">
+      <Hidden smUp implementation="css">
+        <Drawer
+          variant="temporary"
+          anchor="right"
+          open={true}
+          onClose={() => {}}
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+        >
+          <MyDrawer />
+        </Drawer>
+      </Hidden>
+      <Hidden xsDown implementation="css">
+        <Drawer variant="permanent" open>
+          <MyDrawer />
+        </Drawer>
+      </Hidden>
+    </nav>
+  );
+}
+
+function MyDrawer() {
+  return (
+    <div>
+      <Divider />
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+}
