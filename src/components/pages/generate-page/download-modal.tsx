@@ -1,6 +1,6 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
 import { Font } from "../../../types/font";
+import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 
 type Props = {
   titleFont: Font;
@@ -27,12 +27,9 @@ function DownloadModal(props: Props) {
     `;
 
   return (
-    <Modal show={show} onHide={onHide}>
-      <Modal.Header closeButton>
-        <Modal.Title>Fast ways to use these fonts</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
+    <Dialog onClose={onHide} aria-labelledby="simple-dialog-title" open={show}>
+      <DialogTitle>Fast ways to use these fonts</DialogTitle>
+      <DialogContent>
         <h4 className="section-title">You have selected these fonts</h4>
         <br />
         <h4 className="section-title">Title</h4>
@@ -51,8 +48,8 @@ function DownloadModal(props: Props) {
         <h4 className="section-title margin-top-lg">Specify in CSS</h4>
         <p>Use the following CSS rules to specify these families:</p>
         <pre dangerouslySetInnerHTML={{ __html: cssCode }} />
-      </Modal.Body>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 }
 

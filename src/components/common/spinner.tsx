@@ -1,9 +1,6 @@
-import React from 'react'
+import React from "react";
+import { CircularProgress } from "@material-ui/core";
 
 export default function Spinner() {
-  return (
-    <div className="spinner">
-      <i className="fa fa-circle-o-notch fa-2x fa-spin"></i>
-    </div>
-  )
+  return <CircularProgress />;
 }
