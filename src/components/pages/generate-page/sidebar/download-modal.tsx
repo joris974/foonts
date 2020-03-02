@@ -1,5 +1,5 @@
 import React from "react";
-import { Font } from "../../../types/font";
+import { Font } from "../../../../types/font";
 import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
 
 type Props = {
