@@ -18,6 +18,7 @@ import {
 import GetAppIcon from "@material-ui/icons/GetApp";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LoopIcon from "@material-ui/icons/Loop";
+import SwapVertIcon from "@material-ui/icons/SwapVert";
 import SidebarItem from "./sidebar-item";
 
 function hasLiked(titleFont: Font, contentFont: Font) {
@@ -111,80 +112,76 @@ class Sidebar extends React.Component<Props, State> {
     const { showDownloadModal, isLiked } = this.state;
 
     return (
-      <div className="row">
-        <div className="col-xs-12">
-          <div className="row hidden-xs">
-            <div className="col-xs-12">
-              <SidebarItem
-                font={titleFont}
-                isLocked={isTitleLocked}
-                onChangeLock={onChangeLockTitle}
-                fontStyleProps={titleFontPropertiesProps}
-                onChangeFontProperty={onChangeTitleFontProperty}
-              />
-
-              <SidebarItem
-                font={contentFont}
-                isLocked={isContentLocked}
-                onChangeLock={onChangeLockContent}
-                fontStyleProps={contentFontPropertiesProps}
-                onChangeFontProperty={onChangeContentFontProperty}
-              />
-              <div className="row section-divider">
-                <div className="col-xs-1 text-center">
-                  <i
-                    className="fa fa-exchange fa-rotate-90 icon-action icon-swap"
-                    onClick={onClickSwap}
-                  ></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Button
-                variant="outlined"
-                onClick={onClickGenerate}
-                startIcon={<LoopIcon />}
-              >
-                Generate
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant={isLiked ? "contained" : "outlined"}
-                color="secondary"
-                onClick={this.handleClickLike}
-                startIcon={<FavoriteIcon />}
-              >
-                {isLiked ? "You liked this" : "Like"}
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant="outlined"
-                onClick={this.handleToggleDownloadModal}
-                startIcon={<GetAppIcon />}
-              >
-                Download
-              </Button>
-            </Grid>
-
-            <Grid item xs={12}>
-              <p className="text-muted">
-                Tip: Press space bar to generate a new combination.
-              </p>
-            </Grid>
-          </Grid>
-
-          <DownloadModal
-            show={showDownloadModal}
-            onHide={this.handleToggleDownloadModal}
-            titleFont={titleFont}
-            contentFont={contentFont}
+      <Grid container spacing={6}>
+        <Grid item xs={12}>
+          <SidebarItem
+            font={titleFont}
+            isLocked={isTitleLocked}
+            onChangeLock={onChangeLockTitle}
+            fontStyleProps={titleFontPropertiesProps}
+            onChangeFontProperty={onChangeTitleFontProperty}
           />
-        </div>
-      </div>
+        </Grid>
+        <Grid item xs={12}>
+          <SidebarItem
+            font={contentFont}
+            isLocked={isContentLocked}
+            onChangeLock={onChangeLockContent}
+            fontStyleProps={contentFontPropertiesProps}
+            onChangeFontProperty={onChangeContentFontProperty}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="outlined"
+            onClick={onClickGenerate}
+            startIcon={<LoopIcon />}
+          >
+            Generate
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="outlined"
+            onClick={onClickSwap}
+            startIcon={<SwapVertIcon />}
+          >
+            Swap
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant={isLiked ? "contained" : "outlined"}
+            color="secondary"
+            onClick={this.handleClickLike}
+            startIcon={<FavoriteIcon />}
+          >
+            {isLiked ? "You liked this" : "Like"}
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="outlined"
+            onClick={this.handleToggleDownloadModal}
+            startIcon={<GetAppIcon />}
+          >
+            Download
+          </Button>
+        </Grid>
+
+        <Grid item xs={12}>
+          <p className="text-muted">
+            Tip: Press space bar to generate a new combination.
+          </p>
+        </Grid>
+
+        <DownloadModal
+          show={showDownloadModal}
+          onHide={this.handleToggleDownloadModal}
+          titleFont={titleFont}
+          contentFont={contentFont}
+        />
+      </Grid>
     );
   }
 }

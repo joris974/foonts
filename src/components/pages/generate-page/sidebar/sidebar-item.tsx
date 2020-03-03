@@ -33,22 +33,7 @@ type Props = {
   onChangeFontProperty: (update: UpdateFontProperties) => void;
 };
 
-type State = {
-  showConfig: boolean;
-};
-
-class SidebarItem extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { showConfig: false };
-
-    this.toggleConfigMenu = this.toggleConfigMenu.bind(this);
-  }
-
-  toggleConfigMenu() {
-    this.setState({ showConfig: !this.state.showConfig });
-  }
-
+class SidebarItem extends React.Component<Props> {
   render() {
     const {
       font,
@@ -57,7 +42,6 @@ class SidebarItem extends React.Component<Props, State> {
       fontStyleProps,
       onChangeFontProperty
     } = this.props;
-    const { showConfig } = this.state;
 
     const { fontStyle, fontWeight, fontCategories } = fontStyleProps;
 
@@ -65,16 +49,12 @@ class SidebarItem extends React.Component<Props, State> {
       return null;
     }
 
-    const iconLockClassName = isLocked
-      ? "icon-lock-locked fa-lock"
-      : "icon-lock-unlocked fa-unlock-alt";
-
     const isItalic = fontStyle === "italic";
     const isBolded = fontWeight === "bold";
 
     const allCategoriesNodes = allCategories().map(category => {
       return (
-        <div key={category} className="col-xs-6">
+        <div key={category}>
           <Checkbox
             isChecked={fontCategories.includes(category)}
             label={labelForCategory(category)}
@@ -174,7 +154,7 @@ class SidebarItem extends React.Component<Props, State> {
               </Grid>
               <Grid item xs={12}>
                 <h4>Categories</h4>
-                <div className="row">{allCategoriesNodes}</div>
+                {allCategoriesNodes}
               </Grid>
             </Grid>
           </ExpansionPanelDetails>

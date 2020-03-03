@@ -7,6 +7,7 @@ import EditableTitle from "./editable-title";
 import EditableContent from "./editable-content";
 import { FontProperties } from "../../../types/font-style";
 import { UpdateFontProperties } from "../../../helpers/helper";
+import { Container, Grid } from "@material-ui/core";
 
 type Props = {
   titleFont: Font;
@@ -50,12 +51,12 @@ function GeneratePage(props: Props) {
   ));
 
   return (
-    <div>
+    <>
       {fontFacesNode}
 
-      <div className="container">
-        <div className="row margin-top-lg">
-          <div className="col-xs-12 col-sm-offset-0 col-sm-4">
+      <Container>
+        <Grid container>
+          <Grid item xs={12} md={6}>
             <Sidebar
               titleFont={titleFont}
               titleFontPropertiesProps={titleFontPropertiesProps}
@@ -70,8 +71,8 @@ function GeneratePage(props: Props) {
               onClickSwap={handleSwap}
               onClickGenerate={handleClickGenerate}
             />
-          </div>
-          <div className="col-xs-12 col-sm-8">
+          </Grid>
+          <Grid item xs={6}>
             <EditableTitle
               font={titleFont}
               fontStyleProps={titleFontPropertiesProps}
@@ -80,10 +81,10 @@ function GeneratePage(props: Props) {
               font={contentFont}
               fontStyleProps={contentFontPropertiesProps}
             />
-          </div>
-        </div>
-      </div>
-    </div>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 }
 
