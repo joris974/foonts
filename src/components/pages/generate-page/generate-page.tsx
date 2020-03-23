@@ -51,40 +51,37 @@ function GeneratePage(props: Props) {
   ));
 
   return (
-    <>
-      {fontFacesNode}
-
-      <Container>
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <Sidebar
-              titleFont={titleFont}
-              titleFontPropertiesProps={titleFontPropertiesProps}
-              onChangeTitleFontProperty={updateTitleFontProperties}
-              contentFont={contentFont}
-              contentFontPropertiesProps={contentFontPropertiesProps}
-              onChangeContentFontProperty={updateContentFontProperties}
-              isTitleLocked={isTitleLocked}
-              isContentLocked={isContentLocked}
-              onChangeLockTitle={handleChangeLockTitle}
-              onChangeLockContent={handleChangeLockContent}
-              onClickSwap={handleSwap}
-              onClickGenerate={handleClickGenerate}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <EditableTitle
-              font={titleFont}
-              fontStyleProps={titleFontPropertiesProps}
-            />
-            <EditableContent
-              font={contentFont}
-              fontStyleProps={contentFontPropertiesProps}
-            />
-          </Grid>
+    <Container>
+      <Grid container spacing={6}>
+        <Grid item xs={12} md={6}>
+          <Sidebar
+            titleFont={titleFont}
+            titleFontPropertiesProps={titleFontPropertiesProps}
+            onChangeTitleFontProperty={updateTitleFontProperties}
+            contentFont={contentFont}
+            contentFontPropertiesProps={contentFontPropertiesProps}
+            onChangeContentFontProperty={updateContentFontProperties}
+            isTitleLocked={isTitleLocked}
+            isContentLocked={isContentLocked}
+            onChangeLockTitle={handleChangeLockTitle}
+            onChangeLockContent={handleChangeLockContent}
+            onClickSwap={handleSwap}
+            onClickGenerate={handleClickGenerate}
+          />
         </Grid>
-      </Container>
-    </>
+        <Grid item xs={6}>
+          <EditableTitle
+            font={titleFont}
+            fontStyleProps={titleFontPropertiesProps}
+          />
+          <EditableContent
+            font={contentFont}
+            fontStyleProps={contentFontPropertiesProps}
+          />
+        </Grid>
+      </Grid>
+      {fontFacesNode}
+    </Container>
   );
 }
 

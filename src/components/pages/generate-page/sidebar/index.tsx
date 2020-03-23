@@ -12,7 +12,6 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText
 } from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
