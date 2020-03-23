@@ -4,7 +4,7 @@ import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
-import { Grid, Container, Button } from "@material-ui/core";
+import { Grid, Container, Button, Paper } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SortListFilter from "./sort-list-filter";
 
@@ -73,11 +73,13 @@ class ExploreContainer extends React.Component<Props, State> {
 
     return (
       <Container>
-        <Grid container spacing={4}>
-          <Grid item xs={12} style={{ textAlign: "center" }}>
-            <SortListFilter sortedBy={sortedBy} />
+        <Paper style={{ margin: "16px 0", padding: "16px" }}>
+          <Grid container spacing={4}>
+            <Grid item xs={12} style={{ textAlign: "center" }}>
+              <SortListFilter sortedBy={sortedBy} />
+            </Grid>
           </Grid>
-        </Grid>
+        </Paper>
         {pairingsNode}
       </Container>
     );

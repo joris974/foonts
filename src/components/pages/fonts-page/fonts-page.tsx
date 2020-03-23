@@ -7,7 +7,7 @@ import { labelForCategory } from "../../../helpers/helper";
 import { Category } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
 import FontsListItem from "./fonts-list-item";
-import { Grid, Button, Container } from "@material-ui/core";
+import { Grid, Button, Container, Paper } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 type Props = {
@@ -49,56 +49,54 @@ function FontsPage(props: Props) {
 
   const btnSeeMore =
     numMaxVisible > filteredFontList.length ? null : (
-      <Grid container spacing={10}>
-        <Grid item xs={12} style={{ textAlign: "center" }}>
-          <Button
-            color="primary"
-            endIcon={<ExpandMoreIcon />}
-            onClick={handleClickSeeMore}
-          >
-            See more
-          </Button>
-        </Grid>
+      <Grid item xs={12} style={{ textAlign: "center" }}>
+        <Button
+          color="primary"
+          endIcon={<ExpandMoreIcon />}
+          onClick={handleClickSeeMore}
+        >
+          See more
+        </Button>
       </Grid>
     );
 
   const toCheckboxLi = (category: Category) => {
     return (
-      <li className="li-fixed-width">
+      <Grid item xs={6} md={4} lg={2}>
         <Checkbox
           isChecked={isChecked(fontCategories, category)}
           handleChangeCheckbox={() => handleChangeCheckbox(category)}
           label={labelForCategory(category)}
         />
-      </li>
+      </Grid>
     );
   };
 
   return (
     <Container>
-      <Grid container spacing={4}>
-        <Grid item xs={12} style={{ textAlign: "center" }}>
-          <SortListFilter
-            sortedBy={sortedBy}
-            handleChangeSortBy={handleChangeSortBy}
-          />
+      <Paper style={{ margin: "16px 0", padding: "16px" }}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} style={{ textAlign: "center" }}>
+            <SortListFilter
+              sortedBy={sortedBy}
+              handleChangeSortBy={handleChangeSortBy}
+            />
+          </Grid>
+          <Grid item xs={12} style={{ textAlign: "left" }}>
+            <Grid container spacing={1}>
+              {toCheckboxLi(Category.Serif)}
+              {toCheckboxLi(Category.SansSerif)}
+              {toCheckboxLi(Category.Display)}
+              {toCheckboxLi(Category.Handwriting)}
+              {toCheckboxLi(Category.Monospace)}
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container spacing={4}>
-        <Grid item xs={12} style={{ textAlign: "center" }}>
-          <ul className="list-inline">
-            {toCheckboxLi(Category.Serif)}
-            {toCheckboxLi(Category.SansSerif)}
-            {toCheckboxLi(Category.Display)}
-            {toCheckboxLi(Category.Handwriting)}
-            {toCheckboxLi(Category.Monospace)}
-          </ul>
-        </Grid>
-      </Grid>
+      </Paper>
       <Grid container spacing={4}>
         {fontsNode}
+        {btnSeeMore}
       </Grid>
-      {btnSeeMore}
     </Container>
   );
 }
