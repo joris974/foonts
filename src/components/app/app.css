@@ -29,48 +29,6 @@ body {
   padding-bottom: 33px;
 }
 
-@media (min-width: 1200px) {
-  .container {
-    width: 970px;
-  }
-}
-
-.icon-action {
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.icon-action.h3:first-child {
-  margin-right: 5px;
-}
-
-.icon-gear,
-.icon-lock-unlocked {
-  color: #9e9e9e;
-}
-
-.icon-gear.active,
-.icon-gear:hover,
-.icon-lock-unlocked:hover,
-.icon-lock-locked,
-.icon-lock-locked:hover {
-  color: #505050;
-}
-
-.icon-swap {
-  color: #05668d;
-  font-size: 14px;
-}
-
-.icon-swap:hover {
-  color: #505050;
-}
-
-.icon-font-size {
-  color: #05668d;
-  margin-bottom: 0;
-}
-
 /* Section commands */
 
 .section-actions {
@@ -93,12 +51,6 @@ body {
   font-size: 14px;
 }
 
-.margin-top-sm {
-  margin-top: 5px;
-}
-.margin-top-md {
-  margin-top: 15px;
-}
 .margin-top-lg {
   margin-top: 25px;
 }
@@ -106,21 +58,6 @@ body {
 .section-divider {
   margin-top: 25px;
   margin-bottom: 15px;
-}
-
-/* button */
-
-.btn-generate {
-  background-color: #05668d;
-  border-color: #026b79;
-  color: #fff;
-}
-
-.btn-generate:hover,
-.btn-generate:focus {
-  background-color: #067aa7;
-  border-color: #026b79;
-  color: #fff;
 }
 
 /* Modal */
@@ -173,16 +110,10 @@ pre {
 
 footer {
   font-size: 12px;
-  background: #f5f5f5;
   color: #616161;
   font-family: sans-serif;
   padding: 8px;
-  width: 100%;
   height: 33px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 footer a {
@@ -193,33 +124,6 @@ footer a {
 footer a:hover {
   text-decoration: none;
   color: #222;
-}
-
-/* BTN custom */
-.btn-like {
-  background: #ed2553;
-  color: #fff;
-  outline: none;
-}
-
-.btn-like:hover,
-.btn-like:focus {
-  background: #fff;
-  color: #ed2553;
-  outline: none;
-  border-color: #ed2553;
-}
-
-.btn-like.liked:hover,
-.btn-like.liked:focus {
-  background: #ed2553;
-  color: #fff;
-  outline: none;
-}
-
-.btn-custom {
-  border-color: #05668d;
-  border-width: 2px;
 }
 
 .li-fixed-width {
