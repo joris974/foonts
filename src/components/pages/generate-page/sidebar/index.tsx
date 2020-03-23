@@ -4,16 +4,7 @@ import { sendFontPairingLikeToApi } from "../../../../helpers/api";
 import { UpdateFontProperties } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
 import { FontProperties } from "../../../../types/font-style";
-import {
-  Button,
-  Grid,
-  Hidden,
-  Drawer,
-  Divider,
-  List,
-  ListItem,
-  ListItemText
-} from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LoopIcon from "@material-ui/icons/Loop";
@@ -111,8 +102,8 @@ class Sidebar extends React.Component<Props, State> {
     const { showDownloadModal, isLiked } = this.state;
 
     return (
-      <Grid container spacing={6}>
-        <Grid item xs={12}>
+      <Grid container>
+        <Grid item xs={12} style={{ margin: "16px 0 8px 0" }}>
           <SidebarItem
             font={titleFont}
             isLocked={isTitleLocked}
@@ -121,7 +112,7 @@ class Sidebar extends React.Component<Props, State> {
             onChangeFontProperty={onChangeTitleFontProperty}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ margin: "8px 0" }}>
           <SidebarItem
             font={contentFont}
             isLocked={isContentLocked}
@@ -130,7 +121,7 @@ class Sidebar extends React.Component<Props, State> {
             onChangeFontProperty={onChangeContentFontProperty}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ margin: "8px 0" }}>
           <Button
             variant="outlined"
             onClick={onClickGenerate}
@@ -139,7 +130,7 @@ class Sidebar extends React.Component<Props, State> {
             Generate
           </Button>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ margin: "8px 0" }}>
           <Button
             variant="outlined"
             onClick={onClickSwap}
@@ -148,7 +139,7 @@ class Sidebar extends React.Component<Props, State> {
             Swap
           </Button>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ margin: "8px 0" }}>
           <Button
             variant={isLiked ? "contained" : "outlined"}
             color="secondary"
@@ -158,7 +149,7 @@ class Sidebar extends React.Component<Props, State> {
             {isLiked ? "You liked this" : "Like"}
           </Button>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ margin: "8px 0" }}>
           <Button
             variant="outlined"
             onClick={this.handleToggleDownloadModal}
@@ -168,10 +159,10 @@ class Sidebar extends React.Component<Props, State> {
           </Button>
         </Grid>
 
-        <Grid item xs={12}>
-          <p className="text-muted">
+        <Grid item xs={12} style={{ margin: "8px 0" }}>
+          <Typography variant="body2">
             Tip: Press space bar to generate a new combination.
-          </p>
+          </Typography>
         </Grid>
 
         <DownloadModal
@@ -186,51 +177,3 @@ class Sidebar extends React.Component<Props, State> {
 }
 
 export default Sidebar;
-
-function x() {
-  return (
-    <nav aria-label="mailbox folders">
-      <Hidden smUp implementation="css">
-        <Drawer
-          variant="temporary"
-          anchor="right"
-          open={true}
-          onClose={() => {}}
-          ModalProps={{
-            keepMounted: true // Better open performance on mobile.
-          }}
-        >
-          <MyDrawer />
-        </Drawer>
-      </Hidden>
-      <Hidden xsDown implementation="css">
-        <Drawer variant="permanent" open>
-          <MyDrawer />
-        </Drawer>
-      </Hidden>
-    </nav>
-  );
-}
-
-function MyDrawer() {
-  return (
-    <div>
-      <Divider />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-}

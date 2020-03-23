@@ -69,7 +69,7 @@ function GeneratePage(props: Props) {
             onClickGenerate={handleClickGenerate}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <EditableTitle
             font={titleFont}
             fontStyleProps={titleFontPropertiesProps}

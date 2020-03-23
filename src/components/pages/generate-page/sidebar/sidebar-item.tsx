@@ -66,98 +66,96 @@ class SidebarItem extends React.Component<Props> {
 
     const lockIcon = isLocked ? <LockIcon /> : <LockOpenIcon />;
     return (
-      <>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-label="Expand"
-            aria-controls="additional-actions1-content"
-            id="additional-actions1-header"
-          >
-            <FormControlLabel
-              aria-label="Acknowledge"
-              onClick={event => {
-                event.stopPropagation();
-                onChangeLock();
-              }}
-              onFocus={event => {
-                event.stopPropagation();
-                onChangeLock();
-              }}
-              control={lockIcon}
-              label={font.family}
-            />
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Grid container>
-              <Grid item xs={4}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={isBolded}
-                      onChange={() =>
-                        onChangeFontProperty({
-                          type: "fontWeight",
-                          value: "bold"
-                        })
-                      }
-                      value="checkedB"
-                      color="primary"
-                    />
-                  }
-                  label="Bold"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={isItalic}
-                      onChange={() =>
-                        onChangeFontProperty({
-                          type: "fontStyle",
-                          value: "italic"
-                        })
-                      }
-                      value="checkedB"
-                      color="primary"
-                    />
-                  }
-                  label="Italic"
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <IconButton
-                  aria-label="increment"
-                  onClick={() =>
-                    onChangeFontProperty({
-                      type: "fontSize",
-                      action: "increment"
-                    })
-                  }
-                >
-                  <AddIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  onClick={() =>
-                    onChangeFontProperty({
-                      type: "fontSize",
-                      action: "decrement"
-                    })
-                  }
-                >
-                  <RemoveIcon />
-                </IconButton>
-              </Grid>
-              <Grid item xs={12}>
-                <h4>Categories</h4>
-                {allCategoriesNodes}
-              </Grid>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-label="Expand"
+          aria-controls="additional-actions1-content"
+          id="additional-actions1-header"
+        >
+          <FormControlLabel
+            aria-label="Acknowledge"
+            onClick={event => {
+              event.stopPropagation();
+              onChangeLock();
+            }}
+            onFocus={event => {
+              event.stopPropagation();
+              onChangeLock();
+            }}
+            control={lockIcon}
+            label={font.family}
+          />
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Grid container>
+            <Grid item xs={4}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isBolded}
+                    onChange={() =>
+                      onChangeFontProperty({
+                        type: "fontWeight",
+                        value: "bold"
+                      })
+                    }
+                    value="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Bold"
+              />
             </Grid>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      </>
+            <Grid item xs={4}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isItalic}
+                    onChange={() =>
+                      onChangeFontProperty({
+                        type: "fontStyle",
+                        value: "italic"
+                      })
+                    }
+                    value="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Italic"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <IconButton
+                aria-label="increment"
+                onClick={() =>
+                  onChangeFontProperty({
+                    type: "fontSize",
+                    action: "increment"
+                  })
+                }
+              >
+                <AddIcon />
+              </IconButton>
+              <IconButton
+                aria-label="delete"
+                onClick={() =>
+                  onChangeFontProperty({
+                    type: "fontSize",
+                    action: "decrement"
+                  })
+                }
+              >
+                <RemoveIcon />
+              </IconButton>
+            </Grid>
+            <Grid item xs={12}>
+              <h4>Categories</h4>
+              {allCategoriesNodes}
+            </Grid>
+          </Grid>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     );
   }
 }
