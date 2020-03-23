@@ -1,6 +1,21 @@
 import React from "react";
 import { Font } from "../../../../types/font";
-import { Dialog, DialogTitle, DialogContent } from "@material-ui/core";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Typography,
+  makeStyles
+} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  sectionTitle: {
+    color: "#05668d",
+    fontSize: "18px",
+    marginTop: "8px",
+    fontWeight: "bold"
+  }
+}));
 
 type Props = {
   titleFont: Font;
@@ -11,6 +26,7 @@ type Props = {
 
 function DownloadModal(props: Props) {
   const { titleFont, contentFont, show, onHide } = props;
+  const classes = useStyles();
 
   const toUrlFontFamily = (st: string) => st.replace(/ /g, "+");
   const toFontCategory = (st: string) => st.replace("display", "cursive");
@@ -30,22 +46,29 @@ function DownloadModal(props: Props) {
     <Dialog onClose={onHide} aria-labelledby="simple-dialog-title" open={show}>
       <DialogTitle>Fast ways to use these fonts</DialogTitle>
       <DialogContent>
-        <h4 className="section-title">You have selected these fonts</h4>
-        <br />
-        <h4 className="section-title">Title</h4>
-        <p>{titleFont.family}</p>
+        <Typography variant="h5" className={classes.sectionTitle}>
+          You have selected these fonts
+        </Typography>
 
-        <h4 className="section-title">Paragraphs</h4>
-        <p>{contentFont.family}</p>
+        <Typography variant="h6">Title</Typography>
+        <Typography variant="body1">{titleFont.family}</Typography>
 
-        <h4 className="section-title margin-top-lg">Embed Font</h4>
-        <p>
+        <Typography variant="h6">Paragraphs</Typography>
+        <Typography variant="body1">{contentFont.family}</Typography>
+
+        <Typography variant="h5" className={classes.sectionTitle}>
+          Embed Font
+        </Typography>
+        <Typography variant="body1">
           To embed your selected fonts into a webpage, copy this code into the
           head of your HTML document.
-        </p>
+        </Typography>
+
         <pre>{embedCode}</pre>
 
-        <h4 className="section-title margin-top-lg">Specify in CSS</h4>
+        <Typography variant="h5" className={classes.sectionTitle}>
+          Specify in CSS
+        </Typography>
         <p>Use the following CSS rules to specify these families:</p>
         <pre dangerouslySetInnerHTML={{ __html: cssCode }} />
       </DialogContent>

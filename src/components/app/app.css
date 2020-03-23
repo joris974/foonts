@@ -17,27 +17,9 @@ body {
   padding-bottom: 33px;
 }
 
-.margin-top-lg {
-  margin-top: 25px;
-}
-
-/* Modal */
-
-h4,
-.h4 {
-  font-weight: bold;
-  font-size: 16px;
-}
-
 pre {
   overflow: initial;
   white-space: initial;
-}
-
-/* Navbar */
-
-.section-title {
-  color: #05668d;
 }
 
 /* Editable */
