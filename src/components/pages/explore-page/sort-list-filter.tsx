@@ -2,6 +2,7 @@ import React from "react";
 import capitalize from "lodash/capitalize";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 type Props = RouteComponentProps<{}> & {
   sortedBy: "recent" | "popular";
@@ -32,6 +33,7 @@ function SortListFilter(props: Props) {
         onClick={handleClick}
       >
         Sort by&nbsp;{capitalize(sortedBy)}
+        <KeyboardArrowDownIcon />
       </Button>
       <Menu
         id="simple-menu"

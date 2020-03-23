@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import { CircularProgress, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: theme.spacing(2)
+  }
+}));
 
 export default function Spinner() {
+  const classes = useStyles();
   return (
-    <div className="spinner">
-      <i className="fa fa-circle-o-notch fa-2x fa-spin"></i>
+    <div className={classes.root}>
+      <CircularProgress />
     </div>
-  )
+  );
 }

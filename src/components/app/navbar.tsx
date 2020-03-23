@@ -1,31 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  makeStyles
+} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  title: {
+    flexGrow: 1
+  }
+}));
 
 const Navbar = () => {
-  const links = (
-    <ul className="nav navbar-nav navbar-right">
-      <li>
-        <Link to="/generate">Generate</Link>
-      </li>
-      <li>
-        <Link to="/explore/recent">Explore</Link>
-      </li>
-      <li>
-        <Link to="/fonts">Fonts</Link>
-      </li>
-    </ul>
-  );
+  const classes = useStyles();
   return (
-    <nav className="navbar navbar-default navbar-foonts">
-      <div className="container">
-        <div className="navbar-header">
-          <Link to="/" className="navbar-brand">
-            Foonts
-          </Link>
-        </div>
-        {links}
-      </div>
-    </nav>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          Foonts
+        </Typography>
+        <Button color="inherit" component={RouterLink} to="/generate">
+          Generate
+        </Button>
+        <Button color="inherit" component={RouterLink} to="/explore/recent">
+          Explore
+        </Button>
+        <Button color="inherit" component={RouterLink} to="/fonts">
+          Fonts
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 

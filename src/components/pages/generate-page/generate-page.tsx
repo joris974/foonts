@@ -7,6 +7,7 @@ import EditableTitle from "./editable-title";
 import EditableContent from "./editable-content";
 import { FontProperties } from "../../../types/font-style";
 import { UpdateFontProperties } from "../../../helpers/helper";
+import { Container, Grid } from "@material-ui/core";
 
 type Props = {
   titleFont: Font;
@@ -21,12 +22,8 @@ type Props = {
   handleClickGenerate: (
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => void;
-  handleChangeLockTitle: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => void;
-  handleChangeLockContent: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => void;
+  handleChangeLockTitle: () => void;
+  handleChangeLockContent: () => void;
 };
 
 function GeneratePage(props: Props) {
@@ -54,40 +51,37 @@ function GeneratePage(props: Props) {
   ));
 
   return (
-    <div>
+    <Container>
+      <Grid container spacing={6}>
+        <Grid item xs={12} md={6}>
+          <Sidebar
+            titleFont={titleFont}
+            titleFontPropertiesProps={titleFontPropertiesProps}
+            onChangeTitleFontProperty={updateTitleFontProperties}
+            contentFont={contentFont}
+            contentFontPropertiesProps={contentFontPropertiesProps}
+            onChangeContentFontProperty={updateContentFontProperties}
+            isTitleLocked={isTitleLocked}
+            isContentLocked={isContentLocked}
+            onChangeLockTitle={handleChangeLockTitle}
+            onChangeLockContent={handleChangeLockContent}
+            onClickSwap={handleSwap}
+            onClickGenerate={handleClickGenerate}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <EditableTitle
+            font={titleFont}
+            fontStyleProps={titleFontPropertiesProps}
+          />
+          <EditableContent
+            font={contentFont}
+            fontStyleProps={contentFontPropertiesProps}
+          />
+        </Grid>
+      </Grid>
       {fontFacesNode}
-
-      <div className="container">
-        <div className="row margin-top-lg">
-          <div className="col-xs-12 col-sm-offset-0 col-sm-4">
-            <Sidebar
-              titleFont={titleFont}
-              titleFontPropertiesProps={titleFontPropertiesProps}
-              onChangeTitleFontProperty={updateTitleFontProperties}
-              contentFont={contentFont}
-              contentFontPropertiesProps={contentFontPropertiesProps}
-              onChangeContentFontProperty={updateContentFontProperties}
-              isTitleLocked={isTitleLocked}
-              isContentLocked={isContentLocked}
-              onChangeLockTitle={handleChangeLockTitle}
-              onChangeLockContent={handleChangeLockContent}
-              onClickSwap={handleSwap}
-              onClickGenerate={handleClickGenerate}
-            />
-          </div>
-          <div className="col-xs-12 col-sm-8">
-            <EditableTitle
-              font={titleFont}
-              fontStyleProps={titleFontPropertiesProps}
-            />
-            <EditableContent
-              font={contentFont}
-              fontStyleProps={contentFontPropertiesProps}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    </Container>
   );
 }
 
