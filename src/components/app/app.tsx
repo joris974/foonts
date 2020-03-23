@@ -20,7 +20,7 @@ class App extends React.Component<Props> {
 
         <footer className="text-center">
           Designed and built by{" "}
-          <a href="https://github.com/joris974">Joris Buchou</a>. ©2017
+          <a href="https://github.com/joris974">Joris Buchou</a>. ©2020
         </footer>
       </div>
     );

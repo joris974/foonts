@@ -11,53 +11,14 @@
 html,
 body {
   background: #f4f4f4;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#main {
-  height: 100%;
-}
-
-.main-container {
-  min-height: 100%;
-  position: relative;
 }
 
 .body-container {
   padding-bottom: 33px;
 }
 
-/* Section commands */
-
-.section-actions {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.section-command {
-  border-bottom: solid 1px #05668d;
-}
-
-.sidebar-item-config {
-  border-bottom: solid 1px #05668d;
-  padding-bottom: 10px;
-}
-
-.sidebar-item-config h4 {
-  color: #616161;
-  font-weight: bold;
-  font-size: 14px;
-}
-
 .margin-top-lg {
   margin-top: 25px;
-}
-
-.section-divider {
-  margin-top: 25px;
-  margin-bottom: 15px;
 }
 
 /* Modal */
@@ -124,8 +85,4 @@ footer a {
 footer a:hover {
   text-decoration: none;
   color: #222;
-}
-
-.li-fixed-width {
-  width: 120px;
 }
