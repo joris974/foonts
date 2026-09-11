@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Font } from "../../../types/font";
 import { FontProperties } from "../../../types/font-style";
 
@@ -26,47 +26,32 @@ type Props = {
   font: Font;
 };
 
-type State = {
-  content: string[];
-};
+function EditableContent({ fontStyleProps, font }: Props) {
+  const [content, setContent] = useState(DefaultContent);
+  const { fontSize, fontWeight, fontStyle } = fontStyleProps;
 
-class EditableContent extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { content: DefaultContent };
+  const style = {
+    fontSize: `${fontSize}px`,
+    fontWeight,
+    fontStyle,
+    fontFamily: font.family,
+  };
 
-    this.handleChange = this.handleChange.bind(this);
-  }
+  const contentPs = content.map((line, i) => <p key={i}>{line}</p>);
 
-  handleChange(event: any) {
-    this.setState({ content: event.target.value });
-  }
-
-  render() {
-    const { fontStyleProps, font } = this.props;
-    const { fontSize, fontWeight, fontStyle } = fontStyleProps;
-
-    const content = this.state.content;
-    const style = {
-      fontSize: `${fontSize}px`,
-      fontWeight,
-      fontStyle,
-      fontFamily: font.family,
-    };
-
-    const contentPs = content.map((line, i) => <p key={i}>{line}</p>);
-
-    return (
-      <div
-        style={style}
-        contentEditable="true"
-        className="p editable editable-content"
-        onChange={this.handleChange}
-      >
-        {contentPs}
-      </div>
-    );
-  }
+  return (
+    <div
+      style={style}
+      contentEditable="true"
+      className="p editable editable-content"
+      onInput={(event) => {
+        const lines = (event.currentTarget.textContent || "").split("\n");
+        setContent(lines);
+      }}
+    >
+      {contentPs}
+    </div>
+  );
 }
 
 export default EditableContent;

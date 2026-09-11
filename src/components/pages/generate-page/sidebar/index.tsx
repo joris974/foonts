@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DownloadModal from "./download-modal";
 import { sendFontPairingLikeToApi } from "../../../../helpers/api";
 import { UpdateFontProperties } from "../../../../helpers/helper";
@@ -34,36 +34,30 @@ type Props = {
   isContentLocked: boolean;
 };
 
-type State = {
-  showDownloadModal: boolean;
-  isLiked: boolean;
-};
+function Sidebar({
+  titleFont,
+  contentFont,
+  onClickSwap,
+  onClickGenerate,
+  titleFontPropertiesProps,
+  onChangeTitleFontProperty,
+  onChangeLockTitle,
+  isTitleLocked,
+  contentFontPropertiesProps,
+  onChangeContentFontProperty,
+  onChangeLockContent,
+  isContentLocked,
+}: Props) {
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+  const [isLiked, setIsLiked] = useState(() =>
+    hasLiked(titleFont, contentFont),
+  );
 
-class Sidebar extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { showDownloadModal: false, isLiked: false };
-    this.handleClickLike = this.handleClickLike.bind(this);
-    this.handleToggleDownloadModal = this.handleToggleDownloadModal.bind(this);
-  }
+  useEffect(() => {
+    setIsLiked(hasLiked(titleFont, contentFont));
+  }, [titleFont, contentFont]);
 
-  componentDidUpdate(previousProps: Props) {
-    if (
-      previousProps.titleFont !== this.props.titleFont ||
-      previousProps.contentFont !== this.props.contentFont
-    ) {
-      this.setState({ isLiked: false });
-    }
-  }
-
-  componentDidMount() {
-    const { titleFont, contentFont } = this.props;
-    this.setState({ isLiked: hasLiked(titleFont, contentFont) });
-  }
-
-  handleClickLike() {
-    const { titleFont, contentFont } = this.props;
-
+  const handleClickLike = () => {
     const existingInStorage = localStorage.getItem("font-pairing-liked");
     const likedPairings = existingInStorage ? existingInStorage.split(",") : [];
     const fontPairing = `${titleFont.id}-${contentFont.id}`;
@@ -74,106 +68,84 @@ class Sidebar extends React.Component<Props, State> {
       localStorage.setItem("font-pairing-liked", JSON.stringify(newInStorage));
     }
 
-    this.setState({ isLiked: true });
-  }
+    setIsLiked(true);
+  };
 
-  handleToggleDownloadModal() {
-    this.setState((previousState) => ({
-      showDownloadModal: !previousState.showDownloadModal,
-    }));
-  }
+  const handleToggleDownloadModal = () =>
+    setShowDownloadModal((current) => !current);
 
-  render() {
-    const {
-      onClickSwap,
-      onClickGenerate,
-      titleFont,
-      titleFontPropertiesProps,
-      onChangeTitleFontProperty,
-      onChangeLockTitle,
-      isTitleLocked,
-      contentFontPropertiesProps,
-      onChangeContentFontProperty,
-      onChangeLockContent,
-      isContentLocked,
-      contentFont,
-    } = this.props;
-
-    const { showDownloadModal, isLiked } = this.state;
-
-    return (
-      <Grid container>
-        <Grid size={12} style={{ margin: "16px 0 8px 0" }}>
-          <SidebarItem
-            font={titleFont}
-            isLocked={isTitleLocked}
-            onChangeLock={onChangeLockTitle}
-            fontStyleProps={titleFontPropertiesProps}
-            onChangeFontProperty={onChangeTitleFontProperty}
-          />
-        </Grid>
-        <Grid size={12} style={{ margin: "8px 0" }}>
-          <SidebarItem
-            font={contentFont}
-            isLocked={isContentLocked}
-            onChangeLock={onChangeLockContent}
-            fontStyleProps={contentFontPropertiesProps}
-            onChangeFontProperty={onChangeContentFontProperty}
-          />
-        </Grid>
-        <Grid size={12} style={{ margin: "8px 0" }}>
-          <Button
-            variant="outlined"
-            onClick={onClickGenerate}
-            startIcon={<LoopIcon />}
-          >
-            Generate
-          </Button>
-        </Grid>
-        <Grid size={12} style={{ margin: "8px 0" }}>
-          <Button
-            variant="outlined"
-            onClick={onClickSwap}
-            startIcon={<SwapVertIcon />}
-          >
-            Swap
-          </Button>
-        </Grid>
-        <Grid size={12} style={{ margin: "8px 0" }}>
-          <Button
-            variant={isLiked ? "contained" : "outlined"}
-            color="secondary"
-            onClick={this.handleClickLike}
-            startIcon={<FavoriteIcon />}
-          >
-            {isLiked ? "You liked this" : "Like"}
-          </Button>
-        </Grid>
-        <Grid size={12} style={{ margin: "8px 0" }}>
-          <Button
-            variant="outlined"
-            onClick={this.handleToggleDownloadModal}
-            startIcon={<GetAppIcon />}
-          >
-            Download
-          </Button>
-        </Grid>
-
-        <Grid size={12} style={{ margin: "8px 0" }}>
-          <Typography variant="body2">
-            Tip: Press space bar to generate a new combination.
-          </Typography>
-        </Grid>
-
-        <DownloadModal
-          show={showDownloadModal}
-          onHide={this.handleToggleDownloadModal}
-          titleFont={titleFont}
-          contentFont={contentFont}
+  return (
+    <Grid container>
+      <Grid size={12} style={{ margin: "16px 0 8px 0" }}>
+        <SidebarItem
+          font={titleFont}
+          isLocked={isTitleLocked}
+          onChangeLock={onChangeLockTitle}
+          fontStyleProps={titleFontPropertiesProps}
+          onChangeFontProperty={onChangeTitleFontProperty}
         />
       </Grid>
-    );
-  }
+      <Grid size={12} style={{ margin: "8px 0" }}>
+        <SidebarItem
+          font={contentFont}
+          isLocked={isContentLocked}
+          onChangeLock={onChangeLockContent}
+          fontStyleProps={contentFontPropertiesProps}
+          onChangeFontProperty={onChangeContentFontProperty}
+        />
+      </Grid>
+      <Grid size={12} style={{ margin: "8px 0" }}>
+        <Button
+          variant="outlined"
+          onClick={onClickGenerate}
+          startIcon={<LoopIcon />}
+        >
+          Generate
+        </Button>
+      </Grid>
+      <Grid size={12} style={{ margin: "8px 0" }}>
+        <Button
+          variant="outlined"
+          onClick={onClickSwap}
+          startIcon={<SwapVertIcon />}
+        >
+          Swap
+        </Button>
+      </Grid>
+      <Grid size={12} style={{ margin: "8px 0" }}>
+        <Button
+          variant={isLiked ? "contained" : "outlined"}
+          color="secondary"
+          onClick={handleClickLike}
+          startIcon={<FavoriteIcon />}
+        >
+          {isLiked ? "You liked this" : "Like"}
+        </Button>
+      </Grid>
+      <Grid size={12} style={{ margin: "8px 0" }}>
+        <Button
+          variant="outlined"
+          onClick={handleToggleDownloadModal}
+          startIcon={<GetAppIcon />}
+        >
+          Download
+        </Button>
+      </Grid>
+
+      <Grid size={12} style={{ margin: "8px 0" }}>
+        <Typography variant="body2">
+          Tip: Press space bar to generate a new combination.
+        </Typography>
+      </Grid>
+
+      <DownloadModal
+        show={showDownloadModal}
+        onHide={handleToggleDownloadModal}
+        titleFont={titleFont}
+        contentFont={contentFont}
+      />
+    </Grid>
+  );
 }
 
 export default Sidebar;

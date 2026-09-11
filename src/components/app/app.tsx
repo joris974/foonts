@@ -7,24 +7,20 @@ type Props = {
   children?: any;
 };
 
-class App extends React.Component<Props> {
-  render() {
-    const { children } = this.props;
+function App({ children }: Props) {
+  return (
+    <div className="main-container">
+      <CssBaseline />
+      <Navbar />
 
-    return (
-      <div className="main-container">
-        <CssBaseline />
-        <Navbar />
+      <div className="body-container">{children}</div>
 
-        <div className="body-container">{children}</div>
-
-        <footer className="text-center">
-          Designed and built by{" "}
-          <a href="https://github.com/joris974">Joris Buchou</a>. ©2020
-        </footer>
-      </div>
-    );
-  }
+      <footer className="text-center">
+        Designed and built by{" "}
+        <a href="https://github.com/joris974">Joris Buchou</a>. ©2020
+      </footer>
+    </div>
+  );
 }
 
 export default App;

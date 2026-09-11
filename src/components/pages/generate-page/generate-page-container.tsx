@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   allCategories,
   randomFont,
@@ -30,65 +30,68 @@ type Props = {
   updateFonts: (titleFont: Font, contentFont: Font) => void;
 };
 
-type State = {
-  isTitleLocked: boolean;
-  isContentLocked: boolean;
-  titleFontPropertiesProps: FontProperties;
-  contentFontPropertiesProps: FontProperties;
-};
+function GeneratePageContainer({
+  titleFont,
+  contentFont,
+  fontList,
+  updateFonts,
+}: Props) {
+  const [isTitleLocked, setIsTitleLocked] = useState(false);
+  const [isContentLocked, setIsContentLocked] = useState(false);
+  const [titleFontPropertiesProps, setTitleFontPropertiesProps] = useState(
+    defaultTitleStyleProps,
+  );
+  const [contentFontPropertiesProps, setContentFontPropertiesProps] = useState(
+    defaultContentStyleProps,
+  );
 
-class GeneratePageContainer extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+  const generate = () => {
+    if (fontList.length > 0) {
+      const randTitleFont = randomFont(
+        fontList,
+        titleFontPropertiesProps.fontCategories,
+      );
+      const randContentFont = randomFont(
+        fontList,
+        contentFontPropertiesProps.fontCategories,
+      );
 
-    this.state = {
-      isTitleLocked: false,
-      isContentLocked: false,
-      titleFontPropertiesProps: defaultTitleStyleProps,
-      contentFontPropertiesProps: defaultContentStyleProps,
+      updateFonts(
+        isTitleLocked ? titleFont : randTitleFont,
+        isContentLocked ? contentFont : randContentFont,
+      );
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.className.toString().split(" ").includes("editable")) {
+        return;
+      }
+      if (target instanceof HTMLButtonElement) {
+        return;
+      }
+
+      if (event.key === " ") {
+        generate();
+      }
     };
 
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.updateTitleFontProperties = this.updateTitleFontProperties.bind(this);
-    this.updateContentFontProperties =
-      this.updateContentFontProperties.bind(this);
-    this.handleSwap = this.handleSwap.bind(this);
-    this.handleClickGenerate = this.handleClickGenerate.bind(this);
-    this.handleChangeLockTitle = this.handleChangeLockTitle.bind(this);
-    this.handleChangeLockContent = this.handleChangeLockContent.bind(this);
-  }
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [
+    contentFontPropertiesProps.fontCategories,
+    fontList,
+    isContentLocked,
+    isTitleLocked,
+    titleFontPropertiesProps.fontCategories,
+    titleFont,
+    contentFont,
+    updateFonts,
+  ]);
 
-  componentDidMount() {
-    window.addEventListener("keydown", this.handleKeyPress);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.handleKeyPress);
-  }
-
-  handleKeyPress(event: any) {
-    if (event.target.className.split(" ").includes("editable")) {
-      return;
-    }
-    if (event.target instanceof HTMLButtonElement) {
-      return;
-    }
-
-    if (event.keyCode === 32) {
-      this.generate();
-    }
-  }
-
-  handleSwap() {
-    const { titleFont, contentFont, updateFonts } = this.props;
-
-    const {
-      isTitleLocked,
-      isContentLocked,
-      titleFontPropertiesProps,
-      contentFontPropertiesProps,
-    } = this.state;
-
+  const handleSwap = () => {
     const newTitleFontPropertiesProps = {
       fontSize: titleFontPropertiesProps.fontSize,
       fontWeight: contentFontPropertiesProps.fontWeight,
@@ -103,108 +106,49 @@ class GeneratePageContainer extends React.Component<Props, State> {
       fontCategories: titleFontPropertiesProps.fontCategories,
     };
 
-    this.setState(
-      {
-        isTitleLocked: isContentLocked,
-        isContentLocked: isTitleLocked,
-        titleFontPropertiesProps: newTitleFontPropertiesProps,
-        contentFontPropertiesProps: newContentFontPropertiesProps,
-      },
-      () => {
-        updateFonts(contentFont, titleFont);
-      },
+    setIsTitleLocked(isContentLocked);
+    setIsContentLocked(isTitleLocked);
+    setTitleFontPropertiesProps(newTitleFontPropertiesProps);
+    setContentFontPropertiesProps(newContentFontPropertiesProps);
+    updateFonts(contentFont, titleFont);
+  };
+
+  const handleClickGenerate = (_event: React.MouseEvent<HTMLElement>) => {
+    generate();
+  };
+
+  const updateTitleFontProperties = (update: UpdateFontProperties) => {
+    setTitleFontPropertiesProps((current) =>
+      updateFontProperties(current, update),
     );
-  }
+  };
 
-  handleClickGenerate(_event: React.MouseEvent<HTMLElement, MouseEvent>) {
-    this.generate();
-  }
-
-  updateTitleFontProperties(update: UpdateFontProperties) {
-    const { titleFontPropertiesProps } = this.state;
-    const newTitleFontPropertiesProps = updateFontProperties(
-      titleFontPropertiesProps,
-      update,
+  const updateContentFontProperties = (update: UpdateFontProperties) => {
+    setContentFontPropertiesProps((current) =>
+      updateFontProperties(current, update),
     );
-    this.setState({ titleFontPropertiesProps: newTitleFontPropertiesProps });
-  }
+  };
 
-  updateContentFontProperties(update: UpdateFontProperties) {
-    const { contentFontPropertiesProps } = this.state;
-    const newContentFontPropertiesProps = updateFontProperties(
-      contentFontPropertiesProps,
-      update,
-    );
-    this.setState({
-      contentFontPropertiesProps: newContentFontPropertiesProps,
-    });
-  }
+  const handleChangeLockTitle = () => setIsTitleLocked((current) => !current);
+  const handleChangeLockContent = () =>
+    setIsContentLocked((current) => !current);
 
-  generate() {
-    const { fontList, updateFonts, titleFont, contentFont } = this.props;
-
-    if (fontList.length > 0) {
-      const {
-        isTitleLocked,
-        isContentLocked,
-        titleFontPropertiesProps,
-        contentFontPropertiesProps,
-      } = this.state;
-
-      const randTitleFont = randomFont(
-        fontList,
-        titleFontPropertiesProps.fontCategories,
-      );
-      const randContentFont = randomFont(
-        fontList,
-        contentFontPropertiesProps.fontCategories,
-      );
-
-      const newTitleFont = isTitleLocked ? titleFont : randTitleFont;
-      const newContentFont = isContentLocked ? contentFont : randContentFont;
-
-      updateFonts(newTitleFont, newContentFont);
-    }
-  }
-
-  handleChangeLockTitle() {
-    this.setState((previousState) => ({
-      isTitleLocked: !previousState.isTitleLocked,
-    }));
-  }
-
-  handleChangeLockContent() {
-    this.setState((previousState) => ({
-      isContentLocked: !previousState.isContentLocked,
-    }));
-  }
-
-  render() {
-    const { titleFont, contentFont } = this.props;
-    const {
-      contentFontPropertiesProps,
-      titleFontPropertiesProps,
-      isTitleLocked,
-      isContentLocked,
-    } = this.state;
-
-    return (
-      <GeneratePage
-        titleFont={titleFont}
-        titleFontPropertiesProps={titleFontPropertiesProps}
-        contentFont={contentFont}
-        contentFontPropertiesProps={contentFontPropertiesProps}
-        isTitleLocked={isTitleLocked}
-        isContentLocked={isContentLocked}
-        updateTitleFontProperties={this.updateTitleFontProperties}
-        updateContentFontProperties={this.updateContentFontProperties}
-        handleSwap={this.handleSwap}
-        handleClickGenerate={this.handleClickGenerate}
-        handleChangeLockTitle={this.handleChangeLockTitle}
-        handleChangeLockContent={this.handleChangeLockContent}
-      />
-    );
-  }
+  return (
+    <GeneratePage
+      titleFont={titleFont}
+      titleFontPropertiesProps={titleFontPropertiesProps}
+      contentFont={contentFont}
+      contentFontPropertiesProps={contentFontPropertiesProps}
+      isTitleLocked={isTitleLocked}
+      isContentLocked={isContentLocked}
+      updateTitleFontProperties={updateTitleFontProperties}
+      updateContentFontProperties={updateContentFontProperties}
+      handleSwap={handleSwap}
+      handleClickGenerate={handleClickGenerate}
+      handleChangeLockTitle={handleChangeLockTitle}
+      handleChangeLockContent={handleChangeLockContent}
+    />
+  );
 }
 
 export default GeneratePageContainer;

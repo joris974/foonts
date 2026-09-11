@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ExplorePage from "./explore-container";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
@@ -10,38 +10,32 @@ type Props = {
   sortedBy: "recent" | "popular";
 };
 
-type State = {
-  fontPairings: FontPairing[];
-};
+function ExploreHandler({ fontList, loadFontPairings, sortedBy }: Props) {
+  const [fontPairings, setFontPairings] = useState<FontPairing[]>([]);
 
-class ExploreHandler extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { fontPairings: [] };
-  }
+  useEffect(() => {
+    let isCurrent = true;
 
-  componentDidMount() {
-    const { loadFontPairings } = this.props;
-
-    loadFontPairings().then((fontPairings: FontPairing[]) => {
-      this.setState({ fontPairings });
+    loadFontPairings().then((pairings: FontPairing[]) => {
+      if (isCurrent) {
+        setFontPairings(pairings);
+      }
     });
-  }
 
-  render() {
-    const { fontList, sortedBy } = this.props;
-    const { fontPairings } = this.state;
+    return () => {
+      isCurrent = false;
+    };
+  }, [loadFontPairings]);
 
-    return fontPairings.length > 0 ? (
-      <ExplorePage
-        fontList={fontList}
-        fontPairings={fontPairings}
-        sortedBy={sortedBy}
-      />
-    ) : (
-      <Spinner />
-    );
-  }
+  return fontPairings.length > 0 ? (
+    <ExplorePage
+      fontList={fontList}
+      fontPairings={fontPairings}
+      sortedBy={sortedBy}
+    />
+  ) : (
+    <Spinner />
+  );
 }
 
 export default ExploreHandler;

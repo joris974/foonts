@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Font } from "../../../types/font";
 import { FontProperties } from "../../../types/font-style";
 
@@ -9,43 +9,26 @@ type Props = {
   font: Font;
 };
 
-type State = {
-  content: string;
-};
+function EditableTitle({ fontStyleProps, font }: Props) {
+  const [content, setContent] = useState(DefaultTitle);
+  const { fontSize, fontWeight, fontStyle } = fontStyleProps;
 
-class EditableTitle extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { content: DefaultTitle };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event: any) {
-    this.setState({ content: event.target.value });
-  }
-
-  render() {
-    const { fontStyleProps, font } = this.props;
-    const { fontSize, fontWeight, fontStyle } = fontStyleProps;
-
-    const content = this.state.content;
-    const style = {
-      fontSize: `${fontSize}px`,
-      fontWeight,
-      fontStyle,
-      fontFamily: font.family,
-    };
-    return (
-      <h1
-        style={style}
-        contentEditable="true"
-        className="editable editable-title"
-        onChange={this.handleChange}
-      >
-        {content}
-      </h1>
-    );
-  }
+  const style = {
+    fontSize: `${fontSize}px`,
+    fontWeight,
+    fontStyle,
+    fontFamily: font.family,
+  };
+  return (
+    <h1
+      style={style}
+      contentEditable="true"
+      className="editable editable-title"
+      onInput={(event) => setContent(event.currentTarget.textContent || "")}
+    >
+      {content}
+    </h1>
+  );
 }
 
 export default EditableTitle;

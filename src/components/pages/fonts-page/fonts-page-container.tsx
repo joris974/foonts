@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { allCategories } from "../../../helpers/helper";
 import { Category } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
@@ -8,65 +8,43 @@ type Props = {
   fontList: Font[];
 };
 
-type State = {
-  numMaxVisible: number;
-  filteredFontList: Font[];
-  fontCategories: Category[];
-  sortedBy: string;
-};
+function FontsPageContainer({ fontList }: Props) {
+  const [numMaxVisible, setNumMaxVisible] = useState(12);
+  const [fontCategories, setFontCategories] =
+    useState<Category[]>(allCategories());
+  const [sortedBy, setSortedBy] = useState("popular");
+  const [filteredFontList, setFilteredFontList] = useState(fontList);
 
-class FontsPageContainer extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      numMaxVisible: 12,
-      filteredFontList: props.fontList,
-      fontCategories: allCategories(),
-      sortedBy: "popular",
-    };
+  const handleClickSeeMore = () => setNumMaxVisible((current) => current + 12);
 
-    this.handleClickSeeMore = this.handleClickSeeMore.bind(this);
-    this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
-    this.handleChangeSortBy = this.handleChangeSortBy.bind(this);
-  }
-
-  handleClickSeeMore() {
-    this.setState({ numMaxVisible: this.state.numMaxVisible + 12 });
-  }
-
-  handleChangeCheckbox(category: Category) {
-    const { fontCategories } = this.state;
-
-    const newFontCategories = Object.values(fontCategories).includes(category)
+  const handleChangeCheckbox = (category: Category) => {
+    const newFontCategories = fontCategories.includes(category)
       ? fontCategories.filter((c) => c !== category)
       : [...fontCategories, category];
 
-    const filteredFontList = filterFontList(
-      this.props.fontList,
-      newFontCategories,
-    );
-    this.setState({ fontCategories: newFontCategories, filteredFontList });
-  }
+    setFontCategories(newFontCategories);
+    setFilteredFontList(filterFontList(fontList, newFontCategories));
+  };
 
-  handleChangeSortBy(sortBy: string) {
-    const { sortedBy } = this.state;
+  const handleChangeSortBy = (sortBy: string) => {
     if (sortBy === sortedBy) {
       return;
     }
-    this.setState({ sortedBy: sortBy });
-  }
+    setSortedBy(sortBy);
+  };
 
-  render() {
-    return (
-      <FontsPage
-        {...this.props}
-        {...this.state}
-        handleChangeCheckbox={this.handleChangeCheckbox}
-        handleClickSeeMore={this.handleClickSeeMore}
-        handleChangeSortBy={this.handleChangeSortBy}
-      />
-    );
-  }
+  return (
+    <FontsPage
+      fontList={fontList}
+      numMaxVisible={numMaxVisible}
+      filteredFontList={filteredFontList}
+      fontCategories={fontCategories}
+      sortedBy={sortedBy}
+      handleChangeCheckbox={handleChangeCheckbox}
+      handleClickSeeMore={handleClickSeeMore}
+      handleChangeSortBy={handleChangeSortBy}
+    />
+  );
 }
 
 export default FontsPageContainer;
