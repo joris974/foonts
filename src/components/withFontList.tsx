@@ -1,5 +1,4 @@
 import React from "react";
-import { Subtract } from "utility-types";
 import { Font } from "../types/font";
 import { loadFonts } from "../helpers/api";
 import Spinner from "./common/spinner";
@@ -15,8 +14,13 @@ type State = {
 export function withFontList<P extends Props>(
   Component: React.ComponentType<P>,
 ) {
-  return class WithFontList extends React.Component<Subtract<P, Props>, State> {
-    constructor(props: Subtract<P, Props>) {
+  type PropsWithoutFontList = Omit<P, keyof Props>;
+
+  return class WithFontList extends React.Component<
+    PropsWithoutFontList,
+    State
+  > {
+    constructor(props: PropsWithoutFontList) {
       super(props);
       this.state = { fontList: [] };
     }
