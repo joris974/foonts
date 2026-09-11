@@ -5,21 +5,13 @@ import {
   Toolbar,
   Typography,
   Button,
-  makeStyles,
-} from "@material-ui/core";
-
-const useStyles = makeStyles(() => ({
-  title: {
-    flexGrow: 1,
-  },
-}));
+} from "@mui/material";
 
 const Navbar = () => {
-  const classes = useStyles();
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
           Foonts
         </Typography>
         <Button color="inherit" component={RouterLink} to="/generate">

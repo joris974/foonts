@@ -1,19 +1,16 @@
 import React from "react";
-import { CircularProgress, makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: theme.spacing(2),
-  },
-}));
+import { CircularProgress } from "@mui/material";
 
 export default function Spinner() {
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: 16,
+      }}
+    >
       <CircularProgress />
     </div>
   );

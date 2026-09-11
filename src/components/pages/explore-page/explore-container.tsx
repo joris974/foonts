@@ -4,8 +4,8 @@ import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
-import { Grid, Container, Button, Paper } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { GridLegacy as Grid, Container, Button, Paper } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SortListFilter from "./sort-list-filter";
 
 type Props = {

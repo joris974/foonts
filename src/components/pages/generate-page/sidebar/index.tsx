@@ -4,11 +4,11 @@ import { sendFontPairingLikeToApi } from "../../../../helpers/api";
 import { UpdateFontProperties } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
 import { FontProperties } from "../../../../types/font-style";
-import { Button, Grid, Typography } from "@material-ui/core";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LoopIcon from "@material-ui/icons/Loop";
-import SwapVertIcon from "@material-ui/icons/SwapVert";
+import { Button, GridLegacy as Grid, Typography } from "@mui/material";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LoopIcon from "@mui/icons-material/Loop";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 import SidebarItem from "./sidebar-item";
 
 function hasLiked(titleFont: Font, contentFont: Font) {

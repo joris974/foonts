@@ -1,8 +1,8 @@
 import React from "react";
 import capitalize from "lodash/capitalize";
-import { Button, Menu, MenuItem } from "@material-ui/core";
+import { Button, Menu, MenuItem } from "@mui/material";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 type Props = RouteComponentProps<{}> & {
   sortedBy: "recent" | "popular";

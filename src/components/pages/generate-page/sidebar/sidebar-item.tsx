@@ -8,20 +8,20 @@ import {
 import { Font } from "../../../../types/font";
 import { FontProperties } from "../../../../types/font-style";
 import {
-  ExpansionPanel,
-  ExpansionPanelSummary,
+  Accordion,
+  AccordionSummary,
   Switch,
   IconButton,
-  Grid,
-} from "@material-ui/core";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+  GridLegacy as Grid,
+} from "@mui/material";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import LockIcon from "@material-ui/icons/Lock";
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 type Props = {
   font: Font;
@@ -66,8 +66,8 @@ class SidebarItem extends React.Component<Props> {
 
     const lockIcon = isLocked ? <LockIcon /> : <LockOpenIcon />;
     return (
-      <ExpansionPanel>
-        <ExpansionPanelSummary
+      <Accordion>
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-label="Expand"
           aria-controls="additional-actions1-content"
@@ -86,8 +86,8 @@ class SidebarItem extends React.Component<Props> {
             control={lockIcon}
             label={font.family}
           />
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        </AccordionSummary>
+        <AccordionDetails>
           <Grid container>
             <Grid item xs={4}>
               <FormControlLabel
@@ -154,8 +154,8 @@ class SidebarItem extends React.Component<Props> {
               {allCategoriesNodes}
             </Grid>
           </Grid>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+        </AccordionDetails>
+      </Accordion>
     );
   }
 }

@@ -7,8 +7,8 @@ import { labelForCategory } from "../../../helpers/helper";
 import { Category } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
 import FontsListItem from "./fonts-list-item";
-import { Grid, Button, Container, Paper } from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { GridLegacy as Grid, Button, Container, Paper } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type Props = {
   fontList: Font[];

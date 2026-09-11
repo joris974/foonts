@@ -1,7 +1,7 @@
 import React from "react";
 import Fonts from "../../common/fonts";
 import { Font } from "../../../types/font";
-import { Card, CardContent } from "@material-ui/core";
+import { Card, CardContent } from "@mui/material";
 
 type Props = {
   font: Font;

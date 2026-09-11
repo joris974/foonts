@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./navbar";
 import "./app.css";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@mui/material";
 
 type Props = {
   children?: any;

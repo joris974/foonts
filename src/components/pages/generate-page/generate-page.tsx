@@ -7,7 +7,7 @@ import EditableTitle from "./editable-title";
 import EditableContent from "./editable-content";
 import { FontProperties } from "../../../types/font-style";
 import { UpdateFontProperties } from "../../../helpers/helper";
-import { Container, Grid } from "@material-ui/core";
+import { Container, GridLegacy as Grid } from "@mui/material";
 
 type Props = {
   titleFont: Font;

@@ -5,17 +5,7 @@ import {
   DialogTitle,
   DialogContent,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
-
-const useStyles = makeStyles(() => ({
-  sectionTitle: {
-    color: "#05668d",
-    fontSize: "18px",
-    marginTop: "8px",
-    fontWeight: "bold",
-  },
-}));
+} from "@mui/material";
 
 type Props = {
   titleFont: Font;
@@ -26,7 +16,6 @@ type Props = {
 
 function DownloadModal(props: Props) {
   const { titleFont, contentFont, show, onHide } = props;
-  const classes = useStyles();
 
   const toUrlFontFamily = (st: string) => st.replace(/ /g, "+");
   const toFontCategory = (st: string) => st.replace("display", "cursive");
@@ -46,7 +35,10 @@ function DownloadModal(props: Props) {
     <Dialog onClose={onHide} aria-labelledby="simple-dialog-title" open={show}>
       <DialogTitle>Fast ways to use these fonts</DialogTitle>
       <DialogContent>
-        <Typography variant="h5" className={classes.sectionTitle}>
+        <Typography
+          variant="h5"
+          sx={{ color: "#05668d", fontSize: 18, mt: 1, fontWeight: "bold" }}
+        >
           You have selected these fonts
         </Typography>
 
@@ -56,7 +48,10 @@ function DownloadModal(props: Props) {
         <Typography variant="h6">Paragraphs</Typography>
         <Typography variant="body1">{contentFont.family}</Typography>
 
-        <Typography variant="h5" className={classes.sectionTitle}>
+        <Typography
+          variant="h5"
+          sx={{ color: "#05668d", fontSize: 18, mt: 1, fontWeight: "bold" }}
+        >
           Embed Font
         </Typography>
         <Typography variant="body1">
@@ -66,7 +61,10 @@ function DownloadModal(props: Props) {
 
         <pre>{embedCode}</pre>
 
-        <Typography variant="h5" className={classes.sectionTitle}>
+        <Typography
+          variant="h5"
+          sx={{ color: "#05668d", fontSize: 18, mt: 1, fontWeight: "bold" }}
+        >
           Specify in CSS
         </Typography>
         <p>Use the following CSS rules to specify these families:</p>
