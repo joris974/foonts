@@ -1,16 +1,17 @@
 import React from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { capitalize } from "../../../helpers/helper";
 
-type Props = RouteComponentProps<{}> & {
+type Props = {
   sortedBy: "recent" | "popular";
 };
 
 function SortListFilter(props: Props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const { sortedBy, history } = props;
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const { sortedBy } = props;
+  const navigate = useNavigate();
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -21,7 +22,7 @@ function SortListFilter(props: Props) {
   };
 
   const handlePick = (newSortedBy: "recent" | "popular") => {
-    history.push(`/explore/${newSortedBy}`);
+    navigate(`/explore/${newSortedBy}`);
     handleClose();
   };
 
@@ -49,4 +50,4 @@ function SortListFilter(props: Props) {
   );
 }
 
-export default withRouter(SortListFilter);
+export default SortListFilter;

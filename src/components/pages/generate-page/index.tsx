@@ -1,5 +1,5 @@
-import { withRouter, RouteComponentProps } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Font } from "../../../types/font";
 import GeneratePageContainer from "./generate-page-container";
 import {
@@ -11,99 +11,57 @@ import { sendFontPairingToApi } from "../../../helpers/api";
 import Spinner from "../../common/spinner";
 import { withFontList } from "../../withFontList";
 
-type Params = {
-  fonts: string;
-};
-
-type Props = RouteComponentProps<Params> & {
+type Props = {
   fontList: Font[];
 };
 
-type State = {
-  titleFont: Font | null | undefined;
-  contentFont: Font | null | undefined;
-};
+function GeneratePageHandler(props: Props) {
+  const { fontList } = props;
+  const { fonts } = useParams<{ fonts?: string }>();
+  const navigate = useNavigate();
+  const fontsParams = extractFromMatch({ params: { fonts } }, fontList);
+  const [titleFont, setTitleFont] = useState<Font | null | undefined>(
+    fontsParams?.titleFont,
+  );
+  const [contentFont, setContentFont] = useState<Font | null | undefined>(
+    fontsParams?.contentFont,
+  );
 
-class GeneratePageHandler extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+  useEffect(() => {
+    const currentFonts = extractFromMatch({ params: { fonts } }, fontList);
 
-    const fontsParams = extractFromMatch(props.match, props.fontList);
-
-    const [titleFont, contentFont] =
-      fontsParams !== null && fontsParams !== undefined
-        ? [fontsParams.titleFont, fontsParams.contentFont]
-        : [null, null];
-
-    this.state = {
-      titleFont,
-      contentFont,
-    };
-
-    this.updateFonts = this.updateFonts.bind(this);
-  }
-
-  componentDidMount() {
-    this.reloadOrSave(this.props);
-  }
-
-  reloadOrSave(props: Props) {
-    const { history, match, fontList } = props;
-    const fontsParams = extractFromMatch(match, fontList);
-
-    if (fontsParams === null || fontsParams === undefined) {
+    if (currentFonts === null || currentFonts === undefined) {
       if (fontList.length > 0) {
         const [randTitleFont, randContentFont] = randomFonts(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
-        history.push(url);
+        navigate(url);
       }
     } else {
-      const { titleFont, contentFont } = fontsParams;
-      sendFontPairingToApi(titleFont, contentFont);
-      this.setState({
-        titleFont,
-        contentFont,
-      });
+      sendFontPairingToApi(currentFonts.titleFont, currentFonts.contentFont);
+      setTitleFont(currentFonts.titleFont);
+      setContentFont(currentFonts.contentFont);
     }
-  }
+  }, [fontList, fonts, navigate]);
 
-  componentDidUpdate(previousProps: Props) {
-    const fontsChanged =
-      previousProps.match.params.fonts !== this.props.match.params.fonts;
-    const fontListChanged = previousProps.fontList !== this.props.fontList;
-
-    if (fontsChanged || fontListChanged) {
-      this.reloadOrSave(this.props);
-    }
-  }
-
-  updateFonts(newTitleFont: Font, newContentFont: Font) {
-    const { history } = this.props;
+  const updateFonts = (newTitleFont: Font, newContentFont: Font) => {
     const url = fontsToUrl(newTitleFont, newContentFont);
-    history.push(url);
-    this.setState({
-      titleFont: newTitleFont,
-      contentFont: newContentFont,
-    });
+    navigate(url);
+    setTitleFont(newTitleFont);
+    setContentFont(newContentFont);
+  };
+
+  if (!titleFont || !contentFont) {
+    return <Spinner />;
   }
 
-  render() {
-    const { fontList } = this.props;
-    const { titleFont, contentFont } = this.state;
-
-    if (!titleFont || !contentFont) {
-      return <Spinner />;
-    }
-
-    return (
-      <GeneratePageContainer
-        fontList={fontList}
-        titleFont={titleFont}
-        contentFont={contentFont}
-        updateFonts={this.updateFonts}
-      />
-    );
-  }
+  return (
+    <GeneratePageContainer
+      fontList={fontList}
+      titleFont={titleFont}
+      contentFont={contentFont}
+      updateFonts={updateFonts}
+    />
+  );
 }
 
-export default withRouter(withFontList(GeneratePageHandler));
+export default withFontList(GeneratePageHandler);

@@ -1,4 +1,4 @@
-import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import React from "react";
 import App from "../components/app/app";
 import GeneratePage from "../components/pages/generate-page";
@@ -10,21 +10,13 @@ export function AppRouter() {
   return (
     <HashRouter>
       <App>
-        <Switch>
-          <Redirect exact from="/" to="/generate" />
-          <Route path="/generate/:fonts?">
-            <GeneratePage />
-          </Route>
-          <Route path="/explore/recent">
-            <ExploreRecentPage />
-          </Route>
-          <Route path="/explore/popular">
-            <ExplorePopularPage />
-          </Route>
-          <Route path="/fonts">
-            <FontsPage />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/generate" />} />
+          <Route path="/generate/:fonts?" element={<GeneratePage />} />
+          <Route path="/explore/recent" element={<ExploreRecentPage />} />
+          <Route path="/explore/popular" element={<ExplorePopularPage />} />
+          <Route path="/fonts" element={<FontsPage />} />
+        </Routes>
       </App>
     </HashRouter>
   );
