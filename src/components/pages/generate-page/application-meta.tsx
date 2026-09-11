@@ -1,5 +1,4 @@
 import React from "react";
-// import Helmet from "react-helmet";
 
 import { fontsToUrl } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
@@ -24,20 +23,12 @@ export default function ApplicationMeta(props: Props) {
       : null;
 
   return (
-    <div className="application">
-      {/* <Helmet
-        title={title}
-        titleTemplate="Foonts - %s"
-        defaultTitle="Find perfect matchings fonts in seconds!"
-        titleAttributes={{itemprop: "name", lang: "en"}}
-        base={{target: "_blank", href: baseWebsiteUrl}}
-        meta={[
-          {property: "og:url", content: canonicalUrl}
-        ]}
-        link={[
-          {rel: "canonical", href: canonicalUrl},
-        ]}
-      /> */}
-    </div>
+    <>
+      <title>
+        {title ? `Foonts - ${title}` : "Find perfect font pairings in seconds!"}
+      </title>
+      <meta property="og:url" content={canonicalUrl} />
+      <link rel="canonical" href={canonicalUrl} />
+    </>
   );
 }

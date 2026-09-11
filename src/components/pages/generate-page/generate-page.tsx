@@ -5,6 +5,7 @@ import Fonts from "../../common/fonts";
 import Sidebar from "./sidebar";
 import EditableTitle from "./editable-title";
 import EditableContent from "./editable-content";
+import ApplicationMeta from "./application-meta";
 import { FontProperties } from "../../../types/font-style";
 import { UpdateFontProperties } from "../../../helpers/helper";
 import { Container, GridLegacy as Grid } from "@mui/material";
@@ -52,6 +53,7 @@ function GeneratePage(props: Props) {
 
   return (
     <Container>
+      <ApplicationMeta titleFont={titleFont} contentFont={contentFont} />
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           <Sidebar
