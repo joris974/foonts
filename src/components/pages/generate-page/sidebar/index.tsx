@@ -11,11 +11,31 @@ import LoopIcon from "@mui/icons-material/Loop";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import SidebarItem from "./sidebar-item";
 
+const likedPairingsStorageKey = "font-pairing-liked";
+
+function readLikedPairings(): string[] {
+  const existingInStorage = localStorage.getItem(likedPairingsStorageKey);
+  if (!existingInStorage) {
+    return [];
+  }
+
+  try {
+    const parsedValue: unknown = JSON.parse(existingInStorage);
+    if (Array.isArray(parsedValue)) {
+      return parsedValue.filter(
+        (value): value is string => typeof value === "string",
+      );
+    }
+  } catch {
+    return existingInStorage.split(",").filter(Boolean);
+  }
+
+  return [];
+}
+
 function hasLiked(titleFont: Font, contentFont: Font) {
-  const existingInStorage = localStorage.getItem("font-pairing-liked");
   const fontPairing = `${titleFont.id}-${contentFont.id}`;
-  const likedPairings = existingInStorage ? existingInStorage.split(",") : [];
-  return likedPairings.includes(fontPairing);
+  return readLikedPairings().includes(fontPairing);
 }
 
 type Props = {
@@ -58,14 +78,16 @@ function Sidebar({
   }, [titleFont, contentFont]);
 
   const handleClickLike = () => {
-    const existingInStorage = localStorage.getItem("font-pairing-liked");
-    const likedPairings = existingInStorage ? existingInStorage.split(",") : [];
+    const likedPairings = readLikedPairings();
     const fontPairing = `${titleFont.id}-${contentFont.id}`;
 
     if (!likedPairings.includes(fontPairing)) {
       sendFontPairingLikeToApi(titleFont, contentFont);
       const newInStorage = likedPairings.concat(fontPairing);
-      localStorage.setItem("font-pairing-liked", JSON.stringify(newInStorage));
+      localStorage.setItem(
+        likedPairingsStorageKey,
+        JSON.stringify(newInStorage),
+      );
     }
 
     setIsLiked(true);
