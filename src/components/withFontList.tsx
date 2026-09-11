@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Font } from "../types/font";
 import { loadFonts } from "../helpers/api";
+import LoadError from "./common/load-error";
 import Spinner from "./common/spinner";
 
 export type Props = {
@@ -13,22 +14,40 @@ export function withFontList<P extends Props>(
   type PropsWithoutFontList = Omit<P, keyof Props>;
 
   return function WithFontList(props: PropsWithoutFontList) {
-    const [fontList, setFontList] = useState<Font[]>([]);
+    const [fontList, setFontList] = useState<Font[] | null>(null);
+    const [error, setError] = useState<Error | null>(null);
+    const [retryCount, setRetryCount] = useState(0);
 
     useEffect(() => {
       let isCurrent = true;
-      loadFonts().then((loadedFonts) => {
-        if (isCurrent) {
-          setFontList(loadedFonts);
-        }
-      });
+      setError(null);
+      loadFonts()
+        .then((loadedFonts) => {
+          if (isCurrent) {
+            setFontList(loadedFonts);
+          }
+        })
+        .catch((loadError: Error) => {
+          if (isCurrent) {
+            setError(loadError);
+          }
+        });
 
       return () => {
         isCurrent = false;
       };
-    }, []);
+    }, [retryCount]);
 
-    if (fontList.length === 0) {
+    if (error) {
+      return (
+        <LoadError
+          message="We couldn't load the font list."
+          onRetry={() => setRetryCount((current) => current + 1)}
+        />
+      );
+    }
+
+    if (fontList === null) {
       return <Spinner />;
     }
 
