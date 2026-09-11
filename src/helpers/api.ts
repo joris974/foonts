@@ -1,5 +1,5 @@
-import $ from "jquery";
 import { Font } from "../types/font";
+import { FontPairing } from "../types/font-pairing";
 
 function getApiUrl() {
   return window.location.hostname === "foonts.localhost.com"
@@ -7,19 +7,29 @@ function getApiUrl() {
     : "https://api.foonts.net/";
 }
 
-export function loadFonts() {
+async function request<T>(url: string, options?: RequestInit): Promise<T> {
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+export function loadFonts(): Promise<Font[]> {
   const url = `${getApiUrl()}fonts`;
-  return $.ajax({ url });
+  return request<Font[]>(url);
 }
 
-export function loadRecentFontPairings() {
+export function loadRecentFontPairings(): Promise<FontPairing[]> {
   const url = `${getApiUrl()}font-pairings/recent`;
-  return $.ajax({ url }).promise();
+  return request<FontPairing[]>(url);
 }
 
-export function loadPopularFontPairings() {
+export function loadPopularFontPairings(): Promise<FontPairing[]> {
   const url = `${getApiUrl()}font-pairings/liked`;
-  return $.ajax({ url });
+  return request<FontPairing[]>(url);
 }
 
 type PostParams = {
@@ -28,11 +38,12 @@ type PostParams = {
 };
 
 function sendApi(url: string, postParams: PostParams) {
-  return $.ajax({
-    url,
+  return request(url, {
     method: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(postParams)
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(postParams)
   });
 }
 
