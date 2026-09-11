@@ -20,7 +20,7 @@ function DownloadModal(props: Props) {
 
   const cssCode = `
       font-family: '${titleFont.family}', ${toFontCategory(titleFont.category)};
-      <br/>
+
       font-family: '${contentFont.family}', ${toFontCategory(
         contentFont.category,
       )};
@@ -63,7 +63,7 @@ function DownloadModal(props: Props) {
           Specify in CSS
         </Typography>
         <p>Use the following CSS rules to specify these families:</p>
-        <pre dangerouslySetInnerHTML={{ __html: cssCode }} />
+        <pre>{cssCode}</pre>
       </DialogContent>
     </Dialog>
   );
