@@ -116,7 +116,7 @@ class GeneratePageContainer extends React.Component<Props, State> {
     );
   }
 
-  handleClickGenerate(event: React.MouseEvent<HTMLElement, MouseEvent>) {
+  handleClickGenerate(_event: React.MouseEvent<HTMLElement, MouseEvent>) {
     this.generate();
   }
 

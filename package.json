@@ -20,6 +20,8 @@
   "scripts": {
     "start": "vite",
     "build": "tsc --noEmit && vite build",
+    "lint": "oxlint src",
+    "knip": "knip",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\""
@@ -27,6 +29,8 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.1",
     "gh-pages": "^6.3.0",
+    "knip": "^6.35.1",
+    "oxlint": "^1.82.0",
     "prettier": "3.9.6",
     "vite": "^8.3.0"
   }
