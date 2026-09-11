@@ -1,68 +1,79 @@
 import { Font } from "../types/font";
 import { FontPairing } from "../types/font-pairing";
+import { supabase } from "../lib/supabase";
 
-function getApiUrl() {
-  return window.location.hostname === "foonts.localhost.com"
-    ? "https://foonts-api.localhost.com/"
-    : "https://api.foonts.net/";
-}
+export async function loadFonts(): Promise<Font[]> {
+  const { data, error } = await supabase
+    .from("fonts")
+    .select("id, family, url, category, num_liked")
+    .order("family", { ascending: true });
 
-async function request<T>(url: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(url, options);
-
-  if (!response.ok) {
-    throw new Error(
-      `API request failed: ${response.status} ${response.statusText}`,
-    );
+  if (error) {
+    throw error;
   }
 
-  return response.json();
+  return data as Font[];
 }
 
-export function loadFonts(): Promise<Font[]> {
-  const url = `${getApiUrl()}fonts`;
-  return request<Font[]>(url);
+export async function loadRecentFontPairings(): Promise<FontPairing[]> {
+  const { data, error } = await supabase
+    .from("font_pairings")
+    .select(
+      "id, font_title_id, font_content_id, created_at, updated_at, num_views, num_liked",
+    )
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data as FontPairing[];
 }
 
-export function loadRecentFontPairings(): Promise<FontPairing[]> {
-  const url = `${getApiUrl()}font-pairings/recent`;
-  return request<FontPairing[]>(url);
+export async function loadPopularFontPairings(): Promise<FontPairing[]> {
+  const { data, error } = await supabase
+    .from("font_pairings")
+    .select(
+      "id, font_title_id, font_content_id, created_at, updated_at, num_views, num_liked",
+    )
+    .order("num_liked", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data as FontPairing[];
 }
 
-export function loadPopularFontPairings(): Promise<FontPairing[]> {
-  const url = `${getApiUrl()}font-pairings/liked`;
-  return request<FontPairing[]>(url);
-}
-
-type PostParams = {
-  "font-title-id": number;
-  "font-content-id": number;
-};
-
-function sendApi(url: string, postParams: PostParams) {
-  return request(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postParams),
+export async function sendFontPairingToApi(
+  titleFont: Font,
+  contentFont: Font,
+): Promise<FontPairing> {
+  const { data, error } = await supabase.rpc("record_pairing_view", {
+    p_font_title_id: titleFont.id,
+    p_font_content_id: contentFont.id,
   });
+
+  if (error) {
+    throw error;
+  }
+
+  return data as FontPairing;
 }
 
-export function sendFontPairingToApi(titleFont: Font, contentFont: Font) {
-  const url = `${getApiUrl()}font-pairings/`;
-  const postParams = {
-    "font-title-id": titleFont.id,
-    "font-content-id": contentFont.id,
-  };
-  return sendApi(url, postParams);
-}
+export async function sendFontPairingLikeToApi(
+  titleFont: Font,
+  contentFont: Font,
+): Promise<FontPairing> {
+  const { data, error } = await supabase.rpc("record_pairing_like", {
+    p_font_title_id: titleFont.id,
+    p_font_content_id: contentFont.id,
+  });
 
-export function sendFontPairingLikeToApi(titleFont: Font, contentFont: Font) {
-  const url = `${getApiUrl()}font-pairings/like`;
-  const postParams = {
-    "font-title-id": titleFont.id,
-    "font-content-id": contentFont.id,
-  };
-  return sendApi(url, postParams);
+  if (error) {
+    throw error;
+  }
+
+  return data as FontPairing;
 }
