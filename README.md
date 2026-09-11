@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Supabase setup
+
+Copy `.env.example` to `.env.local` and set the Supabase project URL and
+publishable key from the project's Connect dialog. The publishable key is safe
+to ship in the browser; never place a Supabase secret key in frontend
+environment variables.
+
 ## Available Scripts
 
 In the project directory, you can run:
