@@ -23,11 +23,12 @@
     "start": "vite",
     "build": "tsc --noEmit && vite build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\""
   },
   "devDependencies": {
     "gh-pages": "^2.2.0",
-    "prettier": "1.19.1",
+    "prettier": "3.9.6",
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.1.0"
   }

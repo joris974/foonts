@@ -5,5 +5,5 @@ import { AppRouter } from "./routers/router";
 const rootElement = document.getElementById("root");
 
 if (rootElement) {
-	createRoot(rootElement).render(React.createElement(AppRouter));
+  createRoot(rootElement).render(React.createElement(AppRouter));
 }

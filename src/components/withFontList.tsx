@@ -13,7 +13,7 @@ type State = {
 };
 
 export function withFontList<P extends Props>(
-  Component: React.ComponentType<P>
+  Component: React.ComponentType<P>,
 ) {
   return class WithFontList extends React.Component<Subtract<P, Props>, State> {
     constructor(props: Subtract<P, Props>) {
@@ -22,7 +22,7 @@ export function withFontList<P extends Props>(
     }
 
     componentDidMount() {
-      loadFonts().then(fontList => {
+      loadFonts().then((fontList) => {
         this.setState({ fontList });
       });
     }

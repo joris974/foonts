@@ -33,7 +33,7 @@ class EditableTitle extends React.Component<Props, State> {
       fontSize: `${fontSize}px`,
       fontWeight,
       fontStyle,
-      fontFamily: font.family
+      fontFamily: font.family,
     };
     return (
       <h1

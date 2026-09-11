@@ -18,7 +18,7 @@ const DefaultContent = [
     Nam quis ultrices libero.
     Ut pharetra, sem et tincidunt porttitor, felis urna tristique lacus, nec tincidunt nibh est et sapien.
     Vestibulum tempor nisi at congue sodales.
-    `
+    `,
 ];
 
 type Props = {
@@ -51,7 +51,7 @@ class EditableContent extends React.Component<Props, State> {
       fontSize: `${fontSize}px`,
       fontWeight,
       fontStyle,
-      fontFamily: font.family
+      fontFamily: font.family,
     };
 
     const contentPs = content.map((line, i) => <p key={i}>{line}</p>);

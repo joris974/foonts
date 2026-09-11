@@ -78,8 +78,8 @@ class Sidebar extends React.Component<Props, State> {
   }
 
   handleToggleDownloadModal() {
-    this.setState(previousState => ({
-      showDownloadModal: !previousState.showDownloadModal
+    this.setState((previousState) => ({
+      showDownloadModal: !previousState.showDownloadModal,
     }));
   }
 
@@ -96,7 +96,7 @@ class Sidebar extends React.Component<Props, State> {
       onChangeContentFontProperty,
       onChangeLockContent,
       isContentLocked,
-      contentFont
+      contentFont,
     } = this.props;
 
     const { showDownloadModal, isLiked } = this.state;

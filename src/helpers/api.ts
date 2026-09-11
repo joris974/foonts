@@ -11,7 +11,9 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    throw new Error(
+      `API request failed: ${response.status} ${response.statusText}`,
+    );
   }
 
   return response.json();
@@ -41,9 +43,9 @@ function sendApi(url: string, postParams: PostParams) {
   return request(url, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(postParams)
+    body: JSON.stringify(postParams),
   });
 }
 
@@ -51,7 +53,7 @@ export function sendFontPairingToApi(titleFont: Font, contentFont: Font) {
   const url = `${getApiUrl()}font-pairings/`;
   const postParams = {
     "font-title-id": titleFont.id,
-    "font-content-id": contentFont.id
+    "font-content-id": contentFont.id,
   };
   return sendApi(url, postParams);
 }
@@ -60,7 +62,7 @@ export function sendFontPairingLikeToApi(titleFont: Font, contentFont: Font) {
   const url = `${getApiUrl()}font-pairings/like`;
   const postParams = {
     "font-title-id": titleFont.id,
-    "font-content-id": contentFont.id
+    "font-content-id": contentFont.id,
   };
   return sendApi(url, postParams);
 }

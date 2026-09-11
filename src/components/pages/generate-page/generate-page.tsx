@@ -20,7 +20,7 @@ type Props = {
   updateContentFontProperties: (update: UpdateFontProperties) => void;
   handleSwap: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   handleClickGenerate: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
   ) => void;
   handleChangeLockTitle: () => void;
   handleChangeLockContent: () => void;
@@ -39,7 +39,7 @@ function GeneratePage(props: Props) {
     handleSwap,
     handleClickGenerate,
     handleChangeLockTitle,
-    handleChangeLockContent
+    handleChangeLockContent,
   } = props;
 
   if (!titleFont || !contentFont) {

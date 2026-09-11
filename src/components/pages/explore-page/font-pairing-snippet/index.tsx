@@ -18,9 +18,9 @@ type Props = {
 
 function FontPairingItem(props: Props) {
   const { fontList, pairing } = props;
-  const titleFont = fontList.find(font => font.id === pairing.font_title_id);
+  const titleFont = fontList.find((font) => font.id === pairing.font_title_id);
   const fontContent = fontList.find(
-    font => font.id === pairing.font_content_id
+    (font) => font.id === pairing.font_content_id,
   );
 
   if (

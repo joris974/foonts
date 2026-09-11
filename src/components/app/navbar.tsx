@@ -5,13 +5,13 @@ import {
   Toolbar,
   Typography,
   Button,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   title: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 const Navbar = () => {

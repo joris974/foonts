@@ -3,7 +3,7 @@ import {
   allCategories,
   randomFont,
   updateFontProperties,
-  UpdateFontProperties
+  UpdateFontProperties,
 } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
 import GeneratePage from "./generate-page";
@@ -13,14 +13,14 @@ const defaultTitleStyleProps: FontProperties = {
   fontSize: 36,
   fontWeight: "normal",
   fontStyle: "normal",
-  fontCategories: allCategories()
+  fontCategories: allCategories(),
 };
 
 const defaultContentStyleProps: FontProperties = {
   fontSize: 14,
   fontWeight: "normal",
   fontStyle: "normal",
-  fontCategories: allCategories()
+  fontCategories: allCategories(),
 };
 
 type Props = {
@@ -45,14 +45,13 @@ class GeneratePageContainer extends React.Component<Props, State> {
       isTitleLocked: false,
       isContentLocked: false,
       titleFontPropertiesProps: defaultTitleStyleProps,
-      contentFontPropertiesProps: defaultContentStyleProps
+      contentFontPropertiesProps: defaultContentStyleProps,
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.updateTitleFontProperties = this.updateTitleFontProperties.bind(this);
-    this.updateContentFontProperties = this.updateContentFontProperties.bind(
-      this
-    );
+    this.updateContentFontProperties =
+      this.updateContentFontProperties.bind(this);
     this.handleSwap = this.handleSwap.bind(this);
     this.handleClickGenerate = this.handleClickGenerate.bind(this);
     this.handleChangeLockTitle = this.handleChangeLockTitle.bind(this);
@@ -87,21 +86,21 @@ class GeneratePageContainer extends React.Component<Props, State> {
       isTitleLocked,
       isContentLocked,
       titleFontPropertiesProps,
-      contentFontPropertiesProps
+      contentFontPropertiesProps,
     } = this.state;
 
     const newTitleFontPropertiesProps = {
       fontSize: titleFontPropertiesProps.fontSize,
       fontWeight: contentFontPropertiesProps.fontWeight,
       fontStyle: contentFontPropertiesProps.fontStyle,
-      fontCategories: contentFontPropertiesProps.fontCategories
+      fontCategories: contentFontPropertiesProps.fontCategories,
     };
 
     const newContentFontPropertiesProps = {
       fontSize: contentFontPropertiesProps.fontSize,
       fontWeight: titleFontPropertiesProps.fontWeight,
       fontStyle: titleFontPropertiesProps.fontStyle,
-      fontCategories: titleFontPropertiesProps.fontCategories
+      fontCategories: titleFontPropertiesProps.fontCategories,
     };
 
     this.setState(
@@ -109,11 +108,11 @@ class GeneratePageContainer extends React.Component<Props, State> {
         isTitleLocked: isContentLocked,
         isContentLocked: isTitleLocked,
         titleFontPropertiesProps: newTitleFontPropertiesProps,
-        contentFontPropertiesProps: newContentFontPropertiesProps
+        contentFontPropertiesProps: newContentFontPropertiesProps,
       },
       () => {
         updateFonts(contentFont, titleFont);
-      }
+      },
     );
   }
 
@@ -125,7 +124,7 @@ class GeneratePageContainer extends React.Component<Props, State> {
     const { titleFontPropertiesProps } = this.state;
     const newTitleFontPropertiesProps = updateFontProperties(
       titleFontPropertiesProps,
-      update
+      update,
     );
     this.setState({ titleFontPropertiesProps: newTitleFontPropertiesProps });
   }
@@ -134,10 +133,10 @@ class GeneratePageContainer extends React.Component<Props, State> {
     const { contentFontPropertiesProps } = this.state;
     const newContentFontPropertiesProps = updateFontProperties(
       contentFontPropertiesProps,
-      update
+      update,
     );
     this.setState({
-      contentFontPropertiesProps: newContentFontPropertiesProps
+      contentFontPropertiesProps: newContentFontPropertiesProps,
     });
   }
 
@@ -149,16 +148,16 @@ class GeneratePageContainer extends React.Component<Props, State> {
         isTitleLocked,
         isContentLocked,
         titleFontPropertiesProps,
-        contentFontPropertiesProps
+        contentFontPropertiesProps,
       } = this.state;
 
       const randTitleFont = randomFont(
         fontList,
-        titleFontPropertiesProps.fontCategories
+        titleFontPropertiesProps.fontCategories,
       );
       const randContentFont = randomFont(
         fontList,
-        contentFontPropertiesProps.fontCategories
+        contentFontPropertiesProps.fontCategories,
       );
 
       const newTitleFont = isTitleLocked ? titleFont : randTitleFont;
@@ -169,14 +168,14 @@ class GeneratePageContainer extends React.Component<Props, State> {
   }
 
   handleChangeLockTitle() {
-    this.setState(previousState => ({
-      isTitleLocked: !previousState.isTitleLocked
+    this.setState((previousState) => ({
+      isTitleLocked: !previousState.isTitleLocked,
     }));
   }
 
   handleChangeLockContent() {
-    this.setState(previousState => ({
-      isContentLocked: !previousState.isContentLocked
+    this.setState((previousState) => ({
+      isContentLocked: !previousState.isContentLocked,
     }));
   }
 
@@ -186,7 +185,7 @@ class GeneratePageContainer extends React.Component<Props, State> {
       contentFontPropertiesProps,
       titleFontPropertiesProps,
       isTitleLocked,
-      isContentLocked
+      isContentLocked,
     } = this.state;
 
     return (

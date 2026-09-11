@@ -22,7 +22,7 @@ class FontsPageContainer extends React.Component<Props, State> {
       numMaxVisible: 12,
       filteredFontList: props.fontList,
       fontCategories: allCategories(),
-      sortedBy: "popular"
+      sortedBy: "popular",
     };
 
     this.handleClickSeeMore = this.handleClickSeeMore.bind(this);
@@ -38,12 +38,12 @@ class FontsPageContainer extends React.Component<Props, State> {
     const { fontCategories } = this.state;
 
     const newFontCategories = Object.values(fontCategories).includes(category)
-      ? fontCategories.filter(c => c !== category)
+      ? fontCategories.filter((c) => c !== category)
       : [...fontCategories, category];
 
     const filteredFontList = filterFontList(
       this.props.fontList,
-      newFontCategories
+      newFontCategories,
     );
     this.setState({ fontCategories: newFontCategories, filteredFontList });
   }
@@ -73,6 +73,6 @@ export default FontsPageContainer;
 
 function filterFontList(fontList: Font[], fontCategories: Category[]) {
   return fontList.filter((font: Font) =>
-    fontCategories.includes(font.category)
+    fontCategories.includes(font.category),
   );
 }

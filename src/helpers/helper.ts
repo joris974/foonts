@@ -9,7 +9,7 @@ export enum Category {
   Serif = "serif",
   SansSerif = "sans-serif",
   Monospace = "monospace",
-  Handwriting = "handwriting"
+  Handwriting = "handwriting",
 }
 
 export function allCategories(): Category[] {
@@ -18,13 +18,13 @@ export function allCategories(): Category[] {
     Category.Serif,
     Category.SansSerif,
     Category.Monospace,
-    Category.Handwriting
+    Category.Handwriting,
   ];
 }
 
 export function extractFromMatch(
   match: any,
-  fontList: Font[]
+  fontList: Font[],
 ): { titleFont: Font; contentFont: Font } | null {
   const fontsParams = match && match.params && match.params.fonts;
 
@@ -42,15 +42,15 @@ export function extractFromMatch(
 
   const [titleFontFamily, contentFontFamily] = [
     fromUrl(titleFontPathPiece),
-    fromUrl(contentFontPathPiece)
+    fromUrl(contentFontPathPiece),
   ];
 
   const findFontByFamily = (family: string) =>
-    fontList.find(font => font.family === family);
+    fontList.find((font) => font.family === family);
 
   const [titleFont, contentFont] = [
     findFontByFamily(titleFontFamily),
-    findFontByFamily(contentFontFamily)
+    findFontByFamily(contentFontFamily),
   ];
 
   if (
@@ -73,7 +73,7 @@ export type UpdateFontProperties =
 
 export function updateFontProperties(
   fontProperties: FontProperties,
-  update: UpdateFontProperties
+  update: UpdateFontProperties,
 ) {
   const { fontSize, fontWeight, fontStyle, fontCategories } = fontProperties;
 
@@ -109,7 +109,7 @@ export function updateFontProperties(
     fontSize: newFontSize,
     fontWeight: newFontWeight,
     fontStyle: newFontStyle,
-    fontCategories: newFontCategories
+    fontCategories: newFontCategories,
   };
   return newFontPropertiesProps;
 }
@@ -121,7 +121,7 @@ export function fontsToUrl(titleFont: Font, contentFont: Font) {
 export function fontsToSubUrl(titleFont: Font, contentFont: Font) {
   const toUrlFontFamily = (st: string) => st.replace(/ /g, "-");
   return `/generate/${toUrlFontFamily(titleFont.family)}--${toUrlFontFamily(
-    contentFont.family
+    contentFont.family,
   )}`;
 }
 
@@ -143,8 +143,8 @@ export function labelForCategory(category: Category) {
 }
 
 export function randomFont(fontList: Font[], categories: Category[]): Font {
-  const fontsInCategory = fontList.filter(font =>
-    categories.includes(font.category)
+  const fontsInCategory = fontList.filter((font) =>
+    categories.includes(font.category),
   );
   const randomFont = sample(fontsInCategory);
   if (randomFont === null || randomFont === undefined) {

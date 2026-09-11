@@ -34,7 +34,7 @@ class GeneratePageHandler extends React.Component<Props, State> {
 
     this.state = {
       titleFont,
-      contentFont
+      contentFont,
     };
 
     this.updateFonts = this.updateFonts.bind(this);
@@ -59,7 +59,7 @@ class GeneratePageHandler extends React.Component<Props, State> {
       sendFontPairingToApi(titleFont, contentFont);
       this.setState({
         titleFont,
-        contentFont
+        contentFont,
       });
     }
   }
@@ -74,7 +74,7 @@ class GeneratePageHandler extends React.Component<Props, State> {
     history.push(url);
     this.setState({
       titleFont: newTitleFont,
-      contentFont: newContentFont
+      contentFont: newContentFont,
     });
   }
 

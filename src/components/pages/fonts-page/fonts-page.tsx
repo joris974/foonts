@@ -29,7 +29,7 @@ function FontsPage(props: Props) {
     sortedBy,
     handleClickSeeMore,
     handleChangeCheckbox,
-    handleChangeSortBy
+    handleChangeSortBy,
   } = props;
 
   const sortedList = sortBy(filteredFontList, (font: Font) => {
@@ -41,7 +41,7 @@ function FontsPage(props: Props) {
   });
   const limitedResults = take(sortedList, numMaxVisible);
 
-  const fontsNode = limitedResults.map(font => (
+  const fontsNode = limitedResults.map((font) => (
     <Grid item xs={12} key={font.id}>
       <FontsListItem font={font} />
     </Grid>

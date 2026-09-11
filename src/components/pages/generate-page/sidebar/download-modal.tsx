@@ -5,7 +5,7 @@ import {
   DialogTitle,
   DialogContent,
   Typography,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
@@ -13,8 +13,8 @@ const useStyles = makeStyles(() => ({
     color: "#05668d",
     fontSize: "18px",
     marginTop: "8px",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 }));
 
 type Props = {
@@ -31,15 +31,15 @@ function DownloadModal(props: Props) {
   const toUrlFontFamily = (st: string) => st.replace(/ /g, "+");
   const toFontCategory = (st: string) => st.replace("display", "cursive");
   const embedCode = `<link href="https://fonts.googleapis.com/css?family=${toUrlFontFamily(
-    titleFont.family
+    titleFont.family,
   )}|${toUrlFontFamily(contentFont.family)}" rel="stylesheet">`;
 
   const cssCode = `
       font-family: '${titleFont.family}', ${toFontCategory(titleFont.category)};
       <br/>
       font-family: '${contentFont.family}', ${toFontCategory(
-    contentFont.category
-  )};
+        contentFont.category,
+      )};
     `;
 
   return (

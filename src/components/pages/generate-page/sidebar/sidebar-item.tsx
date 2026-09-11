@@ -3,7 +3,7 @@ import Checkbox from "../../../common/checkbox";
 import {
   allCategories,
   labelForCategory,
-  UpdateFontProperties
+  UpdateFontProperties,
 } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
 import { FontProperties } from "../../../../types/font-style";
@@ -12,7 +12,7 @@ import {
   ExpansionPanelSummary,
   Switch,
   IconButton,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -38,7 +38,7 @@ class SidebarItem extends React.Component<Props> {
       onChangeLock,
       isLocked,
       fontStyleProps,
-      onChangeFontProperty
+      onChangeFontProperty,
     } = this.props;
 
     const { fontStyle, fontWeight, fontCategories } = fontStyleProps;
@@ -50,7 +50,7 @@ class SidebarItem extends React.Component<Props> {
     const isItalic = fontStyle === "italic";
     const isBolded = fontWeight === "bold";
 
-    const allCategoriesNodes = allCategories().map(category => {
+    const allCategoriesNodes = allCategories().map((category) => {
       return (
         <div key={category}>
           <Checkbox
@@ -75,11 +75,11 @@ class SidebarItem extends React.Component<Props> {
         >
           <FormControlLabel
             aria-label="Acknowledge"
-            onClick={event => {
+            onClick={(event) => {
               event.stopPropagation();
               onChangeLock();
             }}
-            onFocus={event => {
+            onFocus={(event) => {
               event.stopPropagation();
               onChangeLock();
             }}
@@ -97,7 +97,7 @@ class SidebarItem extends React.Component<Props> {
                     onChange={() =>
                       onChangeFontProperty({
                         type: "fontWeight",
-                        value: "bold"
+                        value: "bold",
                       })
                     }
                     value="checkedB"
@@ -115,7 +115,7 @@ class SidebarItem extends React.Component<Props> {
                     onChange={() =>
                       onChangeFontProperty({
                         type: "fontStyle",
-                        value: "italic"
+                        value: "italic",
                       })
                     }
                     value="checkedB"
@@ -131,7 +131,7 @@ class SidebarItem extends React.Component<Props> {
                 onClick={() =>
                   onChangeFontProperty({
                     type: "fontSize",
-                    action: "increment"
+                    action: "increment",
                   })
                 }
               >
@@ -142,7 +142,7 @@ class SidebarItem extends React.Component<Props> {
                 onClick={() =>
                   onChangeFontProperty({
                     type: "fontSize",
-                    action: "decrement"
+                    action: "decrement",
                   })
                 }
               >

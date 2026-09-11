@@ -36,7 +36,7 @@ class ExploreContainer extends React.Component<Props, State> {
 
     const visibleFontPairings = take(fontPairings, numMaxVisible);
 
-    const pairings = visibleFontPairings.map(pairing => {
+    const pairings = visibleFontPairings.map((pairing) => {
       return (
         <Grid item xs={12} sm={6} md={3} key={pairing.id}>
           <FontPairingItem fontList={fontList} pairing={pairing} />
