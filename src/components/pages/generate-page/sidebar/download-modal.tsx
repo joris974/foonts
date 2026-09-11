@@ -1,11 +1,6 @@
 import React from "react";
 import { Font } from "../../../../types/font";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Typography,
-} from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, Typography } from "@mui/material";
 
 type Props = {
   titleFont: Font;

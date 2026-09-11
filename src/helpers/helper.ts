@@ -145,9 +145,8 @@ export function randomFont(fontList: Font[], categories: Category[]): Font {
   const fontsInCategory = fontList.filter((font) =>
     categories.includes(font.category),
   );
-  const randomFont = fontsInCategory[
-    Math.floor(Math.random() * fontsInCategory.length)
-  ];
+  const randomFont =
+    fontsInCategory[Math.floor(Math.random() * fontsInCategory.length)];
   if (randomFont === null || randomFont === undefined) {
     throw new Error("Empty list");
   }
