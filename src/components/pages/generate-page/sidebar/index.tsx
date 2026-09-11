@@ -4,7 +4,7 @@ import { sendFontPairingLikeToApi } from "../../../../helpers/api";
 import { UpdateFontProperties } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
 import { FontProperties } from "../../../../types/font-style";
-import { Button, GridLegacy as Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LoopIcon from "@mui/icons-material/Loop";
@@ -103,7 +103,7 @@ class Sidebar extends React.Component<Props, State> {
 
     return (
       <Grid container>
-        <Grid item xs={12} style={{ margin: "16px 0 8px 0" }}>
+        <Grid size={12} style={{ margin: "16px 0 8px 0" }}>
           <SidebarItem
             font={titleFont}
             isLocked={isTitleLocked}
@@ -112,7 +112,7 @@ class Sidebar extends React.Component<Props, State> {
             onChangeFontProperty={onChangeTitleFontProperty}
           />
         </Grid>
-        <Grid item xs={12} style={{ margin: "8px 0" }}>
+        <Grid size={12} style={{ margin: "8px 0" }}>
           <SidebarItem
             font={contentFont}
             isLocked={isContentLocked}
@@ -121,7 +121,7 @@ class Sidebar extends React.Component<Props, State> {
             onChangeFontProperty={onChangeContentFontProperty}
           />
         </Grid>
-        <Grid item xs={12} style={{ margin: "8px 0" }}>
+        <Grid size={12} style={{ margin: "8px 0" }}>
           <Button
             variant="outlined"
             onClick={onClickGenerate}
@@ -130,7 +130,7 @@ class Sidebar extends React.Component<Props, State> {
             Generate
           </Button>
         </Grid>
-        <Grid item xs={12} style={{ margin: "8px 0" }}>
+        <Grid size={12} style={{ margin: "8px 0" }}>
           <Button
             variant="outlined"
             onClick={onClickSwap}
@@ -139,7 +139,7 @@ class Sidebar extends React.Component<Props, State> {
             Swap
           </Button>
         </Grid>
-        <Grid item xs={12} style={{ margin: "8px 0" }}>
+        <Grid size={12} style={{ margin: "8px 0" }}>
           <Button
             variant={isLiked ? "contained" : "outlined"}
             color="secondary"
@@ -149,7 +149,7 @@ class Sidebar extends React.Component<Props, State> {
             {isLiked ? "You liked this" : "Like"}
           </Button>
         </Grid>
-        <Grid item xs={12} style={{ margin: "8px 0" }}>
+        <Grid size={12} style={{ margin: "8px 0" }}>
           <Button
             variant="outlined"
             onClick={this.handleToggleDownloadModal}
@@ -159,7 +159,7 @@ class Sidebar extends React.Component<Props, State> {
           </Button>
         </Grid>
 
-        <Grid item xs={12} style={{ margin: "8px 0" }}>
+        <Grid size={12} style={{ margin: "8px 0" }}>
           <Typography variant="body2">
             Tip: Press space bar to generate a new combination.
           </Typography>

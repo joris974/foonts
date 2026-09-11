@@ -12,7 +12,7 @@ import {
   AccordionSummary,
   Switch,
   IconButton,
-  GridLegacy as Grid,
+  Grid,
 } from "@mui/material";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -89,7 +89,7 @@ class SidebarItem extends React.Component<Props> {
         </AccordionSummary>
         <AccordionDetails>
           <Grid container>
-            <Grid item xs={4}>
+            <Grid size={4}>
               <FormControlLabel
                 control={
                   <Switch
@@ -107,7 +107,7 @@ class SidebarItem extends React.Component<Props> {
                 label="Bold"
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid size={4}>
               <FormControlLabel
                 control={
                   <Switch
@@ -125,7 +125,7 @@ class SidebarItem extends React.Component<Props> {
                 label="Italic"
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid size={4}>
               <IconButton
                 aria-label="increment"
                 onClick={() =>
@@ -149,7 +149,7 @@ class SidebarItem extends React.Component<Props> {
                 <RemoveIcon />
               </IconButton>
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <h4>Categories</h4>
               {allCategoriesNodes}
             </Grid>

@@ -3,7 +3,7 @@ import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
 import { FontPairing } from "../../../types/font-pairing";
-import { GridLegacy as Grid, Container, Button, Paper } from "@mui/material";
+import { Grid, Container, Button, Paper } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SortListFilter from "./sort-list-filter";
 
@@ -37,7 +37,7 @@ class ExploreContainer extends React.Component<Props, State> {
 
     const pairings = visibleFontPairings.map((pairing) => {
       return (
-        <Grid item xs={12} sm={6} md={3} key={pairing.id}>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={pairing.id}>
           <FontPairingItem fontList={fontList} pairing={pairing} />
         </Grid>
       );
@@ -46,7 +46,7 @@ class ExploreContainer extends React.Component<Props, State> {
     const btnSeeMore =
       numMaxVisible > fontPairings.length ? null : (
         <Grid container spacing={10}>
-          <Grid item xs={12} style={{ textAlign: "center" }}>
+          <Grid size={12} style={{ textAlign: "center" }}>
             <Button
               color="primary"
               endIcon={<ExpandMoreIcon />}
@@ -74,7 +74,7 @@ class ExploreContainer extends React.Component<Props, State> {
       <Container>
         <Paper style={{ margin: "16px 0", padding: "16px" }}>
           <Grid container spacing={4}>
-            <Grid item xs={12} style={{ textAlign: "center" }}>
+            <Grid size={12} style={{ textAlign: "center" }}>
               <SortListFilter sortedBy={sortedBy} />
             </Grid>
           </Grid>

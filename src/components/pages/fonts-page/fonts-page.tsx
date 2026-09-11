@@ -5,7 +5,7 @@ import { labelForCategory } from "../../../helpers/helper";
 import { Category } from "../../../helpers/helper";
 import { Font } from "../../../types/font";
 import FontsListItem from "./fonts-list-item";
-import { GridLegacy as Grid, Button, Container, Paper } from "@mui/material";
+import { Grid, Button, Container, Paper } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type Props = {
@@ -40,14 +40,14 @@ function FontsPage(props: Props) {
   const limitedResults = sortedList.slice(0, numMaxVisible);
 
   const fontsNode = limitedResults.map((font) => (
-    <Grid item xs={12} key={font.id}>
+    <Grid size={12} key={font.id}>
       <FontsListItem font={font} />
     </Grid>
   ));
 
   const btnSeeMore =
     numMaxVisible > filteredFontList.length ? null : (
-      <Grid item xs={12} style={{ textAlign: "center" }}>
+      <Grid size={12} style={{ textAlign: "center" }}>
         <Button
           color="primary"
           endIcon={<ExpandMoreIcon />}
@@ -60,7 +60,7 @@ function FontsPage(props: Props) {
 
   const toCheckboxLi = (category: Category) => {
     return (
-      <Grid item xs={6} md={4} lg={2}>
+      <Grid size={{ xs: 6, md: 4, lg: 2 }}>
         <Checkbox
           isChecked={isChecked(fontCategories, category)}
           handleChangeCheckbox={() => handleChangeCheckbox(category)}
@@ -74,13 +74,13 @@ function FontsPage(props: Props) {
     <Container>
       <Paper style={{ margin: "16px 0", padding: "16px" }}>
         <Grid container spacing={4}>
-          <Grid item xs={12} style={{ textAlign: "center" }}>
+          <Grid size={12} style={{ textAlign: "center" }}>
             <SortListFilter
               sortedBy={sortedBy}
               handleChangeSortBy={handleChangeSortBy}
             />
           </Grid>
-          <Grid item xs={12} style={{ textAlign: "left" }}>
+          <Grid size={12} style={{ textAlign: "left" }}>
             <Grid container spacing={1}>
               {toCheckboxLi(Category.Serif)}
               {toCheckboxLi(Category.SansSerif)}

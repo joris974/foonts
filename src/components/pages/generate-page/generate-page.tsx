@@ -8,7 +8,7 @@ import EditableContent from "./editable-content";
 import ApplicationMeta from "./application-meta";
 import { FontProperties } from "../../../types/font-style";
 import { UpdateFontProperties } from "../../../helpers/helper";
-import { Container, GridLegacy as Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 
 type Props = {
   titleFont: Font;
@@ -55,7 +55,7 @@ function GeneratePage(props: Props) {
     <Container>
       <ApplicationMeta titleFont={titleFont} contentFont={contentFont} />
       <Grid container spacing={6}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Sidebar
             titleFont={titleFont}
             titleFontPropertiesProps={titleFontPropertiesProps}
@@ -71,7 +71,7 @@ function GeneratePage(props: Props) {
             onClickGenerate={handleClickGenerate}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <EditableTitle
             font={titleFont}
             fontStyleProps={titleFontPropertiesProps}
