@@ -29,7 +29,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\""
   },
   "knip": {
-    "entry": ["src/lib/supabase.ts"]
+    "entry": ["src/lib/supabase.ts", "supabase/seed/seed-google-fonts.mjs"]
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.1",

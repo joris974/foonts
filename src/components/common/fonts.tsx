@@ -8,15 +8,7 @@ type Props = {
 function Fonts(props: Props) {
   const { fontName, fontUrl } = props;
 
-  const toHttps = (st: string) => st.replace(/http:/g, "https:");
-
-  const fontFace = `
-      @font-face {
-        font-family: '${fontName}';
-        src: url('${toHttps(fontUrl)}');
-      }`;
-
-  return <style>{fontFace}</style>;
+  return <link rel="stylesheet" href={fontUrl} title={fontName} />;
 }
 
 export default Fonts;
