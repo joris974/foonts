@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   allCategories,
   randomFont,
@@ -63,10 +63,13 @@ function GeneratePageContainer({
     }
   };
 
+  const generateRef = useRef(generate);
+  generateRef.current = generate;
+
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null;
-      if (target?.className.toString().split(" ").includes("editable")) {
+      const target = event.target;
+      if (target instanceof HTMLElement && target.closest(".editable")) {
         return;
       }
       if (target instanceof HTMLButtonElement) {
@@ -74,22 +77,13 @@ function GeneratePageContainer({
       }
 
       if (event.key === " ") {
-        generate();
+        generateRef.current();
       }
     };
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [
-    contentFontPropertiesProps.fontCategories,
-    fontList,
-    isContentLocked,
-    isTitleLocked,
-    titleFontPropertiesProps.fontCategories,
-    titleFont,
-    contentFont,
-    updateFonts,
-  ]);
+  }, []);
 
   const handleSwap = () => {
     const newTitleFontPropertiesProps = {
