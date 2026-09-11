@@ -47,10 +47,10 @@ class Sidebar extends React.Component<Props, State> {
     this.handleToggleDownloadModal = this.handleToggleDownloadModal.bind(this);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentDidUpdate(previousProps: Props) {
     if (
-      nextProps.titleFont !== this.props.titleFont ||
-      nextProps.contentFont !== this.props.contentFont
+      previousProps.titleFont !== this.props.titleFont ||
+      previousProps.contentFont !== this.props.contentFont
     ) {
       this.setState({ isLiked: false });
     }

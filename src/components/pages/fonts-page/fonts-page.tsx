@@ -1,6 +1,4 @@
 import React from "react";
-import sortBy from "lodash/sortBy";
-import take from "lodash/take";
 import SortListFilter from "./sort-list-filter";
 import Checkbox from "../../common/checkbox";
 import { labelForCategory } from "../../../helpers/helper";
@@ -32,14 +30,14 @@ function FontsPage(props: Props) {
     handleChangeSortBy,
   } = props;
 
-  const sortedList = sortBy(filteredFontList, (font: Font) => {
+  const sortedList = [...filteredFontList].sort((firstFont, secondFont) => {
     if (sortedBy === "alphabetical") {
-      return font.family;
-    } else if (sortedBy === "popular") {
-      return -font.num_liked;
+      return firstFont.family.localeCompare(secondFont.family);
     }
+
+    return secondFont.num_liked - firstFont.num_liked;
   });
-  const limitedResults = take(sortedList, numMaxVisible);
+  const limitedResults = sortedList.slice(0, numMaxVisible);
 
   const fontsNode = limitedResults.map((font) => (
     <Grid item xs={12} key={font.id}>

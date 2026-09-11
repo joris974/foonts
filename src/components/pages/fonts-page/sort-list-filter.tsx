@@ -1,7 +1,7 @@
 import React from "react";
-import capitalize from "lodash/capitalize";
 import { Button, Menu, MenuItem } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { capitalize } from "../../../helpers/helper";
 
 type Props = {
   sortedBy: string;

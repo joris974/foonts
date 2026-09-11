@@ -1,9 +1,12 @@
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import React from "react";
-import sampleSize from "lodash/sampleSize";
 import { Font } from "../../../types/font";
 import GeneratePageContainer from "./generate-page-container";
-import { fontsToUrl, extractFromMatch } from "../../../helpers/helper";
+import {
+  fontsToUrl,
+  extractFromMatch,
+  randomFonts,
+} from "../../../helpers/helper";
 import { sendFontPairingToApi } from "../../../helpers/api";
 import Spinner from "../../common/spinner";
 import { withFontList } from "../../withFontList";
@@ -45,12 +48,12 @@ class GeneratePageHandler extends React.Component<Props, State> {
   }
 
   reloadOrSave(props: Props) {
-    const { history, match, fontList } = this.props;
+    const { history, match, fontList } = props;
     const fontsParams = extractFromMatch(match, fontList);
 
     if (fontsParams === null || fontsParams === undefined) {
       if (fontList.length > 0) {
-        const [randTitleFont, randContentFont] = sampleSize(fontList, 2);
+        const [randTitleFont, randContentFont] = randomFonts(fontList, 2);
         const url = fontsToUrl(randTitleFont, randContentFont);
         history.push(url);
       }
@@ -64,8 +67,14 @@ class GeneratePageHandler extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    this.reloadOrSave(nextProps);
+  componentDidUpdate(previousProps: Props) {
+    const fontsChanged =
+      previousProps.match.params.fonts !== this.props.match.params.fonts;
+    const fontListChanged = previousProps.fontList !== this.props.fontList;
+
+    if (fontsChanged || fontListChanged) {
+      this.reloadOrSave(this.props);
+    }
   }
 
   updateFonts(newTitleFont: Font, newContentFont: Font) {

@@ -1,8 +1,8 @@
 import React from "react";
-import capitalize from "lodash/capitalize";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { capitalize } from "../../../helpers/helper";
 
 type Props = RouteComponentProps<{}> & {
   sortedBy: "recent" | "popular";

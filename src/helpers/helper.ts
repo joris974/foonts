@@ -1,6 +1,3 @@
-import sample from "lodash/sample";
-import difference from "lodash/difference";
-import concat from "lodash/concat";
 import { Font } from "../types/font";
 import { FontProperties, FontStyle, FontWeight } from "../types/font-style";
 
@@ -98,9 +95,11 @@ export function updateFontProperties(
       break;
     case "category":
       if (newFontCategories.includes(update.value)) {
-        newFontCategories = difference(newFontCategories, [update.value]);
+        newFontCategories = newFontCategories.filter(
+          (category) => category !== update.value,
+        );
       } else {
-        newFontCategories = concat(newFontCategories, [update.value]);
+        newFontCategories = [...newFontCategories, update.value];
       }
       break;
   }
@@ -146,9 +145,27 @@ export function randomFont(fontList: Font[], categories: Category[]): Font {
   const fontsInCategory = fontList.filter((font) =>
     categories.includes(font.category),
   );
-  const randomFont = sample(fontsInCategory);
+  const randomFont = fontsInCategory[
+    Math.floor(Math.random() * fontsInCategory.length)
+  ];
   if (randomFont === null || randomFont === undefined) {
     throw new Error("Empty list");
   }
   return randomFont;
+}
+
+export function randomFonts(fontList: Font[], count: number): Font[] {
+  const remainingFonts = [...fontList];
+  const selectedFonts: Font[] = [];
+
+  while (selectedFonts.length < count && remainingFonts.length > 0) {
+    const randomIndex = Math.floor(Math.random() * remainingFonts.length);
+    selectedFonts.push(...remainingFonts.splice(randomIndex, 1));
+  }
+
+  return selectedFonts;
+}
+
+export function capitalize(value: string): string {
+  return value.length === 0 ? value : value[0].toUpperCase() + value.slice(1);
 }

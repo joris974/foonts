@@ -1,5 +1,4 @@
 import React from "react";
-import take from "lodash/take";
 import FontPairingItem from "./font-pairing-snippet";
 import Spinner from "../../common/spinner";
 import { Font } from "../../../types/font";
@@ -34,7 +33,7 @@ class ExploreContainer extends React.Component<Props, State> {
     const { fontList, fontPairings, sortedBy } = this.props;
     const { numMaxVisible } = this.state;
 
-    const visibleFontPairings = take(fontPairings, numMaxVisible);
+    const visibleFontPairings = fontPairings.slice(0, numMaxVisible);
 
     const pairings = visibleFontPairings.map((pairing) => {
       return (
