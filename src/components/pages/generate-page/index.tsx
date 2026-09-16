@@ -37,9 +37,9 @@ function GeneratePageHandler(props: Props) {
         navigate(url);
       }
     } else {
-      sendFontPairingToApi(currentFonts.titleFont, currentFonts.contentFont);
       setTitleFont(currentFonts.titleFont);
       setContentFont(currentFonts.contentFont);
+      sendFontPairingToApi(currentFonts.titleFont, currentFonts.contentFont);
     }
   }, [fontList, fonts, navigate]);
 

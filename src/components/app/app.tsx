@@ -2,18 +2,17 @@ import React from "react";
 import Navbar from "./navbar";
 import "./app.css";
 import { CssBaseline } from "@mui/material";
+import { Outlet } from "react-router";
 
-type Props = {
-  children?: any;
-};
-
-function App({ children }: Props) {
+function App() {
   return (
     <div className="main-container">
       <CssBaseline />
       <Navbar />
 
-      <div className="body-container">{children}</div>
+      <div className="body-container">
+        <Outlet />
+      </div>
 
       <footer className="text-center">
         Designed and built by{" "}
