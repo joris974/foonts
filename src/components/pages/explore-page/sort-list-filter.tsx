@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { capitalize } from "../../../helpers/helper";
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 type Props = {
   fontName: string;
@@ -8,7 +8,19 @@ type Props = {
 function Fonts(props: Props) {
   const { fontName, fontUrl } = props;
 
-  return <link rel="stylesheet" href={fontUrl} title={fontName} />;
+  useEffect(() => {
+    const stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = fontUrl;
+    stylesheet.title = fontName;
+    document.head.appendChild(stylesheet);
+
+    return () => {
+      stylesheet.remove();
+    };
+  }, [fontName, fontUrl]);
+
+  return null;
 }
 
 export default Fonts;

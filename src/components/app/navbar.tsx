@@ -1,5 +1,5 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 
 const Navbar = () => {

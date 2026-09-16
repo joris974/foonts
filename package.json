@@ -15,7 +15,7 @@
     "@types/react-dom": "^19.3.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-router-dom": "^7.18.3",
+    "react-router": "^8.4.0",
     "typescript": "^7.0.2"
   },
   "scripts": {
@@ -29,7 +29,10 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\""
   },
   "knip": {
-    "entry": ["src/lib/supabase.ts", "supabase/seed/seed-google-fonts.mjs"]
+    "entry": [
+      "src/lib/supabase.ts",
+      "supabase/seed/seed-google-fonts.mjs"
+    ]
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.1",

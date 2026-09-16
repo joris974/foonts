@@ -17,7 +17,7 @@ function App({ children }: Props) {
 
       <footer className="text-center">
         Designed and built by{" "}
-        <a href="https://github.com/joris974">Joris Buchou</a>. ©2020
+        <a href="https://github.com/joris974">Joris Buchou</a>. ©2026
       </footer>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Fonts from "../../../common/fonts";
 import { fontsToSubUrl } from "../../../../helpers/helper";
 import { Font } from "../../../../types/font";
